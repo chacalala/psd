@@ -5,4 +5,4 @@
 
 Halo! Ini hasil kerja keras (dan sedikit rebahan) untuk tugas **Proyek Sains Data**.  
 
-Selanjutnya, cek **Laporan Proyek Sains Data** di [laporanpsd.md](laporanpsd.md).
+```{tableofcontents}
