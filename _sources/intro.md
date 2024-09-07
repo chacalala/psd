@@ -1,27 +1,39 @@
-# LAPORAN PROYEK SAINS DATA
+<p align="center">
+  <strong>LAPORAN PROYEK SAINS DATA</strong>
+</p>
 
-## JUDUL
-(Harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
+<p align="center">
+  ![Logo Universitas Trunojoyo Madura](./logo2.png)
+</p>
 
-![Logo Universitas Trunojoyo Madura](./logo2.png)
+<p align="center">
+  <strong>JUDUL</strong><br>
+  (Harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
+</p>
 
----
+<hr>
 
-**Disusun Oleh:**  
-Nama: Revika Syariqatun Alifia  
-NIM: 220411100008  
-Kelas: IF 5D  
+<p align="center">
+  <strong>Disusun Oleh:</strong><br>
+  Nama: Revika Syariqatun Alifia<br>
+  NIM: 220411100008<br>
+  Kelas: IF 5D
+</p>
 
-**Dosen Pengampu:**  
-Nama: Mula'ab, S.Si., M.Kom  
-NIP: 19730520200212  
+<p align="center">
+  <strong>Dosen Pengampu:</strong><br>
+  Nama: Mula'ab, S.Si., M.Kom<br>
+  NIP: 19730520200212
+</p>
 
-**PRODI TEKNIK INFORMATIKA**  
-**JURUSAN TEKNIK INFORMATIKA**  
-**FAKULTAS TEKNIK**  
-**UNIVERSITAS TRUNOJOYO MADURA**  
-**2024**
+<p align="center">
+  <strong>PRODI TEKNIK INFORMATIKA</strong><br>
+  <strong>JURUSAN TEKNIK INFORMATIKA</strong><br>
+  <strong>FAKULTAS TEKNIK</strong><br>
+  <strong>UNIVERSITAS TRUNOJOYO MADURA</strong><br>
+  <strong>2024</strong>
+</p>
 
----
+<hr>
 
 ```{tableofcontents}
