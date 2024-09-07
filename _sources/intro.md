@@ -5,4 +5,4 @@
 
 Halo! 
 <hr>
-Ini hasil kerja keras (dan sedikit rebahan) untuk tugas Proyek Sains Data.  
+Website ini dibuat sebagai bagian dari tugas perkuliahan untuk mata kuliah Proyek Sains Data.
