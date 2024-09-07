@@ -3,12 +3,12 @@
 </p>
 
 <p align="center">
-  ![Logo Universitas Trunojoyo Madura](./logo2.png)
+  <strong>JUDUL</strong><br>
+  (Harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
 </p>
 
 <p align="center">
-  <strong>JUDUL</strong><br>
-  (Harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
+  <img src="./logo2.png" alt="Logo Universitas Trunojoyo Madura" style="width: 219px; height: 231px;">
 </p>
 
 <hr>
