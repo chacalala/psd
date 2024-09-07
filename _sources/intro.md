@@ -4,12 +4,7 @@ TEMPLATE LAPORAN PROYEK SAINS DATA
 JUDUL  
 ( harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
 
-# LAPORAN PROYEK SAINS DATA
-
 ![Logo Universitas Trunojoyo Madura](./logo2.png)
-
-## JUDUL  
-( harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
 
 Disusun Oleh:
 Nama: Revika Syariqatun Alifia  
