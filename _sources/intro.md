@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  ![Logo Universitas Trunojoyo Madura](./logo2.png)
+  ![Logo Universitas Trunojoyo Madura](./utm.png)
 </p>
 
 <hr>
