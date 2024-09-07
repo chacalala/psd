@@ -3,4 +3,6 @@
 **Revika Syariqatun Alifia**  
 **NIM: 220411100008**
 
-Halo! Ini hasil kerja keras (dan sedikit rebahan) untuk tugas **Proyek Sains Data**.  
+Halo! 
+<hr>
+Ini hasil kerja keras (dan sedikit ngopi) untuk tugas **Proyek Sains Data**.  

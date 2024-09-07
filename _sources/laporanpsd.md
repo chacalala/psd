@@ -1,4 +1,4 @@
-# Judul Laporan PSD
+# Laporan Proyek Sains Data
 
 <p align="center">
   <strong>LAPORAN PROYEK SAINS DATA</strong>
@@ -9,7 +9,7 @@
   (Harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
 </p>
 
-![Logo Universitas Trunojoyo Madura](./utm.png)
+<img src="./utm.png" alt="Logo Universitas Trunojoyo Madura" width="58mm" height="61mm">
 
 
 <hr>
