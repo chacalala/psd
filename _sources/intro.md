@@ -1,7 +1,7 @@
 # SELAMAT DATANG
 
-**Revika Syariqatun Alifia**  
-**NIM: 220411100008**
+**Nama : Revika Syariqatun Alifia**  
+**NIM : 220411100008**
 
 Halo! 
 <hr>
