@@ -8,9 +8,8 @@
 </p>
 
 <p align="center">
-  <img src="./utm.png" alt="Logo Universitas Trunojoyo Madura" style="width: 58mm; height: 61mm;">
+  <img src="https://www.example.com/path/to/utm.png" alt="Logo Universitas Trunojoyo Madura" style="width: 58mm; height: 61mm;">
 </p>
-
 
 <hr>
 
