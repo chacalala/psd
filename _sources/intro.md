@@ -1,11 +1,50 @@
 # LAPORAN PROYEK SAINS DATA
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+TEMPLATE LAPORAN PROYEK SAINS DATA
+JUDUL  
+( harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
 
-Check out the content pages bundled with this sample book to see more.
+# LAPORAN PROYEK SAINS DATA
+
+![Logo Universitas Trunojoyo Madura](./logo2.png)
+
+## JUDUL  
+( harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
+
+Disusun Oleh:
+Nama: Revika Syariqatun Alifia  
+NIM: 220411100008  
+Kelas: IF 5D  
+
+Dosen Pengampu:  
+Nama: Mula'ab, S.Si., M.Kom  
+NIP: 19730520200212  
+
+PRODI TEKNIK INFORMATIKA  
+JURUSAN TEKNIK INFORMATIKA  
+FAKULTAS TEKNIK  
+UNIVERSITAS TRUNOJOYO MADURA  
+2024
+
+```{tableofcontents}
+ 
+
+Disusun Oleh:
+Nama: Revika Syariqatun Alifia
+NIM: 220411100008
+Kelas: IF 5D
+
+Dosen Pengampu:
+Nama: Mula'ab, S.Si., M.Kom
+NIP: 19730520200212
+
+
+
+PRODI TEKNIK INFORMATIKA
+JURUSAN TEKNIK INFORMATIKA
+FAKULTAS TEKNIK
+UNIVERSITAS TRUNOJOYO MADURA
+2024
 
 ```{tableofcontents}
 ```
