@@ -7,9 +7,8 @@
   (Harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
 </p>
 
-<p align="center">
-  <img src="https://www.example.com/path/to/utm.png" alt="Logo Universitas Trunojoyo Madura" style="width: 58mm; height: 61mm;">
-</p>
+![Logo Universitas Trunojoyo Madura](./utm.png)
+
 
 <hr>
 
