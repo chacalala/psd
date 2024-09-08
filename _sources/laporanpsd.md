@@ -51,7 +51,7 @@
 <hr>
 
 ### Rumusan Masalah
-<p style="text-indent: 20px;"> Bagaimana Amazon bisa menggunakan data kebiasaan belanja dan informasi pelanggan untuk dijadikan sebagai peningkatan segmentasi pelanggan, supaya dapat menghasilkan iklan dan penawaran yang lebih tepat sasaran sesuai dengan minat pelanggan.</p>
+<p style="text-indent: 20px;"> Bagaimana Amazon bisa menggunakan data kebiasaan belanja dan informasi pelanggan untuk dijadikan sebagai peningkatan segmentasi pelanggan, supaya dapat menghasilkan iklan dan penawaran yang lebih tepat sasaran sesuai dengan minat pelanggan?.</p>
 <hr>
 
 ```{tableofcontents}
