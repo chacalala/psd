@@ -41,21 +41,17 @@
 <hr>
 
 ### Latar Belakang
-    Amazon.com, Inc adalah toko ritel berbasis online terbesar kedua di dunia yang didirikan oleh Jeff Bezos pada 5 Juli 1994 di Bellevue, Washington, Amerika. Awalnya, Amazon hanya menjual berbagai jenis buku, bahkan menciptakan slogan "Earth’s Biggest Bookstore" untuk mencerminkan ambisinya. Namun, seiring waktu dan perkembangan teknologi, Amazon kini menjual barang-barang elektronik serta berbagai kebutuhan sehari-hari. Selain itu, Amazon juga menyediakan layanan Amazon Prime, yang menawarkan pengiriman cepat tanpa biaya, akses streaming film, serial TV, dan musik, serta diskon khusus. Ada juga Amazon Fresh yang menyediakan bahan makanan segar dan kebutuhan sehari-hari yang langsung dikirim ke rumah pelanggan.
-
+<p style="text-indent: 20px;"> Amazon.com, Inc merupakan toko retail berbasis online terbesar kedua di dunia yang didirikan oleh Jeff Bezos pada 5 Juli 1994 di Bellevue, Washington, Amerika. Awal terciptanya Amazon hanya menjual berbagai jenis buku saja yang dimana dia sampai menciptakan slogan “Earth’s Biggest Bookstore” untuk mencerminkan ambisinya. Namun seiring berjalannya waktu dan perkembangan teknologi, Amazon kini menjual barang-barang elektronik hingga berbagai macam kebutuhan sehari-hari. Tidak hanya itu saja Amazon juga menyediakan Amazon Prime yang apabila kita berlangganan akan mendapatkan beberapa benefit seperti pengiriman cepat tanpa biaya, akses streaming film / serial tv dan musik, serta banyak diskon khusus lainnya. Serta ada juga Amazon fresh yang menyediakan berbagai bahan makanan segar dan kebutuhan sehari-hari yang langsung dikirim kerumah pelanggan.</p>
 <hr>
-
-    Amazon memiliki visi untuk menjadi perusahaan yang mengutamakan kebutuhan pelanggan di seluruh dunia serta bertekad menjadi pemberi kerja terbaik. Dengan misinya untuk menyediakan produk yang bervariasi dengan harga terjangkau dan pengiriman cepat, Amazon menerapkan strategi berfokus pada inovasi, pengembangan teknologi, dan kerjasama dengan berbagai mitra. Strategi ini membantu Amazon memperkuat posisinya di industri, meningkatkan kepuasan pelanggan, dan hasil pemasaran untuk mencapai tujuan bisnisnya.
-
+<p style="text-indent: 20px;"> Amazon memiliki visi untuk menjadi salah satu perusahaan yang akan mengutamakan kebutuhan pelanggan di seluruh dunia serta bertekad untuk menjadi pemberi kerja terbaik terhadap seluruh pencari kerja di dunia. Dengan misinya yang akan menyediakan bermacam-macam produk dengan harga yang terjangkau serta pengiriman yang cepat. Untuk mengejar target bisnisnya, Amazon menggunakan strategi yang berfokus kepada mencari ide-ide baru, inovasi, mengembangkan teknologi, dan bekerja sama dengan banyak mitra. Dengan strategi tersebut dapat membatu Amazon untuk memperkuat posisi di industri,  mencapai kepuasan pelanggan dan meningkatkan hasil pemasarannya sehingga mendukung untuk mencapai tujuan bisnisnya.</p>
 <hr>
 
 ### Tujuan
-    Melalui analisis data, diharapkan dapat membagi pelanggan menjadi kelompok-kelompok berdasarkan minat mereka. Dengan cara ini, Amazon dapat membuat iklan dan penawaran yang lebih sesuai dengan minat masing-masing pelanggan, sehingga memperbaiki strategi pemasaran dan mendukung pencapaian salah satu tujuan bisnisnya.
-
+<p style="text-indent: 20px;"> Dengan melakukan analisis data, diharapkan dapat membagi pelanggan ke dalam bentuk kelompok-kelompok berdasarkan minat mereka, sehingga Amazon  lebih mudah membuat iklan dan penawaran yang lebih sesuai dengan minat masing-masing pelanggan. Hal ini diharapkan bisa memperbaiki cara pemasaran untuk membantu perusahaan mencapai salah satu tujuan bisnisnya.</p>
 <hr>
 
 ### Rumusan Masalah
-    Untuk mencapai visi perusahaannya, Amazon harus menemukan cara paling efektif untuk menggunakan data pelanggan dalam pengelompokkan mereka. Hal ini melibatkan pemilihan metode analisis yang tepat agar iklan dan penawaran di platform Amazon dapat disesuaikan dengan setiap kelompok pelanggan.	
+<p style="text-indent: 20px;"> Bagaimana Amazon bisa menggunakan data kebiasaan belanja dan informasi pelanggan untuk dijadikan sebagai peningkatan segmentasi pelanggan, supaya dapat menghasilkan iklan dan penawaran yang lebih tepat sasaran sesuai dengan minat pelanggan.</p>
 <hr>
 
 ```{tableofcontents}
