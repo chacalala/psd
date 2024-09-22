@@ -41,17 +41,21 @@
 <hr>
 
 ### Latar Belakang
-<p style="text-indent: 20px;"> Amazon.com, Inc merupakan toko retail berbasis online terbesar kedua di dunia yang didirikan oleh Jeff Bezos pada 5 Juli 1994 di Bellevue, Washington, Amerika. Awal terciptanya Amazon hanya menjual berbagai jenis buku saja yang dimana dia sampai menciptakan slogan “Earth’s Biggest Bookstore” untuk mencerminkan ambisinya. Namun seiring berjalannya waktu dan perkembangan teknologi, Amazon kini menjual barang-barang elektronik hingga berbagai macam kebutuhan sehari-hari. Tidak hanya itu saja Amazon juga menyediakan Amazon Prime yang apabila kita berlangganan akan mendapatkan beberapa benefit seperti pengiriman cepat tanpa biaya, akses streaming film / serial tv dan musik, serta banyak diskon khusus lainnya. Serta ada juga Amazon fresh yang menyediakan berbagai bahan makanan segar dan kebutuhan sehari-hari yang langsung dikirim kerumah pelanggan.</p>
+<p style="text-indent: 20px;"> Maisons du Monde adalah perusahaan retail yang menyediakan berbagai furnitur dan dekorasi rumah yang didirikan di Perancis oleh Xavier Marie di Brest pada tahun 1996. Maisons du Monde berkembang pesat di pasar Eropa dengan menawarkan berbagai produk yang unik dan beragam. Visi di perusahaan ini yaitu menciptakan dunia yang harmonis dan berkelanjutan, sementara misinya adalah menyediakan produk berkualitas tinggi yang menghormati lingkungan dan manusia. Namun disisi lain perusahaan ini menghadapi berbagai tantangan dalam mengelola permintaan konsumen yang sering kali berubah-ubah, yang menyebabkan masalah seperti kekurangan atau kelebihan stok produk. Kejadian tersebuat sangat berdampak buruk pada pengalamanan pelanggan dan efisiensi operasional.</p>
 <hr>
-<p style="text-indent: 20px;"> Amazon memiliki visi untuk menjadi salah satu perusahaan yang akan mengutamakan kebutuhan pelanggan di seluruh dunia serta bertekad untuk menjadi pemberi kerja terbaik terhadap seluruh pencari kerja di dunia. Dengan misinya yang akan menyediakan bermacam-macam produk dengan harga yang terjangkau serta pengiriman yang cepat. Untuk mengejar target bisnisnya, Amazon menggunakan strategi yang berfokus kepada mencari ide-ide baru, inovasi, mengembangkan teknologi, dan bekerja sama dengan banyak mitra. Dengan strategi tersebut dapat membatu Amazon untuk memperkuat posisi di industri,  mencapai kepuasan pelanggan dan meningkatkan hasil pemasarannya sehingga mendukung untuk mencapai tujuan bisnisnya.</p>
+<p style="text-indent: 20px;"> Dalam upaya untuk mengatasi tantangan tersebut, Maisons du Monde memerlukan pendekatan analitis yang mendalam untuk memahami pola pembelian, memprediksi permintaan, dan mengoptimalkan manajemen persediaan. Peramalan penjualan menjadi kunci dalam strategi ini, karena peramalan yang akurat memungkinkan perusahaan merespons kebutuhan pelanggan dengan lebih efektif. Dengan demikian, perusahaan dapat meningkatkan kualitas layanan dan mengelola persediaan secara efisien. Pendekatan ini tidak hanya memperbaiki pengalaman pelanggan, tetapi juga membantu Maisons du Monde mempertahankan keunggulan kompetitif di pasar yang dinamis.</p>
 <hr>
 
 ### Tujuan
-<p style="text-indent: 20px;"> Dengan melakukan analisis data, diharapkan dapat membagi pelanggan ke dalam bentuk kelompok-kelompok berdasarkan minat mereka, sehingga Amazon  lebih mudah membuat iklan dan penawaran yang lebih sesuai dengan minat masing-masing pelanggan. Hal ini diharapkan bisa memperbaiki cara pemasaran untuk membantu perusahaan mencapai salah satu tujuan bisnisnya.</p>
+<p style="text-indent: 20px;">Dengan analisis data yang mendalam, Maisons du Monde dapat memahami pola pembelian dan memprediksi permintaan yang berubah-ubah. Ini akan membantu perusahaan mengelola stok lebih efektif, mengurangi risiko kekurangan atau kelebihan persediaan, dan memastikan ketersediaan produk sesuai kebutuhan pelanggan. Strategi ini tidak hanya meningkatkan kualitas layanan, tetapi juga memperkuat posisi perusahaan di pasar yang dinamis.</p>
 <hr>
 
 ### Rumusan Masalah
-<p style="text-indent: 20px;"> Bagaimana Amazon bisa menggunakan data kebiasaan belanja dan informasi pelanggan untuk dijadikan sebagai peningkatan segmentasi pelanggan, supaya dapat menghasilkan iklan dan penawaran yang lebih tepat sasaran sesuai dengan minat pelanggan?.</p>
+<ul style="list-style-type: disc; padding-left: 20px; text-indent: 0;">
+    <li>Bagaimana Maisons du Monde dapat memanfaatkan data pelanggan untuk memahami pola pembelian dan memprediksi permintaan yang berubah-ubah?</li>
+    <li>Metode analisis apa yang dapat digunakan untuk mengelompokkan pelanggan secara akurat, sehingga perusahaan dapat mengoptimalkan manajemen persediaan dan meningkatkan kualitas layanan?</li>
+    <li>Bagaimana pendekatan analitis ini dapat membantu Maisons du Monde mengurangi risiko kekurangan atau kelebihan stok, serta memastikan ketersediaan produk sesuai dengan kebutuhan pelanggan?</li>
+</ul>
 <hr>
 
 ```{tableofcontents}
