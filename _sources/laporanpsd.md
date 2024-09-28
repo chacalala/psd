@@ -63,7 +63,7 @@
 ### Data Understanding
 
 #### a. Sumber Data
-Data yang digunakan pada proyek ini diambil dari platform **Lamin Etam** (Laman Informasi Ekonomi Komoditas Kaltim), yang dapat diakses melalui tautan berikut: [Lamin Etam](https://hargapangan.laminetam.id/tabel-harga/daerah). Dataset ini mencakup informasi harga pangan di berbagai daerah di Indonesia, khususnya dari **Samarinda** dan **Kalimantan Timur**. **Lamin Etam** merupakan platform yang menyediakan informasi harga pangan serta menjadi showcase untuk menampilkan UMKM unggulan dari Samarinda dan Kalimantan Timur. Pada proyek ini, digunakan data harga pangan yang tersedia dalam format tabel dari situs tersebut.
+Data yang digunakan pada proyek ini diambil dari platform **Lamin Etam** (Laman Informasi Ekonomi Komoditas Kaltim), yang dapat diakses melalui tautan berikut: [Lamin Etam](https://hargapangan.laminetam.id/tabel-harga/daerah). Dataset ini mencakup informasi harga pangan di berbagai daerah di Indonesia, khususnya dari Samarinda dan Kalimantan Timur. **Lamin Etam** merupakan platform yang menyediakan informasi harga pangan serta menjadi showcase untuk menampilkan UMKM unggulan dari Samarinda dan Kalimantan Timur. Pada proyek ini, digunakan data harga pangan yang tersedia dalam format tabel dari situs tersebut.
 
 #### b. Deskripsi Dataset
 Dataset ini terdiri dari 3 fitur atau kolom, dengan total 56 record. Berikut adalah deskripsi dari setiap atribut yang ada:
@@ -77,5 +77,15 @@ Dataset ini terdiri dari 3 fitur atau kolom, dengan total 56 record. Berikut ada
 - **Tahun**: Numerik (Diskrit), karena tahun adalah angka yang merepresentasikan waktu dan dapat dihitung.
 - **Harga Gula (kg)**: Numerik (Kontinu), karena harga dapat memiliki nilai pecahan dan dapat diukur dengan presisi yang lebih tinggi.
 
+
+## METODOLOGI
+
+### Pra-pemrosesan Data
+Langkah-langkah pada tahap ini adalah sebagai berikut:
+
+#### a. Menangani Nilai Hilang
+Data yang hilang diidentifikasi dan dihapus untuk memastikan tidak ada celah dalam dataset.
+```python
+df = df.dropna()
 
 ```{tableofcontents}

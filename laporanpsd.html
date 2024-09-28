@@ -389,6 +389,13 @@ document.write(`
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">METODOLOGI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-menangani-nilai-hilang">a. Menangani Nilai Hilang</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -461,7 +468,7 @@ document.write(`
 <h3>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h3>
 <section id="a-sumber-data">
 <h4>a. Sumber Data<a class="headerlink" href="#a-sumber-data" title="Link to this heading">#</a></h4>
-<p>Data yang digunakan pada proyek ini diambil dari platform <strong>Lamin Etam</strong> (Laman Informasi Ekonomi Komoditas Kaltim), yang dapat diakses melalui tautan berikut: <a class="reference external" href="https://hargapangan.laminetam.id/tabel-harga/daerah">Lamin Etam</a>. Dataset ini mencakup informasi harga pangan di berbagai daerah di Indonesia, khususnya dari <strong>Samarinda</strong> dan <strong>Kalimantan Timur</strong>. <strong>Lamin Etam</strong> merupakan platform yang menyediakan informasi harga pangan serta menjadi showcase untuk menampilkan UMKM unggulan dari Samarinda dan Kalimantan Timur. Pada proyek ini, digunakan data harga pangan yang tersedia dalam format tabel dari situs tersebut.</p>
+<p>Data yang digunakan pada proyek ini diambil dari platform <strong>Lamin Etam</strong> (Laman Informasi Ekonomi Komoditas Kaltim), yang dapat diakses melalui tautan berikut: <a class="reference external" href="https://hargapangan.laminetam.id/tabel-harga/daerah">Lamin Etam</a>. Dataset ini mencakup informasi harga pangan di berbagai daerah di Indonesia, khususnya dari Samarinda dan Kalimantan Timur. <strong>Lamin Etam</strong> merupakan platform yang menyediakan informasi harga pangan serta menjadi showcase untuk menampilkan UMKM unggulan dari Samarinda dan Kalimantan Timur. Pada proyek ini, digunakan data harga pangan yang tersedia dalam format tabel dari situs tersebut.</p>
 </section>
 <section id="b-deskripsi-dataset">
 <h4>b. Deskripsi Dataset<a class="headerlink" href="#b-deskripsi-dataset" title="Link to this heading">#</a></h4>
@@ -477,6 +484,22 @@ document.write(`
 <li><p><strong>Tahun</strong>: Numerik (Diskrit), karena tahun adalah angka yang merepresentasikan waktu dan dapat dihitung.</p></li>
 <li><p><strong>Harga Gula (kg)</strong>: Numerik (Kontinu), karena harga dapat memiliki nilai pecahan dan dapat diukur dengan presisi yang lebih tinggi.</p></li>
 </ul>
+</section>
+</section>
+</section>
+<section id="id1">
+<h2>METODOLOGI<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="pra-pemrosesan-data">
+<h3>Pra-pemrosesan Data<a class="headerlink" href="#pra-pemrosesan-data" title="Link to this heading">#</a></h3>
+<p>Langkah-langkah pada tahap ini adalah sebagai berikut:</p>
+<section id="a-menangani-nilai-hilang">
+<h4>a. Menangani Nilai Hilang<a class="headerlink" href="#a-menangani-nilai-hilang" title="Link to this heading">#</a></h4>
+<p>Data yang hilang diidentifikasi dan dihapus untuk memastikan tidak ada celah dalam dataset.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="err">```</span><span class="p">{</span><span class="n">tableofcontents</span><span class="p">}</span>
+</pre></div>
+</div>
 </section>
 </section>
 </section>
@@ -547,6 +570,13 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-sumber-data">a. Sumber Data</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-dataset">b. Deskripsi Dataset</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">METODOLOGI</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-menangani-nilai-hilang">a. Menangani Nilai Hilang</a></li>
 </ul>
 </li>
 </ul>
