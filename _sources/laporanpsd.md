@@ -82,23 +82,35 @@ Langkah-langkah pada tahap ini adalah sebagai berikut:
 
 #### a. Menangani Nilai Hilang
 Data yang hilang diidentifikasi dan dihapus untuk memastikan tidak ada celah dalam dataset.
-```python
+```python\`\`\`
 df = df.dropna()
 
 #### b.	Konversi Tipe Data
 Kolom Tahun dan Bulan diubah menjadi tipe integer untuk memudahkan pemodelan.
-```python
+```python\`\`\`
 df['Tahun'] = df['Tahun'].astype(int)
 df['Bulan'] = df['Bulan'].astype(int)
 
 #### c.	Pembersihan Variabel Target
 Variabel target Harga Gula (kg) memiliki nilai dengan simbol mata uang 'Rp' dan koma. Ini dihapus, dan kolom diubah menjadi tipe float.
-```python
+```python\`\`\`
 df['Harga Gula (kg)'] = df['Harga Gula (kg)'].str.replace('Rp', '').str.replace(',', '').str.strip().astype(float)
 
 #### d.	Deteksi dan Penghapusan Outlier
 Z-score dihitung untuk mendeteksi outlier, dan baris dengan Z-score lebih dari 3 dianggap sebagai outlier dan dihapus.
-```python
+```python\`\`\`
 z_scores = np.abs(stats.zscore(df['Harga Gula (kg)'])) outliers = np.where(z_scores > threshold) df_no_outliers = df.drop(outliers[0])
 
 ### Modelling
+
+#### a.	Mendefinisikan Fitur dan Target
+Fitur yang digunakan adalah Bulan dan Tahun, sementara variabel target adalah Harga Gula (kg).
+```python\`\`\`
+X = df_no_outliers[['Bulan', 'Tahun']]
+y = df_no_outliers['Harga Gula (kg)']
+
+#### b.	Pembagian Data
+Data dibagi menjadi data latih (80%) dan data uji (20%) menggunakan fungsi train_test_split dari scikit-learn.
+```python\`\`\`
+X = df_no_outliers[['Bulan', 'Tahun']]
+y = df_no_outliers['Harga Gula (kg)']

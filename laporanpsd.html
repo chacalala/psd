@@ -389,6 +389,14 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-menangani-nilai-hilang">a. Menangani Nilai Hilang</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-konversi-tipe-data">b.	Konversi Tipe Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pembersihan-variabel-target">c.	Pembersihan Variabel Target</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-deteksi-dan-penghapusan-outlier">d.	Deteksi dan Penghapusan Outlier</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mendefinisikan-fitur-dan-target">a.	Mendefinisikan Fitur dan Target</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pembagian-data">b.	Pembagian Data</a></li>
 </ul>
 </li>
 </ul>
@@ -488,28 +496,45 @@ document.write(`
 <p>Langkah-langkah pada tahap ini adalah sebagai berikut:</p>
 <section id="a-menangani-nilai-hilang">
 <h4>a. Menangani Nilai Hilang<a class="headerlink" href="#a-menangani-nilai-hilang" title="Link to this heading">#</a></h4>
-<p>Data yang hilang diidentifikasi dan dihapus untuk memastikan tidak ada celah dalam dataset.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-
-<span class="c1">#### b.	Konversi Tipe Data</span>
-<span class="n">Kolom</span> <span class="n">Tahun</span> <span class="n">dan</span> <span class="n">Bulan</span> <span class="n">diubah</span> <span class="n">menjadi</span> <span class="n">tipe</span> <span class="n">integer</span> <span class="n">untuk</span> <span class="n">memudahkan</span> <span class="n">pemodelan</span><span class="o">.</span>
-<span class="err">```</span><span class="n">python</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tahun&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tahun&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Bulan&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Bulan&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-
-<span class="c1">#### c.	Pembersihan Variabel Target</span>
-<span class="n">Variabel</span> <span class="n">target</span> <span class="n">Harga</span> <span class="n">Gula</span> <span class="p">(</span><span class="n">kg</span><span class="p">)</span> <span class="n">memiliki</span> <span class="n">nilai</span> <span class="n">dengan</span> <span class="n">simbol</span> <span class="n">mata</span> <span class="n">uang</span> <span class="s1">&#39;Rp&#39;</span> <span class="n">dan</span> <span class="n">koma</span><span class="o">.</span> <span class="n">Ini</span> <span class="n">dihapus</span><span class="p">,</span> <span class="n">dan</span> <span class="n">kolom</span> <span class="n">diubah</span> <span class="n">menjadi</span> <span class="n">tipe</span> <span class="nb">float</span><span class="o">.</span>
-<span class="err">```</span><span class="n">python</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Rp&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-
-<span class="c1">#### d.	Deteksi dan Penghapusan Outlier</span>
-<span class="n">Z</span><span class="o">-</span><span class="n">score</span> <span class="n">dihitung</span> <span class="n">untuk</span> <span class="n">mendeteksi</span> <span class="n">outlier</span><span class="p">,</span> <span class="n">dan</span> <span class="n">baris</span> <span class="n">dengan</span> <span class="n">Z</span><span class="o">-</span><span class="n">score</span> <span class="n">lebih</span> <span class="n">dari</span> <span class="mi">3</span> <span class="n">dianggap</span> <span class="n">sebagai</span> <span class="n">outlier</span> <span class="n">dan</span> <span class="n">dihapus</span><span class="o">.</span>
-<span class="err">```</span><span class="n">python</span>
-<span class="n">z_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">zscore</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]))</span> <span class="n">outliers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">z_scores</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span> <span class="n">df_no_outliers</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">outliers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="c1">### Modelling</span>
-</pre></div>
-</div>
+<p>Data yang hilang diidentifikasi dan dihapus untuk memastikan tidak ada celah dalam dataset.
+```python```
+df = df.dropna()</p>
+</section>
+<section id="b-konversi-tipe-data">
+<h4>b.	Konversi Tipe Data<a class="headerlink" href="#b-konversi-tipe-data" title="Link to this heading">#</a></h4>
+<p>Kolom Tahun dan Bulan diubah menjadi tipe integer untuk memudahkan pemodelan.
+```python```
+df[‘Tahun’] = df[‘Tahun’].astype(int)
+df[‘Bulan’] = df[‘Bulan’].astype(int)</p>
+</section>
+<section id="c-pembersihan-variabel-target">
+<h4>c.	Pembersihan Variabel Target<a class="headerlink" href="#c-pembersihan-variabel-target" title="Link to this heading">#</a></h4>
+<p>Variabel target Harga Gula (kg) memiliki nilai dengan simbol mata uang ‘Rp’ dan koma. Ini dihapus, dan kolom diubah menjadi tipe float.
+```python```
+df[‘Harga Gula (kg)’] = df[‘Harga Gula (kg)’].str.replace(‘Rp’, ‘’).str.replace(‘,’, ‘’).str.strip().astype(float)</p>
+</section>
+<section id="d-deteksi-dan-penghapusan-outlier">
+<h4>d.	Deteksi dan Penghapusan Outlier<a class="headerlink" href="#d-deteksi-dan-penghapusan-outlier" title="Link to this heading">#</a></h4>
+<p>Z-score dihitung untuk mendeteksi outlier, dan baris dengan Z-score lebih dari 3 dianggap sebagai outlier dan dihapus.
+```python```
+z_scores = np.abs(stats.zscore(df[‘Harga Gula (kg)’])) outliers = np.where(z_scores &gt; threshold) df_no_outliers = df.drop(outliers[0])</p>
+</section>
+</section>
+<section id="modelling">
+<h3>Modelling<a class="headerlink" href="#modelling" title="Link to this heading">#</a></h3>
+<section id="a-mendefinisikan-fitur-dan-target">
+<h4>a.	Mendefinisikan Fitur dan Target<a class="headerlink" href="#a-mendefinisikan-fitur-dan-target" title="Link to this heading">#</a></h4>
+<p>Fitur yang digunakan adalah Bulan dan Tahun, sementara variabel target adalah Harga Gula (kg).
+```python```
+X = df_no_outliers[[‘Bulan’, ‘Tahun’]]
+y = df_no_outliers[‘Harga Gula (kg)’]</p>
+</section>
+<section id="b-pembagian-data">
+<h4>b.	Pembagian Data<a class="headerlink" href="#b-pembagian-data" title="Link to this heading">#</a></h4>
+<p>Data dibagi menjadi data latih (80%) dan data uji (20%) menggunakan fungsi train_test_split dari scikit-learn.
+```python```
+X = df_no_outliers[[‘Bulan’, ‘Tahun’]]
+y = df_no_outliers[‘Harga Gula (kg)’]</p>
 </section>
 </section>
 </section>
@@ -584,6 +609,14 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-menangani-nilai-hilang">a. Menangani Nilai Hilang</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-konversi-tipe-data">b.	Konversi Tipe Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pembersihan-variabel-target">c.	Pembersihan Variabel Target</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-deteksi-dan-penghapusan-outlier">d.	Deteksi dan Penghapusan Outlier</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mendefinisikan-fitur-dan-target">a.	Mendefinisikan Fitur dan Target</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pembagian-data">b.	Pembagian Data</a></li>
 </ul>
 </li>
 </ul>
