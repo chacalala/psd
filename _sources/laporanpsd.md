@@ -82,35 +82,73 @@ Langkah-langkah pada tahap ini adalah sebagai berikut:
 
 #### a. Menangani Nilai Hilang
 Data yang hilang diidentifikasi dan dihapus untuk memastikan tidak ada celah dalam dataset.
-```python\`\`\`
+```python
 df = df.dropna()
-
+```
 #### b.	Konversi Tipe Data
 Kolom Tahun dan Bulan diubah menjadi tipe integer untuk memudahkan pemodelan.
-```python\`\`\`
+```python
 df['Tahun'] = df['Tahun'].astype(int)
 df['Bulan'] = df['Bulan'].astype(int)
-
+```
 #### c.	Pembersihan Variabel Target
 Variabel target Harga Gula (kg) memiliki nilai dengan simbol mata uang 'Rp' dan koma. Ini dihapus, dan kolom diubah menjadi tipe float.
-```python\`\`\`
+```python
 df['Harga Gula (kg)'] = df['Harga Gula (kg)'].str.replace('Rp', '').str.replace(',', '').str.strip().astype(float)
-
+```
 #### d.	Deteksi dan Penghapusan Outlier
 Z-score dihitung untuk mendeteksi outlier, dan baris dengan Z-score lebih dari 3 dianggap sebagai outlier dan dihapus.
-```python\`\`\`
+```python
 z_scores = np.abs(stats.zscore(df['Harga Gula (kg)'])) outliers = np.where(z_scores > threshold) df_no_outliers = df.drop(outliers[0])
-
+```
 ### Modelling
 
 #### a.	Mendefinisikan Fitur dan Target
 Fitur yang digunakan adalah Bulan dan Tahun, sementara variabel target adalah Harga Gula (kg).
-```python\`\`\`
+```python
 X = df_no_outliers[['Bulan', 'Tahun']]
 y = df_no_outliers['Harga Gula (kg)']
-
+```
 #### b.	Pembagian Data
 Data dibagi menjadi data latih (80%) dan data uji (20%) menggunakan fungsi train_test_split dari scikit-learn.
-```python\`\`\`
+```python
 X = df_no_outliers[['Bulan', 'Tahun']]
 y = df_no_outliers['Harga Gula (kg)']
+```
+#### c.	Pembuatan Model Regresi Linier
+Model regresi linier dibuat dan dilatih menggunakan data latih.
+```python
+model = LinearRegression()
+model.fit(X_train, y_train)
+```
+#### d.	Prediksi
+Model digunakan untuk melakukan prediksi pada data uji.
+```python
+y_pred = model.predict(X_test)
+```
+### Evaluation
+Evaluasi model dilakukan dengan menghitung Mean Squared Error (MSE) dan membandingkan hasil prediksi dengan data aktual.
+#### a.	Menghitung MSE
+MSE dihitung untuk menilai seberapa baik model dalam memprediksi harga gula.
+```python
+mse = mean_squared_error(y_test, y_pred)print(f'Mean Squared Error: {mse}')
+```
+#### b.	Visualisasi Hasil
+Hasil prediksi dibandingkan dengan data aktual menggunakan grafik sebar (scatter plot).
+```python
+plt.scatter(y_test, y_pred)
+plt.xlabel("Harga Gula Aktual")
+plt.ylabel("Harga Gula Prediksi")
+plt.title("Perbandingan Harga Gula Aktual vs Prediksi")
+plt.show()
+```
+Setelah melakukan prediksi, langkah evaluasi menggunakan Mean Squared Error (MSE) menunjukkan bahwa nilai MSE dari model ini adalah 3,917,627.77
+
+#### c.	Contoh Prediksi Masa Depan
+Model digunakan untuk memprediksi harga gula pada bulan dan tahun tertentu.
+```python
+future_data = pd.DataFrame({'Bulan': [10], 'Tahun': [2024]})
+future_price_pred = model.predict(future_data)
+formatted_price = f"Rp {future_price_pred[0]:,.0f}"
+print(f"Prediksi harga gula pada {future_data.iloc[0]['Bulan']}/{future_data.iloc[0]['Tahun']}: {formatted_price}")
+```
