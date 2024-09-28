@@ -77,9 +77,6 @@ Dataset ini terdiri dari 3 fitur atau kolom, dengan total 56 record. Berikut ada
 - **Tahun**: Numerik (Diskrit), karena tahun adalah angka yang merepresentasikan waktu dan dapat dihitung.
 - **Harga Gula (kg)**: Numerik (Kontinu), karena harga dapat memiliki nilai pecahan dan dapat diukur dengan presisi yang lebih tinggi.
 
-
-## METODOLOGI
-
 ### Pra-pemrosesan Data
 Langkah-langkah pada tahap ini adalah sebagai berikut:
 
@@ -88,4 +85,20 @@ Data yang hilang diidentifikasi dan dihapus untuk memastikan tidak ada celah dal
 ```python
 df = df.dropna()
 
-```{tableofcontents}
+#### b.	Konversi Tipe Data
+Kolom Tahun dan Bulan diubah menjadi tipe integer untuk memudahkan pemodelan.
+```python
+df['Tahun'] = df['Tahun'].astype(int)
+df['Bulan'] = df['Bulan'].astype(int)
+
+#### c.	Pembersihan Variabel Target
+Variabel target Harga Gula (kg) memiliki nilai dengan simbol mata uang 'Rp' dan koma. Ini dihapus, dan kolom diubah menjadi tipe float.
+```python
+df['Harga Gula (kg)'] = df['Harga Gula (kg)'].str.replace('Rp', '').str.replace(',', '').str.strip().astype(float)
+
+#### d.	Deteksi dan Penghapusan Outlier
+Z-score dihitung untuk mendeteksi outlier, dan baris dengan Z-score lebih dari 3 dianggap sebagai outlier dan dihapus.
+```python
+z_scores = np.abs(stats.zscore(df['Harga Gula (kg)'])) outliers = np.where(z_scores > threshold) df_no_outliers = df.drop(outliers[0])
+
+### Modelling

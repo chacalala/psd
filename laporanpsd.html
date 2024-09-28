@@ -387,9 +387,6 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-dataset">b. Deskripsi Dataset</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">METODOLOGI</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-menangani-nilai-hilang">a. Menangani Nilai Hilang</a></li>
 </ul>
@@ -486,9 +483,6 @@ document.write(`
 </ul>
 </section>
 </section>
-</section>
-<section id="id1">
-<h2>METODOLOGI<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <section id="pra-pemrosesan-data">
 <h3>Pra-pemrosesan Data<a class="headerlink" href="#pra-pemrosesan-data" title="Link to this heading">#</a></h3>
 <p>Langkah-langkah pada tahap ini adalah sebagai berikut:</p>
@@ -497,7 +491,23 @@ document.write(`
 <p>Data yang hilang diidentifikasi dan dihapus untuk memastikan tidak ada celah dalam dataset.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 
-<span class="err">```</span><span class="p">{</span><span class="n">tableofcontents</span><span class="p">}</span>
+<span class="c1">#### b.	Konversi Tipe Data</span>
+<span class="n">Kolom</span> <span class="n">Tahun</span> <span class="n">dan</span> <span class="n">Bulan</span> <span class="n">diubah</span> <span class="n">menjadi</span> <span class="n">tipe</span> <span class="n">integer</span> <span class="n">untuk</span> <span class="n">memudahkan</span> <span class="n">pemodelan</span><span class="o">.</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tahun&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tahun&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Bulan&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Bulan&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1">#### c.	Pembersihan Variabel Target</span>
+<span class="n">Variabel</span> <span class="n">target</span> <span class="n">Harga</span> <span class="n">Gula</span> <span class="p">(</span><span class="n">kg</span><span class="p">)</span> <span class="n">memiliki</span> <span class="n">nilai</span> <span class="n">dengan</span> <span class="n">simbol</span> <span class="n">mata</span> <span class="n">uang</span> <span class="s1">&#39;Rp&#39;</span> <span class="n">dan</span> <span class="n">koma</span><span class="o">.</span> <span class="n">Ini</span> <span class="n">dihapus</span><span class="p">,</span> <span class="n">dan</span> <span class="n">kolom</span> <span class="n">diubah</span> <span class="n">menjadi</span> <span class="n">tipe</span> <span class="nb">float</span><span class="o">.</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Rp&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="c1">#### d.	Deteksi dan Penghapusan Outlier</span>
+<span class="n">Z</span><span class="o">-</span><span class="n">score</span> <span class="n">dihitung</span> <span class="n">untuk</span> <span class="n">mendeteksi</span> <span class="n">outlier</span><span class="p">,</span> <span class="n">dan</span> <span class="n">baris</span> <span class="n">dengan</span> <span class="n">Z</span><span class="o">-</span><span class="n">score</span> <span class="n">lebih</span> <span class="n">dari</span> <span class="mi">3</span> <span class="n">dianggap</span> <span class="n">sebagai</span> <span class="n">outlier</span> <span class="n">dan</span> <span class="n">dihapus</span><span class="o">.</span>
+<span class="err">```</span><span class="n">python</span>
+<span class="n">z_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">zscore</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]))</span> <span class="n">outliers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">z_scores</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span> <span class="n">df_no_outliers</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">outliers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1">### Modelling</span>
 </pre></div>
 </div>
 </section>
@@ -572,9 +582,6 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-dataset">b. Deskripsi Dataset</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">METODOLOGI</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-menangani-nilai-hilang">a. Menangani Nilai Hilang</a></li>
 </ul>
