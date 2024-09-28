@@ -41,24 +41,41 @@
 <hr>
 
 ### Latar Belakang
-<p style="text-indent: 20px;"> Maisons du Monde adalah perusahaan retail yang menyediakan berbagai furnitur dan dekorasi rumah yang didirikan di Perancis oleh Xavier Marie di Brest pada tahun 1996. Maisons du Monde berkembang pesat di pasar Eropa dengan menawarkan berbagai produk yang unik dan beragam. Visi di perusahaan ini yaitu menciptakan dunia yang harmonis dan berkelanjutan, sementara misinya adalah menyediakan produk berkualitas tinggi yang menghormati lingkungan dan manusia. Namun disisi lain perusahaan ini menghadapi berbagai tantangan dalam mengelola permintaan konsumen yang sering kali berubah-ubah, yang menyebabkan masalah seperti kekurangan atau kelebihan stok produk. Kejadian tersebuat sangat berdampak buruk pada pengalamanan pelanggan dan efisiensi operasional.</p>
+<p style="text-indent: 20px;"> Gulaku didirikan pada tahun 2002 dengan tujuan menyediakan gula berkualitas tinggi yang terjangkau dan mudah didapat oleh masyarakat Indonesia. Setiap produk Gulaku diproduksi dengan standar kualitas yang konsisten, dikemas dalam kemasan steril untuk menjaga kebersihannya. Visi perusahaan ini adalah Memenuhi kebutuhan dan memuaskan konsumen dengan menyediakan gula yang terus ditingkatkan untuk mencapai keberlanjutan, sementara misinya adalah menyediakan produk berkualitas dan ramah lingkungan. Untuk menghadapi tantangan pasar yang dinamis, Gulaku menggunakan teknologi peramalan harga guna membantu produsen dan distributor dalam mengambil keputusan yang lebih tepat.</p>
 <hr>
+<p style="text-indent: 20px;"> Gulaku terus berkomitmen untuk meningkatkan keberlanjutan dalam setiap aspek operasionalnya. Dengan memanfaatkan teknologi canggih dalam proses produksinya, perusahaan tidak hanya memastikan kualitas tinggi, tetapi juga meminimalisir dampak lingkungan. Gulaku juga aktif berkolaborasi dengan pemerintah untuk memperkuat ekonomi lokal dan mendukung inisiatif sosial di Lampung. Melalui program pelatihan dan pengembangan karyawan, Gulaku berusaha menciptakan lingkungan kerja yang positif, di mana setiap karyawan dapat berkembang dan berkontribusi secara maksimal terhadap visi perusahaan. Dengan motto “Manis, Bersih, Murni, Alami,” Gulaku bertekad untuk memberikan yang terbaik bagi konsumennya. Namun, produsen dan distributor Gulaku menghadapi tantangan besar terkait perubahan harga akibat dinamika pasar dan ketidakpastian rantai pasokan.</p>
 <hr>
-<p style="text-indent: 20px;"> Tujuan Maisons du Monde adalah untuk memandu semua keputusan strategis dan tindakan perusahaan. Tujuan ini diwujudkan dalam layanan yang mendukung pelanggan menciptakan rumah yang nyaman dan berkelanjutan, sekaligus berkontribusi pada ekonomi sirkular. Selain itu, perusahaan menyediakan fasilitas pelatihan melalui "MdM Academy" untuk karyawan, mendukung mereka dalam pertumbuhan karier serta meningkatkan kualitas layanan pelanggan. Hubungan jangka panjang dengan mitra bisnis dan pemasok diprioritaskan, memastikan kolaborasi yang berkelanjutan dan memfasilitasi penerapan praktik ramah lingkungan.</p>
-<hr>
-<p style="text-indent: 20px;"> Dalam upaya untuk mengatasi tantangan tersebut, Maisons du Monde memerlukan pendekatan analitis yang mendalam untuk memahami pola pembelian, memprediksi permintaan, dan mengoptimalkan manajemen persediaan. Peramalan penjualan menjadi kunci dalam strategi ini, karena peramalan yang akurat memungkinkan perusahaan merespons kebutuhan pelanggan dengan lebih efektif. Dengan demikian, perusahaan dapat meningkatkan kualitas layanan dan mengelola persediaan secara efisien. Pendekatan ini tidak hanya memperbaiki pengalaman pelanggan, tetapi juga membantu Maisons du Monde mempertahankan keunggulan kompetitif di pasar yang dinamis.</p>
+<p style="text-indent: 20px;"> Untuk menghadapi tantangan harga yang sering berfluktuasi, Gulaku mengandalkan peramalan harga yang akurat. Dengan menganalisis data historis, perusahaan dapat mengurangi risiko perubahan harga yang tidak terduga, serta membantu produsen dan distributor dalam merencanakan produksi dan distribusi secara lebih efisien. Strategi ini membantu menjaga keseimbangan antara penawaran dan permintaan di pasar. Tujuan dari peramalan harga adalah memastikan stabilitas harga, menjaga ketersediaan produk yang konsisten, dan meminimalkan risiko kelebihan atau kekurangan stok.</p>
 <hr>
 
 ### Tujuan
-<p style="text-indent: 20px;">Dengan analisis data yang mendalam, Maisons du Monde dapat memahami pola pembelian dan memprediksi permintaan yang berubah-ubah. Ini akan membantu perusahaan mengelola stok lebih efektif, mengurangi risiko kekurangan atau kelebihan persediaan, dan memastikan ketersediaan produk sesuai kebutuhan pelanggan. Strategi ini tidak hanya meningkatkan kualitas layanan, tetapi juga memperkuat posisi perusahaan di pasar yang dinamis.</p>
+<p style="text-indent: 20px;"> Melalui analisis data historis, Gulaku dapat melakukan peramalan harga secara akurat untuk menjaga stabilitas harga di pasaran, memastikan ketersediaan produk yang konsisten, serta meminimalkan risiko kelebihan atau kekurangan stok. Dengan peramalan yang tepat, Gulaku dapat merencanakan produksi dan distribusi secara lebih efisien, serta mampu mempersiapkan diri terhadap perubahan cepat di pasar.</p>
 <hr>
 
 ### Rumusan Masalah
 <ul style="list-style-type: disc; padding-left: 20px; text-indent: 0;">
-    <li>Bagaimana Maisons du Monde dapat memanfaatkan data pelanggan untuk memahami pola pembelian dan memprediksi permintaan yang berubah-ubah?</li>
-    <li>Metode analisis apa yang dapat digunakan untuk mengelompokkan pelanggan secara akurat, sehingga perusahaan dapat mengoptimalkan manajemen persediaan dan meningkatkan kualitas layanan?</li>
-    <li>Bagaimana pendekatan analitis ini dapat membantu Maisons du Monde mengurangi risiko kekurangan atau kelebihan stok, serta memastikan ketersediaan produk sesuai dengan kebutuhan pelanggan?</li>
+    <li>•	Bagaimana Gulaku dapat memprediksi harga di pasar gula yang dinamis sehingga produsen dan distributor dapat mengambil keputusan yang lebih baik terkait produksi, distribusi, dan persediaan?</li>
 </ul>
 <hr>
+
+## METODOLOGI
+
+### Data Understanding
+
+#### a. Sumber Data
+Data yang digunakan pada proyek ini diambil dari platform **Lamin Etam** (Laman Informasi Ekonomi Komoditas Kaltim), yang dapat diakses melalui tautan berikut: [Lamin Etam](https://hargapangan.laminetam.id/tabel-harga/daerah). Dataset ini mencakup informasi harga pangan di berbagai daerah di Indonesia, khususnya dari **Samarinda** dan **Kalimantan Timur**. **Lamin Etam** merupakan platform yang menyediakan informasi harga pangan serta menjadi showcase untuk menampilkan UMKM unggulan dari Samarinda dan Kalimantan Timur. Pada proyek ini, digunakan data harga pangan yang tersedia dalam format tabel dari situs tersebut.
+
+#### b. Deskripsi Dataset
+Dataset ini terdiri dari 3 fitur atau kolom, dengan total 56 record. Berikut adalah deskripsi dari setiap atribut yang ada:
+
+- **Bulan**: Mengindikasikan bulan terjadinya transaksi, di mana jumlah produk yang dibeli dalam satu transaksi dicatat.
+- **Tahun**: Menunjukkan tahun terjadinya transaksi.
+- **Harga Gula (kg)**: Menyimpan harga gula per kilogram, yang dapat berubah seiring waktu dan relevan dalam konteks pembelian.
+
+**Jenis Data**:
+- **Bulan**: Kategorikal (Ordinal), karena bulan memiliki urutan tertentu (Januari, Februari, dst.).
+- **Tahun**: Numerik (Diskrit), karena tahun adalah angka yang merepresentasikan waktu dan dapat dihitung.
+- **Harga Gula (kg)**: Numerik (Kontinu), karena harga dapat memiliki nilai pecahan dan dapat diukur dengan presisi yang lebih tinggi.
+
 
 ```{tableofcontents}
