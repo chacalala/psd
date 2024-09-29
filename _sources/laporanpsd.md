@@ -65,16 +65,11 @@
 #### a. Sumber Data
 Data yang digunakan pada proyek ini diambil dari platform PHIPS Nasional (Pusat Informasi Harga Pangan Strategis Nasional), yang beralamat di https://www.bi.go.id/hargapangan. Platform ini menyediakan informasi harga strategi pangan yang meliputi berbagai komoditas, baik di pasar tradisional maupun modern, serta data berdasarkan daerah dan jenis pedagang. Informasi ini mencakup harga rata-rata, perubahan harga, dan juga fitur visualisasi seperti histogram dan tampilan peta. Selain itu, PIHPS menawarkan berbagai jenis informasi harga pangan antar daerah, yang sangat berguna untuk analisis pasar dan pengambilan keputusan terkait kebutuhan pangan. Dalam proyek ini, digunakan data harga pangan yang tersedia dalam format tabel dari situs PIHPS Nasional, khususnya data harga gula dari tanggal 1 Januari 2021 hingga 18 September. Bentuk tampilan datanya seperti berikut :
 ```python
-# import library yang dibutuhkan
 import pandas as pd
-
-# Membaca data
+# Baca data CSV
 df = pd.read_csv('https://raw.githubusercontent.com/chacalala/Dataset/refs/heads/main/datagula.csv')
+print(df.head())
 
-# Simpan ke markdown
-with open('output.md', 'w') as f:
-    f.write("# Output DataFrame\n\n")
-    f.write(df.head().to_markdown())  # to_markdown membuat tabel markdown otomatis
 ```
 
 #### b. Deskripsi Dataset
