@@ -465,24 +465,19 @@ document.write(`
 <section id="a-sumber-data">
 <h4>a. Sumber Data<a class="headerlink" href="#a-sumber-data" title="Link to this heading">#</a></h4>
 <p>Data yang digunakan pada proyek ini diambil dari platform PHIPS Nasional (Pusat Informasi Harga Pangan Strategis Nasional), yang beralamat di <a class="reference external" href="https://www.bi.go.id/hargapangan">https://www.bi.go.id/hargapangan</a>. Platform ini menyediakan informasi harga strategi pangan yang meliputi berbagai komoditas, baik di pasar tradisional maupun modern, serta data berdasarkan daerah dan jenis pedagang. Informasi ini mencakup harga rata-rata, perubahan harga, dan juga fitur visualisasi seperti histogram dan tampilan peta. Selain itu, PIHPS menawarkan berbagai jenis informasi harga pangan antar daerah, yang sangat berguna untuk analisis pasar dan pengambilan keputusan terkait kebutuhan pangan. Dalam proyek ini, digunakan data harga pangan yang tersedia dalam format tabel dari situs PIHPS Nasional, khususnya data harga gula dari tanggal 1 Januari 2021 hingga 18 September. Bentuk tampilan datanya seperti berikut :</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="c1"># Baca data CSV</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/chacalala/Dataset/refs/heads/main/datagula.csv&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-
-</pre></div>
-</div>
 </section>
 <section id="b-deskripsi-dataset">
 <h4>b. Deskripsi Dataset<a class="headerlink" href="#b-deskripsi-dataset" title="Link to this heading">#</a></h4>
-<p>Dataset ini terdiri dari 3 fitur atau kolom, dengan total 56 record. Berikut adalah deskripsi dari setiap atribut yang ada:</p>
+<p>Dataset ini terdiri dari 4 fitur atau kolom, dan 976 record. Berikut adalah deskripsi dari setiap atribut yang ada:</p>
 <ul class="simple">
+<li><p><strong>Tanggal</strong> : Mengindentifikasi tanggal transaksi.</p></li>
 <li><p><strong>Bulan</strong>: Mengindikasikan bulan terjadinya transaksi, di mana jumlah produk yang dibeli dalam satu transaksi dicatat.</p></li>
 <li><p><strong>Tahun</strong>: Menunjukkan tahun terjadinya transaksi.</p></li>
 <li><p><strong>Harga Gula (kg)</strong>: Menyimpan harga gula per kilogram, yang dapat berubah seiring waktu dan relevan dalam konteks pembelian.</p></li>
 </ul>
 <p><strong>Jenis Data</strong>:</p>
 <ul class="simple">
+<li><p><strong>Tanggal</strong> : Datetime</p></li>
 <li><p><strong>Bulan</strong>: Kategorikal (Ordinal), karena bulan memiliki urutan tertentu (Januari, Februari, dst.).</p></li>
 <li><p><strong>Tahun</strong>: Numerik (Diskrit), karena tahun adalah angka yang merepresentasikan waktu dan dapat dihitung.</p></li>
 <li><p><strong>Harga Gula (kg)</strong>: Numerik (Kontinu), karena harga dapat memiliki nilai pecahan dan dapat diukur dengan presisi yang lebih tinggi.</p></li>

@@ -64,7 +64,8 @@
 
 #### a. Sumber Data
 Data yang digunakan pada proyek ini diambil dari platform PHIPS Nasional (Pusat Informasi Harga Pangan Strategis Nasional), yang beralamat di https://www.bi.go.id/hargapangan. Platform ini menyediakan informasi harga strategi pangan yang meliputi berbagai komoditas, baik di pasar tradisional maupun modern, serta data berdasarkan daerah dan jenis pedagang. Informasi ini mencakup harga rata-rata, perubahan harga, dan juga fitur visualisasi seperti histogram dan tampilan peta. Selain itu, PIHPS menawarkan berbagai jenis informasi harga pangan antar daerah, yang sangat berguna untuk analisis pasar dan pengambilan keputusan terkait kebutuhan pangan. Dalam proyek ini, digunakan data harga pangan yang tersedia dalam format tabel dari situs PIHPS Nasional, khususnya data harga gula dari tanggal 1 Januari 2021 hingga 18 September. Bentuk tampilan datanya seperti berikut :
-```python
+
+```{code-cell}
 import pandas as pd
 # Baca data CSV
 df = pd.read_csv('https://raw.githubusercontent.com/chacalala/Dataset/refs/heads/main/datagula.csv')
@@ -73,13 +74,15 @@ print(df.head())
 ```
 
 #### b. Deskripsi Dataset
-Dataset ini terdiri dari 3 fitur atau kolom, dengan total 56 record. Berikut adalah deskripsi dari setiap atribut yang ada:
+Dataset ini terdiri dari 4 fitur atau kolom, dan 976 record. Berikut adalah deskripsi dari setiap atribut yang ada:
 
+- **Tanggal** : Mengindentifikasi tanggal transaksi.
 - **Bulan**: Mengindikasikan bulan terjadinya transaksi, di mana jumlah produk yang dibeli dalam satu transaksi dicatat.
 - **Tahun**: Menunjukkan tahun terjadinya transaksi.
 - **Harga Gula (kg)**: Menyimpan harga gula per kilogram, yang dapat berubah seiring waktu dan relevan dalam konteks pembelian.
 
 **Jenis Data**:
+- **Tanggal** : Datetime
 - **Bulan**: Kategorikal (Ordinal), karena bulan memiliki urutan tertentu (Januari, Februari, dst.).
 - **Tahun**: Numerik (Diskrit), karena tahun adalah angka yang merepresentasikan waktu dan dapat dihitung.
 - **Harga Gula (kg)**: Numerik (Kontinu), karena harga dapat memiliki nilai pecahan dan dapat diukur dengan presisi yang lebih tinggi.
