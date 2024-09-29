@@ -175,6 +175,8 @@ Kolom Bulan dan Tahun digabungkan menjadi kolom date untuk memudahkan analisis w
 Visualisasi ini dibuat untuk menunjukkan perubahan harga gula dari waktu ke waktu, termasuk harga 3, 2, dan 1 hari sebelumnya, serta harga saat ini. Dengan grafik garis, kita bisa melihat tren dan pola harga secara jelas. Ini membantu kita memahami bagaimana harga saat ini dipengaruhi oleh harga di hari-hari sebelumnya.
 
 ```{code-cell} python
+import matplotlib.pyplot as plt
+import seaborn as sns
 # Visualisasi
 plt.figure(figsize=(15, 5))
 sns.lineplot(data=df[['xt-3', 'xt-2', 'xt-1', 'xt']])

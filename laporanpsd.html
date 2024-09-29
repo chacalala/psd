@@ -756,7 +756,9 @@ date
 <p>Visualisasi ini dibuat untuk menunjukkan perubahan harga gula dari waktu ke waktu, termasuk harga 3, 2, dan 1 hari sebelumnya, serta harga saat ini. Dengan grafik garis, kita bisa melihat tren dan pola harga secara jelas. Ini membantu kita memahami bagaimana harga saat ini dipengaruhi oleh harga di hari-hari sebelumnya.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualisasi</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="c1"># Visualisasi</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;xt-3&#39;</span><span class="p">,</span> <span class="s1">&#39;xt-2&#39;</span><span class="p">,</span> <span class="s1">&#39;xt-1&#39;</span><span class="p">,</span> <span class="s1">&#39;xt&#39;</span><span class="p">]])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Harga Gula (xt-3, xt-2, xt-1, xt)&#39;</span><span class="p">)</span>
@@ -769,17 +771,7 @@ date
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Visualisasi</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;xt-3&#39;</span><span class="p">,</span> <span class="s1">&#39;xt-2&#39;</span><span class="p">,</span> <span class="s1">&#39;xt-1&#39;</span><span class="p">,</span> <span class="s1">&#39;xt&#39;</span><span class="p">]])</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Harga Gula (xt-3, xt-2, xt-1, xt)&#39;</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;plt&#39; is not defined
-</pre></div>
-</div>
+<img alt="_images/70c13f931e48b3eaf4707cbbff8dea9f17670c6fcc0d5a89d307116e3694a3a1.png" src="_images/70c13f931e48b3eaf4707cbbff8dea9f17670c6fcc0d5a89d307116e3694a3a1.png" />
 </div>
 </div>
 <p>menghitung hubungan antara fitur-fitur lag (harga gula sebelumnya) dan harga gula saat ini. Dengan koefisien korelasi Pearson, kita bisa melihat seberapa kuat dan arah hubungan tersebut. Ini membantu kita memahami fitur mana yang paling berpengaruh terhadap harga gula saat ini, yang penting untuk analisis dan pengembangan model prediksi.</p>
@@ -795,6 +787,21 @@ date
 <span class="c1"># Menampilkan hasil korelasi</span>
 <span class="k">for</span> <span class="n">fitur</span><span class="p">,</span> <span class="n">bobot_korelasi</span> <span class="ow">in</span> <span class="n">correlations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Korelasi Pearson antara </span><span class="si">{</span><span class="n">fitur</span><span class="si">}</span><span class="s2"> dan target: </span><span class="si">{</span><span class="n">bobot_korelasi</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">correlations</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="nn">      3 for col</span> in <span class="ni">df.columns[:-1]:  # Mengabaikan kolom terakhir </span><span class="nt">(target)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="c1"># Pastikan kolom adalah numerik</span>
+<span class="ne">----&gt; </span><span class="mi">5</span>     <span class="n">correlation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">correlations</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">correlation</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Menampilkan hasil korelasi</span>
+
+<span class="ne">NameError</span>: name &#39;np&#39; is not defined
 </pre></div>
 </div>
 </div>
