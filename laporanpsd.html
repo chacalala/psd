@@ -387,26 +387,9 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-dataset">b. Deskripsi Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-menangani-nilai-hilang">a. Menangani Nilai Hilang</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-konversi-tipe-data">b.	Konversi Tipe Data</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pembersihan-variabel-target">c.	Pembersihan Variabel Target</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-deteksi-dan-penghapusan-outlier">d.	Deteksi dan Penghapusan Outlier</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mendefinisikan-fitur-dan-target">a.	Mendefinisikan Fitur dan Target</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pembagian-data">b.	Pembagian Data</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pembuatan-model-regresi-linier">c.	Pembuatan Model Regresi Linier</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-prediksi">d.	Prediksi</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-menghitung-mse">a.	Menghitung MSE</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-visualisasi-hasil">b.	Visualisasi Hasil</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-contoh-prediksi-masa-depan">c.	Contoh Prediksi Masa Depan</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
 </ul>
 </li>
 </ul>
@@ -501,103 +484,12 @@ document.write(`
 </section>
 <section id="pra-pemrosesan-data">
 <h3>Pra-pemrosesan Data<a class="headerlink" href="#pra-pemrosesan-data" title="Link to this heading">#</a></h3>
-<p>Langkah-langkah pada tahap ini adalah sebagai berikut:</p>
-<section id="a-menangani-nilai-hilang">
-<h4>a. Menangani Nilai Hilang<a class="headerlink" href="#a-menangani-nilai-hilang" title="Link to this heading">#</a></h4>
-<p>Data yang hilang diidentifikasi dan dihapus untuk memastikan tidak ada celah dalam dataset.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-</pre></div>
-</div>
-</section>
-<section id="b-konversi-tipe-data">
-<h4>b.	Konversi Tipe Data<a class="headerlink" href="#b-konversi-tipe-data" title="Link to this heading">#</a></h4>
-<p>Kolom Tahun dan Bulan diubah menjadi tipe integer untuk memudahkan pemodelan.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tahun&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tahun&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Bulan&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Bulan&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="c-pembersihan-variabel-target">
-<h4>c.	Pembersihan Variabel Target<a class="headerlink" href="#c-pembersihan-variabel-target" title="Link to this heading">#</a></h4>
-<p>Variabel target Harga Gula (kg) memiliki nilai dengan simbol mata uang ‘Rp’ dan koma. Ini dihapus, dan kolom diubah menjadi tipe float.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Rp&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="d-deteksi-dan-penghapusan-outlier">
-<h4>d.	Deteksi dan Penghapusan Outlier<a class="headerlink" href="#d-deteksi-dan-penghapusan-outlier" title="Link to this heading">#</a></h4>
-<p>Z-score dihitung untuk mendeteksi outlier, dan baris dengan Z-score lebih dari 3 dianggap sebagai outlier dan dihapus.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">z_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">zscore</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]))</span> <span class="n">outliers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">z_scores</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span> <span class="n">df_no_outliers</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">outliers</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-</div>
-</section>
 </section>
 <section id="modelling">
 <h3>Modelling<a class="headerlink" href="#modelling" title="Link to this heading">#</a></h3>
-<section id="a-mendefinisikan-fitur-dan-target">
-<h4>a.	Mendefinisikan Fitur dan Target<a class="headerlink" href="#a-mendefinisikan-fitur-dan-target" title="Link to this heading">#</a></h4>
-<p>Fitur yang digunakan adalah Bulan dan Tahun, sementara variabel target adalah Harga Gula (kg).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">df_no_outliers</span><span class="p">[[</span><span class="s1">&#39;Bulan&#39;</span><span class="p">,</span> <span class="s1">&#39;Tahun&#39;</span><span class="p">]]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df_no_outliers</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</section>
-<section id="b-pembagian-data">
-<h4>b.	Pembagian Data<a class="headerlink" href="#b-pembagian-data" title="Link to this heading">#</a></h4>
-<p>Data dibagi menjadi data latih (80%) dan data uji (20%) menggunakan fungsi train_test_split dari scikit-learn.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">df_no_outliers</span><span class="p">[[</span><span class="s1">&#39;Bulan&#39;</span><span class="p">,</span> <span class="s1">&#39;Tahun&#39;</span><span class="p">]]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df_no_outliers</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</section>
-<section id="c-pembuatan-model-regresi-linier">
-<h4>c.	Pembuatan Model Regresi Linier<a class="headerlink" href="#c-pembuatan-model-regresi-linier" title="Link to this heading">#</a></h4>
-<p>Model regresi linier dibuat dan dilatih menggunakan data latih.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="d-prediksi">
-<h4>d.	Prediksi<a class="headerlink" href="#d-prediksi" title="Link to this heading">#</a></h4>
-<p>Model digunakan untuk melakukan prediksi pada data uji.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
 </section>
 <section id="evaluation">
 <h3>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h3>
-<p>Evaluasi model dilakukan dengan menghitung Mean Squared Error (MSE) dan membandingkan hasil prediksi dengan data aktual.</p>
-<section id="a-menghitung-mse">
-<h4>a.	Menghitung MSE<a class="headerlink" href="#a-menghitung-mse" title="Link to this heading">#</a></h4>
-<p>MSE dihitung untuk menilai seberapa baik model dalam memprediksi harga gula.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean Squared Error: </span><span class="si">{</span><span class="n">mse</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="b-visualisasi-hasil">
-<h4>b.	Visualisasi Hasil<a class="headerlink" href="#b-visualisasi-hasil" title="Link to this heading">#</a></h4>
-<p>Hasil prediksi dibandingkan dengan data aktual menggunakan grafik sebar (scatter plot).</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Harga Gula Aktual&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Harga Gula Prediksi&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Perbandingan Harga Gula Aktual vs Prediksi&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Setelah melakukan prediksi, langkah evaluasi menggunakan Mean Squared Error (MSE) menunjukkan bahwa nilai MSE dari model ini adalah 3,917,627.77</p>
-</section>
-<section id="c-contoh-prediksi-masa-depan">
-<h4>c.	Contoh Prediksi Masa Depan<a class="headerlink" href="#c-contoh-prediksi-masa-depan" title="Link to this heading">#</a></h4>
-<p>Model digunakan untuk memprediksi harga gula pada bulan dan tahun tertentu.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">future_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Bulan&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="s1">&#39;Tahun&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2024</span><span class="p">]})</span>
-<span class="n">future_price_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future_data</span><span class="p">)</span>
-<span class="n">formatted_price</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Rp </span><span class="si">{</span><span class="n">future_price_pred</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediksi harga gula pada </span><span class="si">{</span><span class="n">future_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Bulan&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">future_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Tahun&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">formatted_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
 </section>
 </section>
 </section>
@@ -669,26 +561,9 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-dataset">b. Deskripsi Dataset</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-menangani-nilai-hilang">a. Menangani Nilai Hilang</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-konversi-tipe-data">b.	Konversi Tipe Data</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pembersihan-variabel-target">c.	Pembersihan Variabel Target</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-deteksi-dan-penghapusan-outlier">d.	Deteksi dan Penghapusan Outlier</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-mendefinisikan-fitur-dan-target">a.	Mendefinisikan Fitur dan Target</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-pembagian-data">b.	Pembagian Data</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-pembuatan-model-regresi-linier">c.	Pembuatan Model Regresi Linier</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-prediksi">d.	Prediksi</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-menghitung-mse">a.	Menghitung MSE</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-visualisasi-hasil">b.	Visualisasi Hasil</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-contoh-prediksi-masa-depan">c.	Contoh Prediksi Masa Depan</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
 </ul>
 </li>
 </ul>
