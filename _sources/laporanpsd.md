@@ -94,6 +94,13 @@ Dataset ini terdiri dari 4 fitur atau kolom, dan 976 record. Berikut adalah desk
 - **Tahun**: Menunjukkan tahun terjadinya transaksi.
 - **Harga Gula (kg)**: Menyimpan harga gula per kilogram, yang dapat berubah seiring waktu dan relevan dalam konteks pembelian.
 
+memberikan ringkasan tentang DataFrame
+```{code-cell} python
+df.info()
+print('Ukuran data ', df.shape)
+```
+Hasilnya menunjukkan bahwa DataFrame memiliki 976 baris dan 4 kolom. Tiga kolom bertipe int64 (Tanggal, Bulan, Tahun) dan satu kolom bertipe object (Harga Gula). Semua kolom memiliki 976 nilai non-null, sehingga tidak ada nilai yang hilang. Penggunaan memori adalah sekitar 30.6 KB.
+
 **Jenis Data**:
 - **Tanggal** : Datetime
 - **Bulan**: Kategorikal (Ordinal), karena bulan memiliki urutan tertentu (Januari, Februari, dst.).
