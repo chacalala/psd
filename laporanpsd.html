@@ -385,6 +385,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-sumber-data">a. Sumber Data</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-dataset">b. Deskripsi Dataset</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-eksplorasi-data">c. Eksplorasi Data</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a></li>
@@ -495,7 +496,7 @@ document.write(`
 <li><p><strong>Tahun</strong>: Menunjukkan tahun terjadinya transaksi.</p></li>
 <li><p><strong>Harga Gula (kg)</strong>: Menyimpan harga gula per kilogram, yang dapat berubah seiring waktu dan relevan dalam konteks pembelian.</p></li>
 </ul>
-<p>memberikan ringkasan tentang DataFrame</p>
+<p>melihat ringkasan tentang DataFrame</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -527,6 +528,283 @@ Ukuran data  (976, 4)
 <li><p><strong>Bulan</strong>: Kategorikal (Ordinal), karena bulan memiliki urutan tertentu (Januari, Februari, dst.).</p></li>
 <li><p><strong>Tahun</strong>: Numerik (Diskrit), karena tahun adalah angka yang merepresentasikan waktu dan dapat dihitung.</p></li>
 <li><p><strong>Harga Gula (kg)</strong>: Numerik (Kontinu), karena harga dapat memiliki nilai pecahan dan dapat diukur dengan presisi yang lebih tinggi.</p></li>
+</ul>
+<p>melihat tipe data dari setiap kolom</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tanggal             int64
+Bulan               int64
+Tahun               int64
+Harga Gula (kg)    object
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Kolom Tanggal, Bulan, Tahun (int64) berisi bilangan bulat, sesuai karena merupakan angka. Harga Gula (kg) (object) bertipe teks, kemungkinan mengandung tanda koma, sehingga perlu dikonversi ke tipe numerik (seperti float) untuk perhitungan.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          Tanggal       Bulan        Tahun
+count  976.000000  976.000000   976.000000
+mean    15.677254    6.221311  2022.398566
+std      8.790049    3.347283     1.084132
+min      1.000000    1.000000  2021.000000
+25%      8.000000    3.000000  2021.000000
+50%     16.000000    6.000000  2022.000000
+75%     23.000000    9.000000  2023.000000
+max     31.000000   12.000000  2024.000000
+</pre></div>
+</div>
+</div>
+</div>
+<p>memberikan informasi seperti jumlah data, rata-rata, nilai tertinggi dan terendah, serta seberapa jauh penyebaran data tersebut. Seperti misal :</p>
+<ul class="simple">
+<li><p>count : Jumlah total data untuk setiap kolom adalah 969.</p></li>
+<li><p>mean : Rata-rata nilai untuk setiap kolom, misalnya rata-rata untuk kolom xt adalah 15,260.11.</p></li>
+<li><p>std : Standar deviasi menunjukkan seberapa jauh nilai menyimpang dari rata-rata, dengan contoh kolom xtmemiliki</p></li>
+<li><p>standar deviasi 1,567.58.</p></li>
+<li><p>min : Nilai minimum untuk setiap kolom, seperti nilai terkecil di kolom xtyang adalah 13,750.</p></li>
+<li><p>25% (kuartil pertama) : 25% dari data memiliki nilai di bawah 13,950 untuk kolom xt-1.</p></li>
+<li><p>50% (median) : Nilai tengah dari data, misalnya median untuk kolom xtadalah 14,800.</p></li>
+<li><p>75% (kuartil ketiga) : 75% dari data memiliki nilai di bawah 15,550 untuk kolom xt-1.</p></li>
+<li><p>max : Nilai maksimum, di kolom mana xtmemiliki nilai tertinggi 18,950.</p></li>
+</ul>
+</section>
+<section id="c-eksplorasi-data">
+<h4>c. Eksplorasi Data<a class="headerlink" href="#c-eksplorasi-data" title="Link to this heading">#</a></h4>
+<p>Sebelum memulai analisis atau visualisasi data, penting untuk memastikan bahwa kolom Harga Gula (kg) memiliki format yang benar agar bisa digunakan dalam perhitungan. Oleh karena itu, perlu mengubah kolom tersebut menjadi tipe data numerik dengan menghapus tanda koma yang mungkin ada.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     Tanggal  Bulan  Tahun  Harga Gula (kg)
+0          1      1   2021          13900.0
+1          4      1   2021          13900.0
+2          5      1   2021          13900.0
+3          6      1   2021          13950.0
+4          7      1   2021          13950.0
+..       ...    ...    ...              ...
+971       23      9   2024          18750.0
+972       24      9   2024          18750.0
+973       25      9   2024          18850.0
+974       26      9   2024          18750.0
+975       27      9   2024          18750.0
+
+[976 rows x 4 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<p>membuat beberapa kolom baru di DataFrame untuk menyimpan harga gula berdasarkan lag waktu, yaitu harga 3, 2, 1 hari sebelumnya dan juga menambahkan kolom xt yang berisi harga gula saat ini. Setelah itu, hapus baris yang memiliki nilai kosong akibat proses shifting(menggeser nilai).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt-3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt-2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt-1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Tanggal</th>
+      <th>Bulan</th>
+      <th>Tahun</th>
+      <th>Harga Gula (kg)</th>
+      <th>xt-3</th>
+      <th>xt-2</th>
+      <th>xt-1</th>
+      <th>xt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>13900.0</td>
+      <td>13950.0</td>
+      <td>13900.0</td>
+      <td>13900.0</td>
+      <td>13900.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>13900.0</td>
+      <td>13950.0</td>
+      <td>13950.0</td>
+      <td>13900.0</td>
+      <td>13900.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>13900.0</td>
+      <td>13950.0</td>
+      <td>13950.0</td>
+      <td>13950.0</td>
+      <td>13900.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>13950.0</td>
+      <td>13950.0</td>
+      <td>13950.0</td>
+      <td>13950.0</td>
+      <td>13950.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>7</td>
+      <td>1</td>
+      <td>2021</td>
+      <td>13950.0</td>
+      <td>13950.0</td>
+      <td>13950.0</td>
+      <td>13950.0</td>
+      <td>13950.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Dengan menambahkan kolom yang menunjukkan harga gula 3, 2, dan 1 hari sebelumnya, kita bisa melihat bagaimana harga-harga tersebut mempengaruhi harga saat ini.</p>
+<p>menambahkan kolom target xt (harga gula saat ini) ke DataFrame untuk diprediksi, dan menghapus kolom yang tidak diperlukan, sehingga hanya kolom penting untuk analisis yang tersisa.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menyimpan harga gula saat ini ke kolom &#39;xt&#39;</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span>
+
+<span class="c1"># Menghapus baris dengan nilai NaN</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Menghapus kolom &#39;Harga Gula (kg)&#39; jika tidak diperlukan lagi</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">])</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>menggabungkan kolom Bulan dan Tahun jadi date, lalu menghapus keduanya. Kolom date dijadikan indeks untuk memudahkan analisis berdasarkan tanggal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menggabungkan bulan dan tahun menjadi satu kolom tanggal</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Bulan&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tahun&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Bulan&#39;</span><span class="p">,</span> <span class="s1">&#39;Tahun&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+
+<span class="c1"># Menampilkan DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Tanggal     xt-3     xt-2     xt-1       xt
+date                                               
+1-2021        1  13950.0  13900.0  13900.0  13900.0
+1-2021        4  13950.0  13950.0  13900.0  13900.0
+1-2021        5  13950.0  13950.0  13950.0  13900.0
+1-2021        6  13950.0  13950.0  13950.0  13950.0
+1-2021        7  13950.0  13950.0  13950.0  13950.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Kolom Bulan dan Tahun digabungkan menjadi kolom date untuk memudahkan analisis waktu. Menghapus kolom yang tidak diperlukan menyederhanakan DataFrame, dan menjadikan date sebagai indeks mempermudah operasi berbasis waktu.</p>
+<p>Visualisasi ini dibuat untuk menunjukkan perubahan harga gula dari waktu ke waktu, termasuk harga 3, 2, dan 1 hari sebelumnya, serta harga saat ini. Dengan grafik garis, kita bisa melihat tren dan pola harga secara jelas. Ini membantu kita memahami bagaimana harga saat ini dipengaruhi oleh harga di hari-hari sebelumnya.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualisasi</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;xt-3&#39;</span><span class="p">,</span> <span class="s1">&#39;xt-2&#39;</span><span class="p">,</span> <span class="s1">&#39;xt-1&#39;</span><span class="p">,</span> <span class="s1">&#39;xt&#39;</span><span class="p">]])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Harga Gula (xt-3, xt-2, xt-1, xt)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tanggal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Visualisasi</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;xt-3&#39;</span><span class="p">,</span> <span class="s1">&#39;xt-2&#39;</span><span class="p">,</span> <span class="s1">&#39;xt-1&#39;</span><span class="p">,</span> <span class="s1">&#39;xt&#39;</span><span class="p">]])</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Harga Gula (xt-3, xt-2, xt-1, xt)&#39;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;plt&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>menghitung hubungan antara fitur-fitur lag (harga gula sebelumnya) dan harga gula saat ini. Dengan koefisien korelasi Pearson, kita bisa melihat seberapa kuat dan arah hubungan tersebut. Ini membantu kita memahami fitur mana yang paling berpengaruh terhadap harga gula saat ini, yang penting untuk analisis dan pengembangan model prediksi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menghitung korelasi Pearson antara fitur dan target</span>
+<span class="n">correlations</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>  <span class="c1"># Mengabaikan kolom terakhir (target)</span>
+    <span class="c1"># Pastikan kolom adalah numerik</span>
+    <span class="n">correlation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">correlations</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">correlation</span>
+
+<span class="c1"># Menampilkan hasil korelasi</span>
+<span class="k">for</span> <span class="n">fitur</span><span class="p">,</span> <span class="n">bobot_korelasi</span> <span class="ow">in</span> <span class="n">correlations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Korelasi Pearson antara </span><span class="si">{</span><span class="n">fitur</span><span class="si">}</span><span class="s2"> dan target: </span><span class="si">{</span><span class="n">bobot_korelasi</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>dari hasil diatas</p>
+<ul class="simple">
+<li><p>Tanggal dan target (0.0163): Tidak ada hubungan signifikan; tanggal tidak mempengaruhi harga gula.</p></li>
+<li><p>xt-3 (0.9989): Hubungan sangat kuat; harga 3 hari lalu hampir sama dengan harga sekarang.</p></li>
+<li><p>xt-2 (0.9992): Hubungan sangat kuat; harga 2 hari lalu hampir identik dengan harga saat ini.</p></li>
+<li><p>xt-1 (0.9996): Hubungan sangat kuat; harga sehari lalu sangat mempengaruhi harga saat ini.</p></li>
 </ul>
 </section>
 </section>
@@ -607,6 +885,7 @@ Ukuran data  (976, 4)
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-sumber-data">a. Sumber Data</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-deskripsi-dataset">b. Deskripsi Dataset</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-eksplorasi-data">c. Eksplorasi Data</a></li>
 </ul>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a></li>
