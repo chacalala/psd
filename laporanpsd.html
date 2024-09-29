@@ -771,13 +771,15 @@ date
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/70c13f931e48b3eaf4707cbbff8dea9f17670c6fcc0d5a89d307116e3694a3a1.png" src="_images/70c13f931e48b3eaf4707cbbff8dea9f17670c6fcc0d5a89d307116e3694a3a1.png" />
+<img alt="_images/2297460b8183d4085958f64e885a84e9af92cb2437f052f0095b1f754395ab2d.png" src="_images/2297460b8183d4085958f64e885a84e9af92cb2437f052f0095b1f754395ab2d.png" />
 </div>
 </div>
 <p>menghitung hubungan antara fitur-fitur lag (harga gula sebelumnya) dan harga gula saat ini. Dengan koefisien korelasi Pearson, kita bisa melihat seberapa kuat dan arah hubungan tersebut. Ini membantu kita memahami fitur mana yang paling berpengaruh terhadap harga gula saat ini, yang penting untuk analisis dan pengembangan model prediksi.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menghitung korelasi Pearson antara fitur dan target</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1"># Menghitung korelasi Pearson antara fitur dan target</span>
 <span class="n">correlations</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>  <span class="c1"># Mengabaikan kolom terakhir (target)</span>
     <span class="c1"># Pastikan kolom adalah numerik</span>
@@ -791,17 +793,10 @@ date
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">correlations</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="nn">      3 for col</span> in <span class="ni">df.columns[:-1]:  # Mengabaikan kolom terakhir </span><span class="nt">(target)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="c1"># Pastikan kolom adalah numerik</span>
-<span class="ne">----&gt; </span><span class="mi">5</span>     <span class="n">correlation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">correlations</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">correlation</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Menampilkan hasil korelasi</span>
-
-<span class="ne">NameError</span>: name &#39;np&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Korelasi Pearson antara Tanggal dan target: 0.0163
+Korelasi Pearson antara xt-3 dan target: 0.9989
+Korelasi Pearson antara xt-2 dan target: 0.9992
+Korelasi Pearson antara xt-1 dan target: 0.9996
 </pre></div>
 </div>
 </div>

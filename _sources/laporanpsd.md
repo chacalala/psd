@@ -190,6 +190,8 @@ plt.show()
 menghitung hubungan antara fitur-fitur lag (harga gula sebelumnya) dan harga gula saat ini. Dengan koefisien korelasi Pearson, kita bisa melihat seberapa kuat dan arah hubungan tersebut. Ini membantu kita memahami fitur mana yang paling berpengaruh terhadap harga gula saat ini, yang penting untuk analisis dan pengembangan model prediksi.
 
 ```{code-cell} python
+import numpy as np
+import pandas as pd
 # Menghitung korelasi Pearson antara fitur dan target
 correlations = {}
 for col in df.columns[:-1]:  # Mengabaikan kolom terakhir (target)
