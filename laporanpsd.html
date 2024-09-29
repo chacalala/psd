@@ -453,7 +453,7 @@ document.write(`
 <section id="rumusan-masalah">
 <h3>Rumusan Masalah<a class="headerlink" href="#rumusan-masalah" title="Link to this heading">#</a></h3>
 <ul style="list-style-type: disc; padding-left: 20px; text-indent: 0;">
-    <li>•	Bagaimana Gulaku dapat memprediksi harga di pasar gula yang dinamis sehingga produsen dan distributor dapat mengambil keputusan yang lebih baik terkait produksi, distribusi, dan persediaan?</li>
+    <li>	Bagaimana Gulaku dapat memprediksi harga di pasar gula yang dinamis sehingga produsen dan distributor dapat mengambil keputusan yang lebih baik terkait produksi, distribusi, dan persediaan?</li>
 </ul>
 <hr>
 </section>
@@ -471,7 +471,10 @@ document.write(`
 <span class="c1"># Membaca data</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/chacalala/Dataset/refs/heads/main/datagula.csv&#39;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="c1"># Simpan ke markdown</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;output.md&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# Output DataFrame</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_markdown</span><span class="p">())</span>  <span class="c1"># to_markdown membuat tabel markdown otomatis</span>
 </pre></div>
 </div>
 </section>

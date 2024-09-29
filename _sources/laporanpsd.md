@@ -54,7 +54,7 @@
 
 ### Rumusan Masalah
 <ul style="list-style-type: disc; padding-left: 20px; text-indent: 0;">
-    <li>•	Bagaimana Gulaku dapat memprediksi harga di pasar gula yang dinamis sehingga produsen dan distributor dapat mengambil keputusan yang lebih baik terkait produksi, distribusi, dan persediaan?</li>
+    <li>	Bagaimana Gulaku dapat memprediksi harga di pasar gula yang dinamis sehingga produsen dan distributor dapat mengambil keputusan yang lebih baik terkait produksi, distribusi, dan persediaan?</li>
 </ul>
 <hr>
 
@@ -71,7 +71,10 @@ import pandas as pd
 # Membaca data
 df = pd.read_csv('https://raw.githubusercontent.com/chacalala/Dataset/refs/heads/main/datagula.csv')
 
-print(df.head())
+# Simpan ke markdown
+with open('output.md', 'w') as f:
+    f.write("# Output DataFrame\n\n")
+    f.write(df.head().to_markdown())  # to_markdown membuat tabel markdown otomatis
 ```
 
 #### b. Deskripsi Dataset
