@@ -464,7 +464,16 @@ document.write(`
 <h3>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h3>
 <section id="a-sumber-data">
 <h4>a. Sumber Data<a class="headerlink" href="#a-sumber-data" title="Link to this heading">#</a></h4>
-<p>Data yang digunakan pada proyek ini diambil dari platform <strong>Lamin Etam</strong> (Laman Informasi Ekonomi Komoditas Kaltim), yang dapat diakses melalui tautan berikut: <a class="reference external" href="https://hargapangan.laminetam.id/tabel-harga/daerah">Lamin Etam</a>. Dataset ini mencakup informasi harga pangan di berbagai daerah di Indonesia, khususnya dari Samarinda dan Kalimantan Timur. <strong>Lamin Etam</strong> merupakan platform yang menyediakan informasi harga pangan serta menjadi showcase untuk menampilkan UMKM unggulan dari Samarinda dan Kalimantan Timur. Pada proyek ini, digunakan data harga pangan yang tersedia dalam format tabel dari situs tersebut.</p>
+<p>Data yang digunakan pada proyek ini diambil dari platform PHIPS Nasional (Pusat Informasi Harga Pangan Strategis Nasional), yang beralamat di <a class="reference external" href="https://www.bi.go.id/hargapangan">https://www.bi.go.id/hargapangan</a>. Platform ini menyediakan informasi harga strategi pangan yang meliputi berbagai komoditas, baik di pasar tradisional maupun modern, serta data berdasarkan daerah dan jenis pedagang. Informasi ini mencakup harga rata-rata, perubahan harga, dan juga fitur visualisasi seperti histogram dan tampilan peta. Selain itu, PIHPS menawarkan berbagai jenis informasi harga pangan antar daerah, yang sangat berguna untuk analisis pasar dan pengambilan keputusan terkait kebutuhan pangan. Dalam proyek ini, digunakan data harga pangan yang tersedia dalam format tabel dari situs PIHPS Nasional, khususnya data harga gula dari tanggal 1 Januari 2021 hingga 18 September. Bentuk tampilan datanya seperti berikut :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import library yang dibutuhkan</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Membaca data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/chacalala/Dataset/refs/heads/main/datagula.csv&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
 </section>
 <section id="b-deskripsi-dataset">
 <h4>b. Deskripsi Dataset<a class="headerlink" href="#b-deskripsi-dataset" title="Link to this heading">#</a></h4>
