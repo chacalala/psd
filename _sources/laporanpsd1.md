@@ -58,57 +58,67 @@ import matplotlib.pyplot as plt
 
 ```{code-cell} python
 # Membaca data
+#Mengambil dan menampilkan data
 df = pd.read_csv('https://raw.githubusercontent.com/chacalala/psd/refs/heads/main/bitcoin.csv')
+pd.options.display.float_format = '{:.0f}'.format
+print(df.head())
+```
+
+<p style="text-indent: 50px; text-align: justify;">Di sini, perubahan dilakukan agar kolom Date bisa diproses dengan benar sebagai tanggal. Dengan mengubahnya ke format datetime, kita bisa lebih mudah melakukan perbandingan atau analisis berdasarkan waktu. Kemudian, menjadikan Date sebagai indeks membuat data lebih mudah dicari berdasarkan tanggal, dan menyortirnya memastikan data tersusun dengan urutan waktu yang benar.</p>
+
+```{code-cell} python
+# mengubah kolom 'Date' dalam format datetime
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Mengatur kolom 'Date' sebagai indeks
+df.set_index('Date', inplace=True)
+
+# Mensortir data berdasarkan kolom Date dari terkecil ke terbesar
+df = df.sort_values(by='Date')
+df
 ```
 
 #### b. Deskripsi Dataset
-<p style="text-indent: 50px; text-align: justify;">Dataset ini terdiri dari 8 fitur atau kolom, dan 986 record. Berikut adalah deskripsi dari setiap atribut yang ada:</p>
+<p style="text-indent: 50px; text-align: justify;">Dataset ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris. Berikut adalah penjelasan setiap atribut:</p>
+        <ul>
+            <li><strong>Date:</strong> Tanggal data harga aset koin (format YYYY-MM-DD)</li>
+            <li><strong>Open:</strong> Harga pembukaan aset koin pada tanggal tersebut</li>
+            <li><strong>High:</strong> Harga tertinggi yang dicapai pada tanggal tersebut</li>
+            <li><strong>Low:</strong> Harga terendah aset koin pada tanggal tersebut</li>
+            <li><strong>Close:</strong> Harga penutupan aset koin pada tanggal tersebut</li>
+            <li><strong>Adj Close:</strong> Harga penutupan yang sudah disesuaikan dengan pembagian aset koin, dividen, dan corporate actions lainnya</li>
+            <li><strong>Volume:</strong> Jumlah aset koin yang diperdagangkan pada tanggal tersebut</li>
+        </ul>
 
-- **Date** : Mengindentifikasi tanggal transaksi, biasanya memiliki format YYYY-MM-DD.
-- **Harga Gula (kg)**: Menyimpan harga gula per kilogram, yang dapat berubah seiring waktu dan relevan dalam konteks pembelian.
-
-**Jenis Data**:
-- **Date** : Data saat ini disajikan dalam bentuk string, namun akan diubah menjadi tipe data datetime pada tahap eksplorasi untuk memudahkan analisis waktu.
-- **Harga Gula (kg)**: Numerik (Kontinu), karena harga dapat memiliki nilai pecahan dan dapat diukur dengan presisi yang lebih tinggi.
-
-<p style="text-indent: 50px; text-align: justify;"> Selanjutnya, melihat tipe data dari setiap kolom</p>
+<p style="text-indent: 50px; text-align: justify;"> Selanjutnya, memeriksa informasi tentang dataset menggunakan untuk melihat jumlah baris dan kolom, serta tipe data dari masing-masing kolom. Ini membantu kita memastikan bahwa semua data sudah lengkap dan tidak ada yang hilang. Selain itu, kita juga ingin mengetahui ukuran data untuk melihat berapa banyak baris dan kolom yang ada. Dari hasil ini, kita bisa tahu bahwa dataset memiliki 1802 baris dan 6 kolom, dengan data yang lengkap dan tipe data yang sesuai.</p>
 
 ```{code-cell} python
-df.dtypes
+df.info()
+print('Ukuran data ', df.shape)
 ```
-
-<p style="text-indent: 50px; text-align: justify;">Kolom "Date" (object) berisi data dalam format teks, yang kemungkinan mewakili tanggal. Kolom "Harga" (object) bertipe teks, yang mungkin mengandung tanda koma atau simbol lainnya, sehingga perlu dikonversi ke tipe numerik (seperti float) untuk melakukan analisis.</p>
 
 #### c. Eksplorasi Data
-<p style="text-indent: 50px; text-align: justify;">Sebelum melakukan eksplorasi data, kolom date akan dikonversi dari format string menjadi tipe data datetime dan dijadikan sebagai indeks dari DataFrame.</p>
-
-```{code-cell} python
-df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
-df.set_index('Date', inplace=True)
-```
-
-<p style="text-indent: 50px; text-align: justify;">Selanjutnya, penting untuk memastikan bahwa kolom Harga Gula (kg) memiliki format yang benar agar bisa digunakan dalam perhitungan. Oleh karena itu, perlu mengubah kolom tersebut menjadi tipe data numerik dengan menghapus tanda koma yang mungkin ada.</p>
-
-```{code-cell} python
-df['Harga'] = df['Harga'].replace('-', np.nan).str.replace(',', '').astype(float)
-print(df.head())
-```
 
 <p style="text-indent: 50px; text-align: justify;">Setelah itu, melihat apakah didalam data set tersebut ada missing value.</p>
 
 ```{code-cell} python
-missing_values = df.isnull().sum()
-print("Jumlah Missing Values di setiap kolom:")
-print(missing_values)
+df.isnull().sum()
 ```
 
-<p style="text-indent: 50px; text-align: justify;">Setelah dilakukan pengecekan, ternyata terdapat missing values pada kolom Harga sebanyak 9 nilai. Untuk menangani hal ini, kita akan menggunakan metode Forward Fill (ffill), di mana nilai terakhir yang valid akan dibawa ke depan untuk mengisi nilai yang hilang. Metode ini dipilih karena dianggap cocok untuk mempertahankan kontinuitas data berdasarkan tren historis.</p>
+<p style="text-indent: 50px; text-align: justify;">Setelah dilakukan pengecekan dan ternyata tidak ada missing value maka langkah selanjutnya yaitu membuat visualisasi tren data untuk setiap kolom dalam dataset. Dengan menggunakan `matplotlib` dan `seaborn`, kita akan menggambar grafik garis untuk setiap kolom, dengan tanggal sebagai sumbu X dan nilai kolom sebagai sumbu Y. Setiap grafik akan menampilkan tren perubahan nilai kolom tersebut seiring waktu, lengkap dengan label sumbu dan judul yang menjelaskan kolom yang sedang dianalisis. Grafik ini juga akan dilengkapi dengan grid dan rotasi sumbu X agar lebih mudah dibaca.</p>
 
 ```{code-cell} python
-df = df.ffill()
-missing_values_after = df.isnull().sum()
-print("\nJumlah Missing Values setelah penanganan:")
-print(missing_values_after)
+import matplotlib.pyplot as plt
+import seaborn as sns
+for col in df:
+    plt.figure(figsize=(7, 3))
+    sns.lineplot(data=df, x='Date', y=col)
+    plt.title(f'Trend of {col}')
+    plt.xlabel('Date')
+    plt.ylabel(col)
+    plt.grid(True)
+    plt.xticks(rotation=45)
+    plt.show()
 ```
 
 <p style="text-indent: 50px; text-align: justify;">Selanjutnya melakukan pengecekan struktur dataset</p>
