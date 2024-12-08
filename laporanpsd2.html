@@ -449,35 +449,11 @@
 </section>
 <section id="b-deskripsi-dataset">
 <h4>b. Deskripsi Dataset<a class="headerlink" href="#b-deskripsi-dataset" title="Link to this heading">#</a></h4>
-<p>Dataset ini terdiri dari 2 fitur atau kolom, dan 976 record. Berikut adalah deskripsi dari setiap atribut yang ada:</p>
+<p>Dataset ini terdiri dari 2 fitur atau kolom, dan 986 record. Berikut adalah deskripsi dari setiap atribut yang ada:</p>
 <ul class="simple">
-<li><p><strong>TDate</strong> : Mengindentifikasi tanggal transaksi, biasanya memiliki format YYYY-MM-DD.</p></li>
+<li><p><strong>Date</strong> : Mengindentifikasi tanggal transaksi, biasanya memiliki format YYYY-MM-DD.</p></li>
 <li><p><strong>Harga Gula (kg)</strong>: Menyimpan harga gula per kilogram, yang dapat berubah seiring waktu dan relevan dalam konteks pembelian.</p></li>
 </ul>
-<p>melihat ringkasan tentang DataFrame</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ukuran data &#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 986 entries, 0 to 985
-Data columns (total 2 columns):
- #   Column  Non-Null Count  Dtype 
----  ------  --------------  ----- 
- 0   Date    986 non-null    object
- 1   Harga   986 non-null    object
-dtypes: object(2)
-memory usage: 15.5+ KB
-Ukuran data  (986, 2)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Hasilnya menunjukkan bahwa DataFrame memiliki 986 baris dan 1 kolom. Kolom “Harga” bertipe float64 dan memiliki 977 nilai non-null. Terdapat beberapa nilai yang hilang, yaitu 9 nilai yang kosong. Penggunaan memori adalah sekitar 15.4 KB.</p>
 <p><strong>Jenis Data</strong>:</p>
 <ul class="simple">
 <li><p><strong>Date</strong> : Data saat ini disajikan dalam bentuk string, namun akan diubah menjadi tipe data datetime pada tahap eksplorasi untuk memudahkan analisis waktu.</p></li>
@@ -498,38 +474,7 @@ dtype: object
 </div>
 </div>
 </div>
-<p>Kolom Tanggal, Bulan, Tahun (int64) berisi bilangan bulat, sesuai karena merupakan angka. Harga Gula (kg) (object) bertipe teks, kemungkinan mengandung tanda koma, sehingga perlu dikonversi ke tipe numerik (seperti float) untuk perhitungan.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                Date   Harga
-count            986     986
-unique           986      80
-top     11/ 10/ 2024  15,850
-freq               1      85
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>memberikan informasi seperti jumlah data, rata-rata, nilai tertinggi dan terendah, serta seberapa jauh penyebaran data tersebut. Seperti misal :</p>
-<ul class="simple">
-<li><p>count : Jumlah total data untuk setiap kolom adalah 969.</p></li>
-<li><p>mean : Rata-rata nilai untuk setiap kolom, misalnya rata-rata untuk kolom xt adalah 15,260.11.</p></li>
-<li><p>std : Standar deviasi menunjukkan seberapa jauh nilai menyimpang dari rata-rata, dengan contoh kolom xtmemiliki</p></li>
-<li><p>standar deviasi 1,567.58.</p></li>
-<li><p>min : Nilai minimum untuk setiap kolom, seperti nilai terkecil di kolom xtyang adalah 13,750.</p></li>
-<li><p>25% (kuartil pertama) : 25% dari data memiliki nilai di bawah 13,950 untuk kolom xt-1.</p></li>
-<li><p>50% (median) : Nilai tengah dari data, misalnya median untuk kolom xtadalah 14,800.</p></li>
-<li><p>75% (kuartil ketiga) : 75% dari data memiliki nilai di bawah 15,550 untuk kolom xt-1.</p></li>
-<li><p>max : Nilai maksimum, di kolom mana xtmemiliki nilai tertinggi 18,950.</p></li>
-</ul>
+<p>Kolom “Date” (object) berisi data dalam format teks, yang kemungkinan mewakili tanggal. Kolom “Harga” (object) bertipe teks, yang mungkin mengandung tanda koma atau simbol lainnya, sehingga perlu dikonversi ke tipe numerik (seperti float) untuk melakukan analisis.</p>
 </section>
 <section id="c-eksplorasi-data">
 <h4>c. Eksplorasi Data<a class="headerlink" href="#c-eksplorasi-data" title="Link to this heading">#</a></h4>
@@ -562,7 +507,7 @@ freq               1      85
 <span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
 
 <span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 

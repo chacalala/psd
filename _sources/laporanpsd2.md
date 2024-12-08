@@ -56,17 +56,10 @@ print(df.head())
 ```
 
 #### b. Deskripsi Dataset
-Dataset ini terdiri dari 2 fitur atau kolom, dan 976 record. Berikut adalah deskripsi dari setiap atribut yang ada:
+Dataset ini terdiri dari 2 fitur atau kolom, dan 986 record. Berikut adalah deskripsi dari setiap atribut yang ada:
 
-- **TDate** : Mengindentifikasi tanggal transaksi, biasanya memiliki format YYYY-MM-DD.
+- **Date** : Mengindentifikasi tanggal transaksi, biasanya memiliki format YYYY-MM-DD.
 - **Harga Gula (kg)**: Menyimpan harga gula per kilogram, yang dapat berubah seiring waktu dan relevan dalam konteks pembelian.
-
-melihat ringkasan tentang DataFrame
-```{code-cell} python
-df.info()
-print('Ukuran data ', df.shape)
-```
-Hasilnya menunjukkan bahwa DataFrame memiliki 986 baris dan 1 kolom. Kolom "Harga" bertipe float64 dan memiliki 977 nilai non-null. Terdapat beberapa nilai yang hilang, yaitu 9 nilai yang kosong. Penggunaan memori adalah sekitar 15.4 KB.
 
 **Jenis Data**:
 - **Date** : Data saat ini disajikan dalam bentuk string, namun akan diubah menjadi tipe data datetime pada tahap eksplorasi untuk memudahkan analisis waktu.
@@ -76,21 +69,7 @@ melihat tipe data dari setiap kolom
 ```{code-cell} python
 df.dtypes
 ```
-Kolom Tanggal, Bulan, Tahun (int64) berisi bilangan bulat, sesuai karena merupakan angka. Harga Gula (kg) (object) bertipe teks, kemungkinan mengandung tanda koma, sehingga perlu dikonversi ke tipe numerik (seperti float) untuk perhitungan.
-
-```{code-cell} python
-print(df.describe())
-```
-memberikan informasi seperti jumlah data, rata-rata, nilai tertinggi dan terendah, serta seberapa jauh penyebaran data tersebut. Seperti misal :
-- count : Jumlah total data untuk setiap kolom adalah 969.
-- mean : Rata-rata nilai untuk setiap kolom, misalnya rata-rata untuk kolom xt adalah 15,260.11.
-- std : Standar deviasi menunjukkan seberapa jauh nilai menyimpang dari rata-rata, dengan contoh kolom xtmemiliki 
-- standar deviasi 1,567.58.
-- min : Nilai minimum untuk setiap kolom, seperti nilai terkecil di kolom xtyang adalah 13,750.
-- 25% (kuartil pertama) : 25% dari data memiliki nilai di bawah 13,950 untuk kolom xt-1.
-- 50% (median) : Nilai tengah dari data, misalnya median untuk kolom xtadalah 14,800.
-- 75% (kuartil ketiga) : 75% dari data memiliki nilai di bawah 15,550 untuk kolom xt-1.
-- max : Nilai maksimum, di kolom mana xtmemiliki nilai tertinggi 18,950.
+Kolom "Date" (object) berisi data dalam format teks, yang kemungkinan mewakili tanggal. Kolom "Harga" (object) bertipe teks, yang mungkin mengandung tanda koma atau simbol lainnya, sehingga perlu dikonversi ke tipe numerik (seperti float) untuk melakukan analisis.
 
 #### c. Eksplorasi Data
 Sebelum memulai analisis atau visualisasi data, penting untuk memastikan bahwa kolom Harga Gula (kg) memiliki format yang benar agar bisa digunakan dalam perhitungan. Oleh karena itu, perlu mengubah kolom tersebut menjadi tipe data numerik dengan menghapus tanda koma yang mungkin ada.
