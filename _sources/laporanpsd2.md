@@ -92,7 +92,6 @@ df.set_index('Date', inplace=True)
 <p style="text-indent: 50px; text-align: justify;">Selanjutnya, penting untuk memastikan bahwa kolom Harga Gula (kg) memiliki format yang benar agar bisa digunakan dalam perhitungan. Oleh karena itu, perlu mengubah kolom tersebut menjadi tipe data numerik dengan menghapus tanda koma yang mungkin ada.</p>
 
 ```{code-cell} python
-import numpy as np
 df['Harga'] = df['Harga'].replace('-', np.nan).str.replace(',', '').astype(float)
 print(df.head())
 ```
@@ -149,9 +148,6 @@ print(df.head())
 <p style="text-indent: 50px; text-align: justify;">Melakukan normalisasi data pada fitur (Harga-1, Harga-2, Harga-3) dan target (Harga) menggunakan MinMaxScaler, pertama-tama normalisasi fitur dilakukan dengan scaler_features dan hasilnya disimpan dalam df_features_normalized. Kemudian, target harga dinormalisasi dengan scaler_target dan hasilnya disimpan dalam df_target_normalized. Setelah itu, kedua dataframe tersebut digabungkan dengan pd.concat untuk menghasilkan df_normalized, siap untuk analisis atau model prediksi selanjutnya..</p>
 
 ```{code-cell} python
-# Import MinMaxScaler dari sklearn
-from sklearn.preprocessing import MinMaxScaler
-
 # Inisialisasi scaler untuk fitur (input) dan target (output)
 scaler_features = MinMaxScaler()
 scaler_target = MinMaxScaler()
@@ -177,9 +173,6 @@ df_normalized.head()
 <p style="text-indent: 50px; text-align: justify;">Selanjutnya, melakukan pembagian data menjadi data training dan data testing dengan menggunakan train_test_split, di mana 80% data digunakan untuk training dan 20% untuk testing. Proses ini dilakukan dengan opsi shuffle=False agar data tetap terurut berdasarkan urutan aslinya. Setelah pembagian, data training (X_train dan y_train) digunakan untuk melatih model, sedangkan data testing (X_test dan y_test) digunakan untuk menguji kinerja model yang telah dilatih.
 
 ```{code-cell} python
-# Impor train_test_split
-from sklearn.model_selection import train_test_split
-
 # Mengatur fitur (X) dan target (y)
 X = df_normalized[['Harga-1', 'Harga-2', 'Harga-3']]
 y = df_normalized['Harga']
@@ -202,15 +195,6 @@ pip install matplotlib
 ```
 
 ```{code-cell} python
-from sklearn.ensemble import BaggingRegressor
-from sklearn.linear_model import LinearRegression
-from sklearn.svm import SVR
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_percentage_error
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-
 # List model untuk ensemble Bagging
 models = {
     "Linear Regression": LinearRegression(),
