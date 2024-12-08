@@ -150,24 +150,36 @@ df = df.drop(columns=['Volume', 'Adj Close'])
 df.head()
 ```
 
-#### b. 
-#### Normalisasi Data
+#### b. Rekayasa Fitur
+<p style="text-indent: 50px; text-align: justify;">Dalam penelitian ini, tujuan kita adalah memprediksi harga **Close** pada hari berikutnya, sehingga kita memerlukan variabel baru sebagai target. Fitur ini berguna untuk mengetahui sejauh mana harga saham bisa turun, yang memungkinkan investor untuk membeli aset pada harga yang lebih rendah dan meningkatkan peluang keuntungan ketika harga saham naik kembali.</P>
 
-<p style="text-indent: 50px; text-align: justify;">Melakukan normalisasi data pada fitur (Harga-1, Harga-2, Harga-3) dan target (Harga) menggunakan MinMaxScaler, pertama-tama normalisasi fitur dilakukan dengan scaler_features dan hasilnya disimpan dalam df_features_normalized. Kemudian, target harga dinormalisasi dengan scaler_target dan hasilnya disimpan dalam df_target_normalized. Setelah itu, kedua dataframe tersebut digabungkan dengan pd.concat untuk menghasilkan df_normalized, siap untuk analisis atau model prediksi selanjutnya..</p>
+```{code-cell} python
+df['Close Target'] = df['Close'].shift(-1)
+
+df = df[:-1]
+df.head()
+```
+
+<p style="text-indent: 50px; text-align: justify;">Tabel ini menunjukkan data harga saham harian yang mencakup harga pembukaan (Open), harga tertinggi (High), harga terendah (Low), dan harga penutupan (Close). Selain itu, terdapat kolom Close Target yang merupakan prediksi harga penutupan untuk hari berikutnya. Misalnya, pada 2020-01-01, harga penutupan adalah 7200.2, sementara prediksi harga penutupan untuk 2020-01-02 adalah 6985.5, yang lebih rendah dari harga penutupan hari itu.</P>
+
+
+#### c. Normalisasi Data
+
+<p style="text-indent: 50px; text-align: justify;">Melakukan normalisasi data pada fitur dan target bertujuan untuk mengubah nilai-nilai dalam dataset ke rentang yang seragam, biasanya antara 0 dan 1. Dalam kode ini, `MinMaxScaler` digunakan untuk menormalisasi fitur (Open, High, Low, Close) dan target (Close Target). Fitur dinormalisasi menggunakan scaler_features.fit_transform() dan target menggunakan scaler_target.fit_transform(). Hasil normalisasi kemudian digabungkan dengan pd.concat() menjadi satu dataframe df_normalized, yang siap digunakan dalam model machine learning. Normalisasi membantu model belajar lebih efektif dengan skala data yang konsisten.</p>
 
 ```{code-cell} python
 # Inisialisasi scaler untuk fitur (input) dan target (output)
 scaler_features = MinMaxScaler()
 scaler_target = MinMaxScaler()
 
-# Normalisasi fitur (Harga-1, Harga-2, Harga-3)
-df_features_normalized = pd.DataFrame(scaler_features.fit_transform(df[['Harga-3', 'Harga-2', 'Harga-1']]),
-                                      columns=['Harga-3', 'Harga-2', 'Harga-1'],
+# Normalisasi fitur (Open, High, Low,, 'Close' Close Target-4, Close Target-5)
+df_features_normalized = pd.DataFrame(scaler_features.fit_transform(df[['Open', 'High', 'Low', 'Close']]),
+                                      columns=['Open', 'High', 'Low', 'Close'],
                                       index=df.index)
 
-# Normalisasi target (Harga)
-df_target_normalized = pd.DataFrame(scaler_target.fit_transform(df[['Harga']]),
-                                    columns=['Harga'],
+# Normalisasi target (Close Target)
+df_target_normalized = pd.DataFrame(scaler_target.fit_transform(df[['Close Target']]),
+                                    columns=['Close Target'],
                                     index=df.index)
 
 # Gabungkan kembali dataframe yang sudah dinormalisasi
@@ -182,16 +194,11 @@ df_normalized.head()
 
 ```{code-cell} python
 # Mengatur fitur (X) dan target (y)
-X = df_normalized[['Harga-1', 'Harga-2', 'Harga-3']]
-y = df_normalized['Harga']
+X = df_normalized[['Open', 'High', 'Low', 'Close']]
+y = df_normalized['Close Target']
 
-# Membagi data menjadi training dan testing (80% training, 20% testing)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
-
-print('===== Data Train =====')
-print(X_train)
-print('===== Data Testing ====')
-print(X_test)
+# Membagi data menjadi training dan testing (60% training, 40% testing)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, shuffle=False)
 ```
 
 #### b. Penyusunan Model
@@ -203,58 +210,48 @@ pip install matplotlib
 ```
 
 ```{code-cell} python
-# List model untuk ensemble Bagging
+# List model regresi
 models = {
     "Linear Regression": LinearRegression(),
-    "SVR": SVR(),
-    "KNN": KNeighborsRegressor(n_neighbors=5)
+    "Ridge Regression": Ridge(alpha=1.0),
+    "Gradient Boosting" : GradientBoostingRegressor(random_state=32),
 }
 
 # Dictionary untuk menyimpan hasil evaluasi
 results = {}
 
 # Iterasi setiap model
-for i, (name, base_model) in enumerate(models.items()):
-    # Inisialisasi Bagging Regressor dengan model dasar
-    bagging_model = BaggingRegressor(
-        estimator=base_model,
-        n_estimators=30,
-        max_samples=0.8,         # Menggunakan 80% dari data latih
-        max_features=1.0,       # Menggunakan semua fitur
-        bootstrap=True,         # Menggunakan bootstrap sampling
-        random_state=42
-    )
-    
+for name, model in models.items():
     # Latih model
-    bagging_model.fit(X_train, y_train)
-    
+    model.fit(X_train, y_train)
+
     # Prediksi pada data uji
-    y_pred = bagging_model.predict(X_test)
-    
-    # Evaluasi model
+    y_pred = model.predict(X_test)
+
+    # Evaluasi
     mse = mean_squared_error(y_test, y_pred)
     rmse = np.sqrt(mse)
     mape = mean_absolute_percentage_error(y_test, y_pred) * 100  # Dalam persen
-    
+
     # Simpan hasil evaluasi
     results[name] = {"RMSE": rmse, "MAPE": mape}
-    
+
     # Kembalikan hasil prediksi ke skala asli
     y_pred_original = scaler_target.inverse_transform(y_pred.reshape(-1, 1))
     y_test_original = scaler_target.inverse_transform(y_test.values.reshape(-1, 1))
-    
+
     # Plot hasil prediksi
     plt.figure(figsize=(15, 6))
     plt.plot(y_test.index, y_test_original, label="Actual", color="blue")
     plt.plot(y_test.index, y_pred_original, label=f"Predicted ({name})", color="red")
-    
+
     # Tambahkan detail plot
     plt.title(f'Actual vs Predicted Values ({name})')
-    plt.xlabel('Tanggal')
+    plt.xlabel('Date')
     plt.ylabel('Harga')
     plt.legend()
     plt.grid(True)
-    
+
     # Tampilkan plot
     plt.show()
 
@@ -265,8 +262,8 @@ for model, metrics in results.items():
 ```
 
 ### Kesimpulan
-Berdasarkan hasil percobaan dengan beberapa model, metode Linear Regression menunjukkan performa terbaik dengan nilai RMSE sebesar 0.01 dan MAPE sebesar 0.98%.
+<p style="text-indent: 50px; text-align: justify;">Berdasarkan hasil percobaan dengan beberapa model, metode Linear Regression menunjukkan performa terbaik dengan nilai RMSE sebesar 0.01 dan MAPE sebesar 2.01%.</P>
 
 ### DEPLOYMENT
-Hasil deployment dapat dilihat melalui tautan berikut:
+<p style="text-indent: 50px; text-align: justify;">Hasil deployment dapat dilihat melalui tautan berikut:</P>
 https://huggingface.co/spaces/Alifiacaca/projek2_prediksigula
