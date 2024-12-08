@@ -90,7 +90,7 @@ df
             <li><strong>Volume:</strong> Jumlah aset koin yang diperdagangkan pada tanggal tersebut</li>
         </ul>
 
-<p style="text-indent: 50px; text-align: justify;"> Selanjutnya, memeriksa informasi tentang dataset menggunakan untuk melihat jumlah baris dan kolom, serta tipe data dari masing-masing kolom. Ini membantu kita memastikan bahwa semua data sudah lengkap dan tidak ada yang hilang. Selain itu, kita juga ingin mengetahui ukuran data untuk melihat berapa banyak baris dan kolom yang ada. Dari hasil ini, kita bisa tahu bahwa dataset memiliki 1802 baris dan 6 kolom, dengan data yang lengkap dan tipe data yang sesuai.</p>
+<p style="text-indent: 50px; text-align: justify;"> Selanjutnya, memeriksa informasi tentang dataset untuk melihat jumlah baris dan kolom, serta tipe data dari masing-masing kolom. Ini membantu kita memastikan bahwa semua data sudah lengkap dan tidak ada yang hilang. Selain itu, kita juga ingin mengetahui ukuran data untuk melihat berapa banyak baris dan kolom yang ada. Dari hasil ini, kita bisa tahu bahwa dataset memiliki 1802 baris dan 6 kolom, dengan data yang lengkap dan tipe data yang sesuai.</p>
 
 ```{code-cell} python
 df.info()
@@ -128,29 +128,29 @@ df.info()
 print('Ukuran data ', df.shape)
 ```
 
-<p style="text-indent: 50px; text-align: justify;">DataFrame diatas berisi 986 data dengan indeks waktu dari 1 Januari 2021 hingga 11 Oktober 2024. Terdapat satu kolom bernama "Harga" bertipe float64, dan semua datanya lengkap tanpa nilai kosong. Ukuran memori yang digunakan adalah 15,4 KB. Dataset ini siap digunakan untuk analisis, seperti memprediksi harga atau melihat tren waktu.</p>
-
-<p style="text-indent: 50px; text-align: justify;">Selanjutnya, dilakukan eksplorasi data untuk mendapatkan statistik dasar dari kolom Harga.</p>
+<p style="text-indent: 50px; text-align: justify;">Setelah membuat heatmap, di sini kita akan menganalisis hubungan antar fitur dalam dataset. Heatmap ini membantu kita memahami korelasi antara kolom-kolom yang ada, apakah ada hubungan yang kuat, lemah, atau tidak ada korelasi sama sekali. Ini dapat memberikan wawasan penting untuk analisis lebih lanjut atau pembuatan model, seperti memilih fitur yang relevan atau mendeteksi multikolinearitas.</p>
 
 ```{code-cell} python
-df.describe()
+correlation_matrix = df.corr()
+
+plt.figure(figsize=(7, 3))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
+plt.title('Heatmap Korelasi Antar Fitur')
+plt.show()
 ```
-<p style="text-indent: 50px; text-align: justify;">Terdapat 986 data yang dianalisis dengan rata-rata harga Rp16.477,84 dan penyebaran data (standar deviasi) sekitar Rp1.334,03, menunjukkan variabilitas harga. Harga terendah tercatat sebesar Rp13.450,00, sementara 25% data memiliki harga di bawah Rp15.550,00 (Kuartil 1), dan median atau harga tengah berada di Rp15.900,00. Sebanyak 75% data memiliki harga di bawah Rp16.850,00 (Kuartil 3), dengan harga tertinggi mencapai Rp19.300,00.</p>
+<p style="text-indent: 50px; text-align: justify;">Hasil korelasi pada heatmap ini menunjukkan hubungan antara fitur-fitur dalam data. Nilai korelasi berkisar dari -1 sampai 1, di mana 1 berarti hubungan sangat kuat dan positif, 0 berarti tidak ada hubungan, dan -1 berarti hubungan sangat kuat namun negatif. Pada heatmap ini, terlihat bahwa fitur "Open," "High," "Low," "Close," dan "Adj Close" memiliki korelasi sempurna (1), yang menunjukkan bahwa nilai-nilai ini sangat saling terkait. Namun, fitur "Volume" memiliki korelasi yang lemah (sekitar 0,26-0,27) terhadap fitur-fitur lainnya, yang berarti perubahan pada "Volume" tidak terlalu berhubungan dengan perubahan pada fitur lainnya.</p>
 
 ### Data Preprocessing
 
-#### Sliding Window
-<p style="text-indent: 50px; text-align: justify;">Melakukan penambahan fitur lag untuk harga gula yang merepresentasikan harga pada hari-hari sebelumnya. Kolom baru yang ditambahkan adalah Harga-1, Harga-2, dan Harga-3, yang masing-masing menunjukkan harga gula satu, dua, dan tiga hari sebelumnya. Nilai-nilai NaN yang muncul akibat pergeseran (lag) dihapus menggunakan fungsi `dropna`, sehingga hanya data yang lengkap yang tersisa. Kolom-kolom tersebut diatur ulang, sehingga kolom Harga (harga saat ini) berada di posisi terakhir, yang akan mempermudah analisis prediksi harga menggunakan model berbasis waktu.</p>
+#### a. Penghapusan Kolom yang Tidak Relevan dan Verifikasi Dataset
+<p style="text-indent: 50px; text-align: justify;">Menghapus kolom Volume dan Adj Close dari dataset, kolom-kolom tersebut dihilangkan karena mungkin tidak relevan untuk analisis atau pemodelan selanjutnya. Kemudian, kita akan melihat lima baris pertama dari dataset yang telah diperbarui untuk memastikan perubahan yang dilakukan.</p>
 
 ```{code-cell} python
-df['Harga-1'] = df['Harga'].shift(1)  # Harga satu hari sebelumnya
-df['Harga-2'] = df['Harga'].shift(2)  # Harga dua hari sebelumnya
-df['Harga-3'] = df['Harga'].shift(3)  # Harga tiga hari sebelumnya
-df.dropna(inplace=True)
-df = df[['Harga-3', 'Harga-2', 'Harga-1', 'Harga']]
-print(df.head())
+df = df.drop(columns=['Volume', 'Adj Close'])
+df.head()
 ```
 
+#### b. 
 #### Normalisasi Data
 
 <p style="text-indent: 50px; text-align: justify;">Melakukan normalisasi data pada fitur (Harga-1, Harga-2, Harga-3) dan target (Harga) menggunakan MinMaxScaler, pertama-tama normalisasi fitur dilakukan dengan scaler_features dan hasilnya disimpan dalam df_features_normalized. Kemudian, target harga dinormalisasi dengan scaler_target dan hasilnya disimpan dalam df_target_normalized. Setelah itu, kedua dataframe tersebut digabungkan dengan pd.concat untuk menghasilkan df_normalized, siap untuk analisis atau model prediksi selanjutnya..</p>
