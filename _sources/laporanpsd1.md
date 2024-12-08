@@ -203,11 +203,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, shuffle
 
 #### b. Penyusunan Model
 
-<p style="text-indent: 50px; text-align: justify;">Pada tahap ini, dilakukan percobaan dengan menggunakan tiga model utama, yaitu Regresi Linear, Support Vector Regression (SVR), dan K-Nearest Neighbors (KNN). Selain itu, untuk meningkatkan akurasi dan kinerja model, diterapkan juga teknik ensemble dengan metode bagging</p>
-
-```{code-cell} python
-pip install matplotlib
-```
+<p style="text-indent: 50px; text-align: justify;">Pada tahap ini, dilakukan percobaan dengan menggunakan tiga model utama, yaitu Regresi Linear, Ridge Linear , dan Gradient Boosting. Selain itu, untuk meningkatkan akurasi dan kinerja model, diterapkan juga teknik ensemble dengan metode bagging</p>
 
 ```{code-cell} python
 # List model regresi
