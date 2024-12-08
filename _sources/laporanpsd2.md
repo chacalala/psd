@@ -13,13 +13,7 @@ kernelspec:
 ---
 # Laporan Proyek Sains Data 2
 
-<p align="center">
-  <strong>LAPORAN PROYEK SAINS DATA</strong>
-</p>
-
-<p align="center">
-  <strong>Analisis Tren Historis untuk Prediksi Harga Gula</strong><br>
-</p>
+# Analisis Tren Historis untuk Prediksi Harga Gula
 
 ## PENDAHULUAN
 <hr>
@@ -265,3 +259,8 @@ for model, metrics in results.items():
 ```
 
 ### Kesimpulan
+Berdasarkan hasil percobaan dengan beberapa model, metode Linear Regression menunjukkan performa terbaik dengan nilai RMSE sebesar 0.01 dan MAPE sebesar 0.98%.
+
+### DEPLOYMENT
+Hasil deployment dapat dilihat melalui tautan berikut:
+https://huggingface.co/spaces/Alifiacaca/projek2_prediksigula
