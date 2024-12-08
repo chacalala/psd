@@ -262,4 +262,4 @@ for model, metrics in results.items():
 
 ### DEPLOYMENT
 <p style="text-indent: 50px; text-align: justify;">Hasil deployment dapat dilihat melalui tautan berikut:</P>
-https://huggingface.co/spaces/Alifiacaca/projek2_prediksigula
+https://huggingface.co/spaces/Alifiacaca/projek1_prediksibtc
