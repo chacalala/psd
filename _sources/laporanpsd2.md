@@ -72,11 +72,18 @@ df.dtypes
 Kolom "Date" (object) berisi data dalam format teks, yang kemungkinan mewakili tanggal. Kolom "Harga" (object) bertipe teks, yang mungkin mengandung tanda koma atau simbol lainnya, sehingga perlu dikonversi ke tipe numerik (seperti float) untuk melakukan analisis.
 
 #### c. Eksplorasi Data
-Sebelum memulai analisis atau visualisasi data, penting untuk memastikan bahwa kolom Harga Gula (kg) memiliki format yang benar agar bisa digunakan dalam perhitungan. Oleh karena itu, perlu mengubah kolom tersebut menjadi tipe data numerik dengan menghapus tanda koma yang mungkin ada.
+Sebelum melakukan eksplorasi data, kolom date akan dikonversi dari format string menjadi tipe data datetime dan dijadikan sebagai indeks dari DataFrame.
 
 ```{code-cell} python
-df['Harga Gula (kg)'] = pd.to_numeric(df['Harga Gula (kg)'].str.replace(',', ''), errors='coerce')
-print(df)
+df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
+df.set_index('Date', inplace=True)
+```
+
+Selanjutnya, penting untuk memastikan bahwa kolom Harga Gula (kg) memiliki format yang benar agar bisa digunakan dalam perhitungan. Oleh karena itu, perlu mengubah kolom tersebut menjadi tipe data numerik dengan menghapus tanda koma yang mungkin ada.
+
+```{code-cell} python
+df['Harga'] = df['Harga'].replace('-', np.nan).str.replace(',', '').astype(float)
+print(df.head())
 ```
 membuat beberapa kolom baru di DataFrame untuk menyimpan harga gula berdasarkan lag waktu, yaitu harga 3, 2, 1 hari sebelumnya dan juga menambahkan kolom xt yang berisi harga gula saat ini. Setelah itu, hapus baris yang memiliki nilai kosong akibat proses shifting(menggeser nilai).
 
