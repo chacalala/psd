@@ -18,47 +18,16 @@ kernelspec:
 </p>
 
 <p align="center">
-  <strong>JUDUL</strong><br>
-  (Harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
+  <strong>Analisis Tren Historis untuk Prediksi Harga Gula</strong><br>
 </p>
-
-![Logo Universitas Trunojoyo Madura](./utm.png)
-
-
-<hr>
-
-<p align="center">
-  <strong>Disusun Oleh:</strong><br>
-  Nama: Revika Syariqatun Alifia<br>
-  NIM: 220411100008<br>
-  Kelas: IF 5D
-</p>
-
-<p align="center">
-  <strong>Dosen Pengampu:</strong><br>
-  Nama: Mula'ab, S.Si., M.Kom<br>
-  NIP: 19730520200212
-</p>
-
-<p align="center">
-  <strong>PRODI TEKNIK INFORMATIKA</strong><br>
-  <strong>JURUSAN TEKNIK INFORMATIKA</strong><br>
-  <strong>FAKULTAS TEKNIK</strong><br>
-  <strong>UNIVERSITAS TRUNOJOYO MADURA</strong><br>
-  <strong>2024</strong>
-</p>
-
-<hr>
 
 ## PENDAHULUAN
 <hr>
 
 ### Latar Belakang
-<p style="text-indent: 20px;"> Gulaku didirikan pada tahun 2002 dengan tujuan menyediakan gula berkualitas tinggi yang terjangkau dan mudah didapat oleh masyarakat Indonesia. Setiap produk Gulaku diproduksi dengan standar kualitas yang konsisten, dikemas dalam kemasan steril untuk menjaga kebersihannya. Visi perusahaan ini adalah Memenuhi kebutuhan dan memuaskan konsumen dengan menyediakan gula yang terus ditingkatkan untuk mencapai keberlanjutan, sementara misinya adalah menyediakan produk berkualitas dan ramah lingkungan. Untuk menghadapi tantangan pasar yang dinamis, Gulaku menggunakan teknologi peramalan harga guna membantu produsen dan distributor dalam mengambil keputusan yang lebih tepat.</p>
+<p style="text-indent: 20px;"> Gulaku, didirikan pada tahun 2002, berkomitmen menyediakan gula berkualitas tinggi yang terjangkau bagi masyarakat Indonesia. Dengan visi keberlanjutan dan misi ramah lingkungan, Gulaku menjaga kualitas produk melalui teknologi modern dan kemasan steril. Selain itu, perusahaan mendukung inisiatif sosial dan ekonomi lokal di Lampung.</p>
 <hr>
-<p style="text-indent: 20px;"> Gulaku terus berkomitmen untuk meningkatkan keberlanjutan dalam setiap aspek operasionalnya. Dengan memanfaatkan teknologi canggih dalam proses produksinya, perusahaan tidak hanya memastikan kualitas tinggi, tetapi juga meminimalisir dampak lingkungan. Gulaku juga aktif berkolaborasi dengan pemerintah untuk memperkuat ekonomi lokal dan mendukung inisiatif sosial di Lampung. Melalui program pelatihan dan pengembangan karyawan, Gulaku berusaha menciptakan lingkungan kerja yang positif, di mana setiap karyawan dapat berkembang dan berkontribusi secara maksimal terhadap visi perusahaan. Dengan motto “Manis, Bersih, Murni, Alami,” Gulaku bertekad untuk memberikan yang terbaik bagi konsumennya. Namun, produsen dan distributor Gulaku menghadapi tantangan besar terkait perubahan harga akibat dinamika pasar dan ketidakpastian rantai pasokan.</p>
-<hr>
-<p style="text-indent: 20px;"> Untuk menghadapi tantangan harga yang sering berfluktuasi, Gulaku mengandalkan peramalan harga yang akurat. Dengan menganalisis data historis, perusahaan dapat mengurangi risiko perubahan harga yang tidak terduga, serta membantu produsen dan distributor dalam merencanakan produksi dan distribusi secara lebih efisien. Strategi ini membantu menjaga keseimbangan antara penawaran dan permintaan di pasar. Tujuan dari peramalan harga adalah memastikan stabilitas harga, menjaga ketersediaan produk yang konsisten, dan meminimalkan risiko kelebihan atau kekurangan stok.</p>
+<p style="text-indent: 20px;"> Menghadapi tantangan fluktuasi harga akibat dinamika pasar, Gulaku mengandalkan peramalan harga berbasis analisis data historis. Strategi ini membantu menjaga stabilitas harga, ketersediaan produk, serta mengurangi risiko kelebihan atau kekurangan stok. Peramalan yang akurat memungkinkan perusahaan merencanakan produksi dan distribusi lebih efisien untuk memenuhi kebutuhan pasar dengan lebih baik.</p>
 <hr>
 
 ### Tujuan
@@ -82,16 +51,14 @@ Data yang digunakan pada proyek ini diambil dari platform PHIPS Nasional (Pusat 
 ```{code-cell} python
 import pandas as pd
 # Baca data CSV
-df = pd.read_csv('https://raw.githubusercontent.com/chacalala/Dataset/refs/heads/main/datagula.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/chacalala/psd/refs/heads/main/Data%20Gula.csv')
 print(df.head())
 ```
 
 #### b. Deskripsi Dataset
-Dataset ini terdiri dari 4 fitur atau kolom, dan 976 record. Berikut adalah deskripsi dari setiap atribut yang ada:
+Dataset ini terdiri dari 2 fitur atau kolom, dan 976 record. Berikut adalah deskripsi dari setiap atribut yang ada:
 
-- **Tanggal** : Mengindentifikasi tanggal transaksi.
-- **Bulan**: Mengindikasikan bulan terjadinya transaksi, di mana jumlah produk yang dibeli dalam satu transaksi dicatat.
-- **Tahun**: Menunjukkan tahun terjadinya transaksi.
+- **TDate** : Mengindentifikasi tanggal transaksi, biasanya memiliki format YYYY-MM-DD.
 - **Harga Gula (kg)**: Menyimpan harga gula per kilogram, yang dapat berubah seiring waktu dan relevan dalam konteks pembelian.
 
 melihat ringkasan tentang DataFrame
@@ -99,12 +66,10 @@ melihat ringkasan tentang DataFrame
 df.info()
 print('Ukuran data ', df.shape)
 ```
-Hasilnya menunjukkan bahwa DataFrame memiliki 976 baris dan 4 kolom. Tiga kolom bertipe int64 (Tanggal, Bulan, Tahun) dan satu kolom bertipe object (Harga Gula). Semua kolom memiliki 976 nilai non-null, sehingga tidak ada nilai yang hilang. Penggunaan memori adalah sekitar 30.6 KB.
+Hasilnya menunjukkan bahwa DataFrame memiliki 986 baris dan 1 kolom. Kolom "Harga" bertipe float64 dan memiliki 977 nilai non-null. Terdapat beberapa nilai yang hilang, yaitu 9 nilai yang kosong. Penggunaan memori adalah sekitar 15.4 KB.
 
 **Jenis Data**:
-- **Tanggal** : Datetime
-- **Bulan**: Kategorikal (Ordinal), karena bulan memiliki urutan tertentu (Januari, Februari, dst.).
-- **Tahun**: Numerik (Diskrit), karena tahun adalah angka yang merepresentasikan waktu dan dapat dihitung.
+- **Date** : Data saat ini disajikan dalam bentuk string, namun akan diubah menjadi tipe data datetime pada tahap eksplorasi untuk memudahkan analisis waktu.
 - **Harga Gula (kg)**: Numerik (Kontinu), karena harga dapat memiliki nilai pecahan dan dapat diukur dengan presisi yang lebih tinggi.
 
 melihat tipe data dari setiap kolom

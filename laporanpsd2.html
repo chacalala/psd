@@ -394,40 +394,16 @@
   <strong>LAPORAN PROYEK SAINS DATA</strong>
 </p>
 <p align="center">
-  <strong>JUDUL</strong><br>
-  (Harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
+  <strong>Analisis Tren Historis untuk Prediksi Harga Gula</strong><br>
 </p>
-<p><img alt="Logo Universitas Trunojoyo Madura" src="_images/utm.png" /></p>
-<hr>
-<p align="center">
-  <strong>Disusun Oleh:</strong><br>
-  Nama: Revika Syariqatun Alifia<br>
-  NIM: 220411100008<br>
-  Kelas: IF 5D
-</p>
-<p align="center">
-  <strong>Dosen Pengampu:</strong><br>
-  Nama: Mula'ab, S.Si., M.Kom<br>
-  NIP: 19730520200212
-</p>
-<p align="center">
-  <strong>PRODI TEKNIK INFORMATIKA</strong><br>
-  <strong>JURUSAN TEKNIK INFORMATIKA</strong><br>
-  <strong>FAKULTAS TEKNIK</strong><br>
-  <strong>UNIVERSITAS TRUNOJOYO MADURA</strong><br>
-  <strong>2024</strong>
-</p>
-<hr>
 <section id="pendahuluan">
 <h2>PENDAHULUAN<a class="headerlink" href="#pendahuluan" title="Link to this heading">#</a></h2>
 <hr>
 <section id="latar-belakang">
 <h3>Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h3>
-<p style="text-indent: 20px;"> Gulaku didirikan pada tahun 2002 dengan tujuan menyediakan gula berkualitas tinggi yang terjangkau dan mudah didapat oleh masyarakat Indonesia. Setiap produk Gulaku diproduksi dengan standar kualitas yang konsisten, dikemas dalam kemasan steril untuk menjaga kebersihannya. Visi perusahaan ini adalah Memenuhi kebutuhan dan memuaskan konsumen dengan menyediakan gula yang terus ditingkatkan untuk mencapai keberlanjutan, sementara misinya adalah menyediakan produk berkualitas dan ramah lingkungan. Untuk menghadapi tantangan pasar yang dinamis, Gulaku menggunakan teknologi peramalan harga guna membantu produsen dan distributor dalam mengambil keputusan yang lebih tepat.</p>
+<p style="text-indent: 20px;"> Gulaku, didirikan pada tahun 2002, berkomitmen menyediakan gula berkualitas tinggi yang terjangkau bagi masyarakat Indonesia. Dengan visi keberlanjutan dan misi ramah lingkungan, Gulaku menjaga kualitas produk melalui teknologi modern dan kemasan steril. Selain itu, perusahaan mendukung inisiatif sosial dan ekonomi lokal di Lampung.</p>
 <hr>
-<p style="text-indent: 20px;"> Gulaku terus berkomitmen untuk meningkatkan keberlanjutan dalam setiap aspek operasionalnya. Dengan memanfaatkan teknologi canggih dalam proses produksinya, perusahaan tidak hanya memastikan kualitas tinggi, tetapi juga meminimalisir dampak lingkungan. Gulaku juga aktif berkolaborasi dengan pemerintah untuk memperkuat ekonomi lokal dan mendukung inisiatif sosial di Lampung. Melalui program pelatihan dan pengembangan karyawan, Gulaku berusaha menciptakan lingkungan kerja yang positif, di mana setiap karyawan dapat berkembang dan berkontribusi secara maksimal terhadap visi perusahaan. Dengan motto “Manis, Bersih, Murni, Alami,” Gulaku bertekad untuk memberikan yang terbaik bagi konsumennya. Namun, produsen dan distributor Gulaku menghadapi tantangan besar terkait perubahan harga akibat dinamika pasar dan ketidakpastian rantai pasokan.</p>
-<hr>
-<p style="text-indent: 20px;"> Untuk menghadapi tantangan harga yang sering berfluktuasi, Gulaku mengandalkan peramalan harga yang akurat. Dengan menganalisis data historis, perusahaan dapat mengurangi risiko perubahan harga yang tidak terduga, serta membantu produsen dan distributor dalam merencanakan produksi dan distribusi secara lebih efisien. Strategi ini membantu menjaga keseimbangan antara penawaran dan permintaan di pasar. Tujuan dari peramalan harga adalah memastikan stabilitas harga, menjaga ketersediaan produk yang konsisten, dan meminimalkan risiko kelebihan atau kekurangan stok.</p>
+<p style="text-indent: 20px;"> Menghadapi tantangan fluktuasi harga akibat dinamika pasar, Gulaku mengandalkan peramalan harga berbasis analisis data historis. Strategi ini membantu menjaga stabilitas harga, ketersediaan produk, serta mengurangi risiko kelebihan atau kekurangan stok. Peramalan yang akurat memungkinkan perusahaan merencanakan produksi dan distribusi lebih efisien untuk memenuhi kebutuhan pasar dengan lebih baik.</p>
 <hr>
 </section>
 <section id="tujuan">
@@ -454,18 +430,18 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="c1"># Baca data CSV</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/chacalala/Dataset/refs/heads/main/datagula.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/chacalala/psd/refs/heads/main/Data</span><span class="si">%20G</span><span class="s1">ula.csv&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Tanggal  Bulan  Tahun Harga Gula (kg)
-0        1      1   2021          13,900
-1        4      1   2021          13,900
-2        5      1   2021          13,900
-3        6      1   2021          13,950
-4        7      1   2021          13,950
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           Date   Harga
+0  01/ 01/ 2021  15,750
+1  04/ 01/ 2021  15,750
+2  05/ 01/ 2021  15,750
+3  06/ 01/ 2021  15,700
+4  07/ 01/ 2021  15,700
 </pre></div>
 </div>
 </div>
@@ -473,11 +449,9 @@
 </section>
 <section id="b-deskripsi-dataset">
 <h4>b. Deskripsi Dataset<a class="headerlink" href="#b-deskripsi-dataset" title="Link to this heading">#</a></h4>
-<p>Dataset ini terdiri dari 4 fitur atau kolom, dan 976 record. Berikut adalah deskripsi dari setiap atribut yang ada:</p>
+<p>Dataset ini terdiri dari 2 fitur atau kolom, dan 976 record. Berikut adalah deskripsi dari setiap atribut yang ada:</p>
 <ul class="simple">
-<li><p><strong>Tanggal</strong> : Mengindentifikasi tanggal transaksi.</p></li>
-<li><p><strong>Bulan</strong>: Mengindikasikan bulan terjadinya transaksi, di mana jumlah produk yang dibeli dalam satu transaksi dicatat.</p></li>
-<li><p><strong>Tahun</strong>: Menunjukkan tahun terjadinya transaksi.</p></li>
+<li><p><strong>TDate</strong> : Mengindentifikasi tanggal transaksi, biasanya memiliki format YYYY-MM-DD.</p></li>
 <li><p><strong>Harga Gula (kg)</strong>: Menyimpan harga gula per kilogram, yang dapat berubah seiring waktu dan relevan dalam konteks pembelian.</p></li>
 </ul>
 <p>melihat ringkasan tentang DataFrame</p>
@@ -490,27 +464,23 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 976 entries, 0 to 975
-Data columns (total 4 columns):
- #   Column           Non-Null Count  Dtype 
----  ------           --------------  ----- 
- 0   Tanggal          976 non-null    int64 
- 1   Bulan            976 non-null    int64 
- 2   Tahun            976 non-null    int64 
- 3   Harga Gula (kg)  976 non-null    object
-dtypes: int64(3), object(1)
-memory usage: 30.6+ KB
-Ukuran data  (976, 4)
+RangeIndex: 986 entries, 0 to 985
+Data columns (total 2 columns):
+ #   Column  Non-Null Count  Dtype 
+---  ------  --------------  ----- 
+ 0   Date    986 non-null    object
+ 1   Harga   986 non-null    object
+dtypes: object(2)
+memory usage: 15.5+ KB
+Ukuran data  (986, 2)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Hasilnya menunjukkan bahwa DataFrame memiliki 976 baris dan 4 kolom. Tiga kolom bertipe int64 (Tanggal, Bulan, Tahun) dan satu kolom bertipe object (Harga Gula). Semua kolom memiliki 976 nilai non-null, sehingga tidak ada nilai yang hilang. Penggunaan memori adalah sekitar 30.6 KB.</p>
+<p>Hasilnya menunjukkan bahwa DataFrame memiliki 986 baris dan 1 kolom. Kolom “Harga” bertipe float64 dan memiliki 977 nilai non-null. Terdapat beberapa nilai yang hilang, yaitu 9 nilai yang kosong. Penggunaan memori adalah sekitar 15.4 KB.</p>
 <p><strong>Jenis Data</strong>:</p>
 <ul class="simple">
-<li><p><strong>Tanggal</strong> : Datetime</p></li>
-<li><p><strong>Bulan</strong>: Kategorikal (Ordinal), karena bulan memiliki urutan tertentu (Januari, Februari, dst.).</p></li>
-<li><p><strong>Tahun</strong>: Numerik (Diskrit), karena tahun adalah angka yang merepresentasikan waktu dan dapat dihitung.</p></li>
+<li><p><strong>Date</strong> : Data saat ini disajikan dalam bentuk string, namun akan diubah menjadi tipe data datetime pada tahap eksplorasi untuk memudahkan analisis waktu.</p></li>
 <li><p><strong>Harga Gula (kg)</strong>: Numerik (Kontinu), karena harga dapat memiliki nilai pecahan dan dapat diukur dengan presisi yang lebih tinggi.</p></li>
 </ul>
 <p>melihat tipe data dari setiap kolom</p>
@@ -521,10 +491,8 @@ Ukuran data  (976, 4)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tanggal             int64
-Bulan               int64
-Tahun               int64
-Harga Gula (kg)    object
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date     object
+Harga    object
 dtype: object
 </pre></div>
 </div>
@@ -538,15 +506,14 @@ dtype: object
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          Tanggal       Bulan        Tahun
-count  976.000000  976.000000   976.000000
-mean    15.677254    6.221311  2022.398566
-std      8.790049    3.347283     1.084132
-min      1.000000    1.000000  2021.000000
-25%      8.000000    3.000000  2021.000000
-50%     16.000000    6.000000  2022.000000
-75%     23.000000    9.000000  2023.000000
-max     31.000000   12.000000  2024.000000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                Date   Harga
+count            986     986
+unique           986      80
+top     11/ 10/ 2024  15,850
+freq               1      85
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -575,20 +542,51 @@ max     31.000000   12.000000  2024.000000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     Tanggal  Bulan  Tahun  Harga Gula (kg)
-0          1      1   2021          13900.0
-1          4      1   2021          13900.0
-2          5      1   2021          13900.0
-3          6      1   2021          13950.0
-4          7      1   2021          13950.0
-..       ...    ...    ...              ...
-971       23      9   2024          18750.0
-972       24      9   2024          18750.0
-973       25      9   2024          18850.0
-974       26      9   2024          18750.0
-975       27      9   2024          18750.0
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="nn">File ~\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py:3805,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3804</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">3805</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3806</span> <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
 
-[976 rows x 4 columns]
+<span class="nn">File index.pyx:167,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File index.pyx:196,</span> in <span class="ni">pandas._libs.index.IndexEngine.get_loc</span><span class="nt">()</span>
+
+<span class="nn">File pandas\\_libs\\hashtable_class_helper.pxi:7081,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="nn">File pandas\\_libs\\hashtable_class_helper.pxi:7089,</span> in <span class="ni">pandas._libs.hashtable.PyObjectHashTable.get_item</span><span class="nt">()</span>
+
+<span class="ne">KeyError</span>: &#39;Harga Gula (kg)&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\frame.py:4102,</span> in <span class="ni">DataFrame.__getitem__</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4100</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">nlevels</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">4101</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_multilevel</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">4102</span> <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4103</span> <span class="k">if</span> <span class="n">is_integer</span><span class="p">(</span><span class="n">indexer</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">4104</span>     <span class="n">indexer</span> <span class="o">=</span> <span class="p">[</span><span class="n">indexer</span><span class="p">]</span>
+
+<span class="nn">File ~\AppData\Local\Programs\Python\Python311\Lib\site-packages\pandas\core\indexes\base.py:3812,</span> in <span class="ni">Index.get_loc</span><span class="nt">(self, key)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3807</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">casted_key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">3808</span>         <span class="nb">isinstance</span><span class="p">(</span><span class="n">casted_key</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3809</span>         <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">slice</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">casted_key</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3810</span>     <span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3811</span>         <span class="k">raise</span> <span class="n">InvalidIndexError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3812</span>     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+<span class="g g-Whitespace">   </span><span class="mi">3813</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3814</span>     <span class="c1"># If we have a listlike key, _check_indexing_error will raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3815</span>     <span class="c1">#  InvalidIndexError. Otherwise we fall through and re-raise</span>
+<span class="g g-Whitespace">   </span><span class="mi">3816</span>     <span class="c1">#  the TypeError.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3817</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_check_indexing_error</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+<span class="ne">KeyError</span>: &#39;Harga Gula (kg)&#39;
 </pre></div>
 </div>
 </div>
@@ -606,94 +604,6 @@ max     31.000000   12.000000  2024.000000
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Tanggal</th>
-      <th>Bulan</th>
-      <th>Tahun</th>
-      <th>Harga Gula (kg)</th>
-      <th>xt-3</th>
-      <th>xt-2</th>
-      <th>xt-1</th>
-      <th>xt</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>1</td>
-      <td>2021</td>
-      <td>13900.0</td>
-      <td>13950.0</td>
-      <td>13900.0</td>
-      <td>13900.0</td>
-      <td>13900.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4</td>
-      <td>1</td>
-      <td>2021</td>
-      <td>13900.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13900.0</td>
-      <td>13900.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>5</td>
-      <td>1</td>
-      <td>2021</td>
-      <td>13900.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13900.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>6</td>
-      <td>1</td>
-      <td>2021</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>7</td>
-      <td>1</td>
-      <td>2021</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>Dengan menambahkan kolom yang menunjukkan harga gula 3, 2, dan 1 hari sebelumnya, kita bisa melihat bagaimana harga-harga tersebut mempengaruhi harga saat ini.</p>
 <p>menambahkan kolom target xt (harga gula saat ini) ke DataFrame untuk diprediksi, dan menghapus kolom yang tidak diperlukan, sehingga hanya kolom penting untuk analisis yang tersisa.</p>
@@ -724,17 +634,6 @@ max     31.000000   12.000000  2024.000000
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Tanggal     xt-3     xt-2     xt-1       xt
-date                                               
-1-2021        1  13950.0  13900.0  13900.0  13900.0
-1-2021        4  13950.0  13950.0  13900.0  13900.0
-1-2021        5  13950.0  13950.0  13950.0  13900.0
-1-2021        6  13950.0  13950.0  13950.0  13950.0
-1-2021        7  13950.0  13950.0  13950.0  13950.0
-</pre></div>
-</div>
-</div>
 </div>
 <p>Kolom Bulan dan Tahun digabungkan menjadi kolom date untuk memudahkan analisis waktu. Menghapus kolom yang tidak diperlukan menyederhanakan DataFrame, dan menjadikan date sebagai indeks mempermudah operasi berbasis waktu.</p>
 <p>Visualisasi ini dibuat untuk menunjukkan perubahan harga gula dari waktu ke waktu, termasuk harga 3, 2, dan 1 hari sebelumnya, serta harga saat ini. Dengan grafik garis, kita bisa melihat tren dan pola harga secara jelas. Ini membantu kita memahami bagaimana harga saat ini dipengaruhi oleh harga di hari-hari sebelumnya.</p>
@@ -751,18 +650,6 @@ date
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Visualisasi</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
 </pre></div>
 </div>
 </div>
