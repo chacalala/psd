@@ -43,25 +43,25 @@ kernelspec:
 
 
 ```{code-cell} python
-import numpy as np
+# import library
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import LinearRegression
+from sklearn.svm import SVR
+from sklearn.neighbors import KNeighborsRegressor
 from sklearn.ensemble import BaggingRegressor
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_percentage_error
 import seaborn as sns
-import plotly.graph_objects as go
-import plotly.express as px
 import matplotlib.pyplot as plt
-import plotly.express as px
-from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import accuracy_score, classification_report
+```
 
-
-# Membaca data
+```{code-cell} python
+#Mengambil dan menampilkan data
 df = pd.read_csv('https://raw.githubusercontent.com/chacalala/psd/refs/heads/main/Data%20Gula.csv')
-df
+pd.options.display.float_format = '{:.0f}'.format
+print(df.head())
 ```
 
 #### b. Deskripsi Dataset
