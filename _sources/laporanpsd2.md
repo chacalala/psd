@@ -50,8 +50,9 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import BaggingRegressor
 from sklearn.metrics import mean_squared_error
-import plotly.graph_objects as go
 import seaborn as sns
+import plotly.graph_objects as go
+import plotly.express as px
 import matplotlib.pyplot as plt
 import plotly.express as px
 from sklearn.naive_bayes import GaussianNB
