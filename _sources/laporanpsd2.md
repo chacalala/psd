@@ -86,6 +86,32 @@ import numpy as np
 df['Harga'] = df['Harga'].replace('-', np.nan).str.replace(',', '').astype(float)
 print(df.head())
 ```
+
+Setelah itu, melihat apakah didalam data set tersebut ada missing value
+
+```{code-cell} python
+missing_values = df.isnull().sum()
+print("Jumlah Missing Values di setiap kolom:")
+print(missing_values)
+```
+
+Setelah dilakukan pengecekan, ternyata terdapat missing values pada kolom Harga sebanyak 9 nilai. Untuk menangani hal ini, kita akan menggunakan metode Forward Fill (ffill), di mana nilai terakhir yang valid akan dibawa ke depan untuk mengisi nilai yang hilang. Metode ini dipilih karena dianggap cocok untuk mempertahankan kontinuitas data berdasarkan tren historis.
+
+```{code-cell} python
+df = df.ffill()
+missing_values_after = df.isnull().sum()
+print("\nJumlah Missing Values setelah penanganan:")
+print(missing_values_after)
+```
+
+Selanjutnya melakukan pengecekan struktur dataset
+
+```{code-cell} python
+df.info()
+print('Ukuran data ', df.shape)
+```
+DataFrame diatas berisi 986 data dengan indeks waktu dari 1 Januari 2021 hingga 11 Oktober 2024. Terdapat satu kolom bernama "Harga" bertipe float64, dan semua datanya lengkap tanpa nilai kosong. Ukuran memori yang digunakan adalah 15,4 KB. Dataset ini siap digunakan untuk analisis, seperti memprediksi harga atau melihat tren waktu.
+
 membuat beberapa kolom baru di DataFrame untuk menyimpan harga gula berdasarkan lag waktu, yaitu harga 3, 2, 1 hari sebelumnya dan juga menambahkan kolom xt yang berisi harga gula saat ini. Setelah itu, hapus baris yang memiliki nilai kosong akibat proses shifting(menggeser nilai).
 
 ```{code-cell} python
