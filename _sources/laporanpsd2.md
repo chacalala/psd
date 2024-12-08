@@ -82,6 +82,7 @@ df.set_index('Date', inplace=True)
 Selanjutnya, penting untuk memastikan bahwa kolom Harga Gula (kg) memiliki format yang benar agar bisa digunakan dalam perhitungan. Oleh karena itu, perlu mengubah kolom tersebut menjadi tipe data numerik dengan menghapus tanda koma yang mungkin ada.
 
 ```{code-cell} python
+import numpy as np
 df['Harga'] = df['Harga'].replace('-', np.nan).str.replace(',', '').astype(float)
 print(df.head())
 ```
