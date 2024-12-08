@@ -43,10 +43,24 @@ kernelspec:
 
 
 ```{code-cell} python
+import numpy as np
 import pandas as pd
-# Baca data CSV
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import BaggingRegressor
+from sklearn.metrics import mean_squared_error
+import plotly.graph_objects as go
+import seaborn as sns
+import matplotlib.pyplot as plt
+import plotly.express as px
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, classification_report
+
+
+# Membaca data
 df = pd.read_csv('https://raw.githubusercontent.com/chacalala/psd/refs/heads/main/Data%20Gula.csv')
-print(df.head())
+df
 ```
 
 #### b. Deskripsi Dataset
