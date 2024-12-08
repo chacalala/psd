@@ -261,5 +261,5 @@ for model, metrics in results.items():
 <p style="text-indent: 50px; text-align: justify;">Berdasarkan hasil percobaan dengan beberapa model, metode Linear Regression menunjukkan performa terbaik dengan nilai RMSE sebesar 0.01 dan MAPE sebesar 2.01%.</P>
 
 ### DEPLOYMENT
-<p style="text-indent: 50px; text-align: justify;">Hasil deployment dapat dilihat melalui tautan berikut:</P>
+Hasil deployment dapat dilihat melalui tautan berikut:
 https://huggingface.co/spaces/Alifiacaca/projek1_prediksibtc
