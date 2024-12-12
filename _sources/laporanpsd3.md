@@ -13,61 +13,25 @@ kernelspec:
 ---
 # Laporan Proyek Sains Data 3
 
-<p align="center">
-  <strong>LAPORAN PROYEK SAINS DATA</strong>
-</p>
-
-<p align="center">
-  <strong>JUDUL</strong><br>
-  (Harus singkat, jelas, dan langsung mencerminkan inti dari proyek)
-</p>
-
-![Logo Universitas Trunojoyo Madura](./utm.png)
-
-
-<hr>
-
-<p align="center">
-  <strong>Disusun Oleh:</strong><br>
-  Nama: Revika Syariqatun Alifia<br>
-  NIM: 220411100008<br>
-  Kelas: IF 5D
-</p>
-
-<p align="center">
-  <strong>Dosen Pengampu:</strong><br>
-  Nama: Mula'ab, S.Si., M.Kom<br>
-  NIP: 19730520200212
-</p>
-
-<p align="center">
-  <strong>PRODI TEKNIK INFORMATIKA</strong><br>
-  <strong>JURUSAN TEKNIK INFORMATIKA</strong><br>
-  <strong>FAKULTAS TEKNIK</strong><br>
-  <strong>UNIVERSITAS TRUNOJOYO MADURA</strong><br>
-  <strong>2024</strong>
-</p>
-
-<hr>
-
+# Prediksi Harga Monero untuk Multi-Step Forecasting Berdasarkan Variabel Multivariat
 ## PENDAHULUAN
 <hr>
 
 ### Latar Belakang
-<p style="text-indent: 20px;"> Gulaku didirikan pada tahun 2002 dengan tujuan menyediakan gula berkualitas tinggi yang terjangkau dan mudah didapat oleh masyarakat Indonesia. Setiap produk Gulaku diproduksi dengan standar kualitas yang konsisten, dikemas dalam kemasan steril untuk menjaga kebersihannya. Visi perusahaan ini adalah Memenuhi kebutuhan dan memuaskan konsumen dengan menyediakan gula yang terus ditingkatkan untuk mencapai keberlanjutan, sementara misinya adalah menyediakan produk berkualitas dan ramah lingkungan. Untuk menghadapi tantangan pasar yang dinamis, Gulaku menggunakan teknologi peramalan harga guna membantu produsen dan distributor dalam mengambil keputusan yang lebih tepat.</p>
+<p style="text-indent: 20px;"> Monero (XMR) adalah cryptocurrency yang terdesentralisasi dan berfokus pada privasi, pertama kali dirilis pada 2014 sebagai fork dari protokol CryptoNote. Berbeda dengan Bitcoin, Monero dirancang untuk menyediakan anonimitas penuh dalam transaksi, menggunakan teknologi seperti tanda tangan cincin (ring signatures), alamat sekali pakai (stealth addresses), dan mekanisme RingCT (Ring Confidential Transactions) untuk menyembunyikan identitas pengirim, penerima, serta jumlah transaksi. Hal ini menjadikan Monero pilihan populer di kalangan pengguna yang menghargai privasi tinggi, meskipun juga sering mendapat sorotan negatif dari regulator karena potensinya digunakan dalam aktivitas ilegal.</p>
 <hr>
-<p style="text-indent: 20px;"> Gulaku terus berkomitmen untuk meningkatkan keberlanjutan dalam setiap aspek operasionalnya. Dengan memanfaatkan teknologi canggih dalam proses produksinya, perusahaan tidak hanya memastikan kualitas tinggi, tetapi juga meminimalisir dampak lingkungan. Gulaku juga aktif berkolaborasi dengan pemerintah untuk memperkuat ekonomi lokal dan mendukung inisiatif sosial di Lampung. Melalui program pelatihan dan pengembangan karyawan, Gulaku berusaha menciptakan lingkungan kerja yang positif, di mana setiap karyawan dapat berkembang dan berkontribusi secara maksimal terhadap visi perusahaan. Dengan motto “Manis, Bersih, Murni, Alami,” Gulaku bertekad untuk memberikan yang terbaik bagi konsumennya. Namun, produsen dan distributor Gulaku menghadapi tantangan besar terkait perubahan harga akibat dinamika pasar dan ketidakpastian rantai pasokan.</p>
+<p style="text-indent: 20px;"> Dalam dunia cryptocurrency, Monero (XMR) menonjol sebagai aset digital yang mengutamakan privasi dan keamanan. Namun, sifat pasar cryptocurrency yang sangat fluktuatif sering kali membuat investor dan pelaku pasar menghadapi tantangan besar dalam mengelola risiko dan memanfaatkan peluang investasi secara optimal. Monero memiliki potensi besar sebagai aset investasi alternatif, terutama bagi individu dan institusi yang menghargai privasi tinggi dalam transaksi keuangan. Akan tetapi, fluktuasi harga yang signifikan menciptakan ketidakpastian, yang pada gilirannya dapat menghambat adopsi lebih luas dan keputusan investasi yang tepat.</p>
 <hr>
-<p style="text-indent: 20px;"> Untuk menghadapi tantangan harga yang sering berfluktuasi, Gulaku mengandalkan peramalan harga yang akurat. Dengan menganalisis data historis, perusahaan dapat mengurangi risiko perubahan harga yang tidak terduga, serta membantu produsen dan distributor dalam merencanakan produksi dan distribusi secara lebih efisien. Strategi ini membantu menjaga keseimbangan antara penawaran dan permintaan di pasar. Tujuan dari peramalan harga adalah memastikan stabilitas harga, menjaga ketersediaan produk yang konsisten, dan meminimalkan risiko kelebihan atau kekurangan stok.</p>
+<p style="text-indent: 20px;"> Oleh karena itu, pengembangan model prediksi harga Monero menjadi sangat relevan untuk membantu investor memahami dinamika harga Monero secara lebih mendalam, mendukung strategi investasi yang lebih terinformasi dan berbasis data, serta meningkatkan kepercayaan terhadap aset ini dengan menyediakan wawasan yang dapat diandalkan terkait potensi pergerakan harga. Proyek ini dirancang untuk menjawab kebutuhan tersebut, dengan fokus pada pemanfaatan data historis dan teknologi kecerdasan buatan untuk memberikan solusi praktis bagi tantangan yang dihadapi oleh investor di pasar cryptocurrency.</p>
 <hr>
 
 ### Tujuan
-<p style="text-indent: 20px;"> Melalui analisis data historis, Gulaku dapat melakukan peramalan harga secara akurat untuk menjaga stabilitas harga di pasaran, memastikan ketersediaan produk yang konsisten, serta meminimalkan risiko kelebihan atau kekurangan stok. Dengan peramalan yang tepat, Gulaku dapat merencanakan produksi dan distribusi secara lebih efisien, serta mampu mempersiapkan diri terhadap perubahan cepat di pasar.</p>
+<p style="text-indent: 20px;"> Proyek ini bertujuan untuk mengembangkan model prediksi harga cryptocurrency Monero (XMR) berdasarkan data historis. Analisis ini diharapkan dapat membantu investor memahami pergerakan harga Monero, memaksimalkan keuntungan, dan mengelola risiko dengan lebih efektif.</p>
 <hr>
 
 ### Rumusan Masalah
 <ul style="list-style-type: disc; padding-left: 20px; text-indent: 0;">
-    <li>	Bagaimana Gulaku dapat memprediksi harga di pasar gula yang dinamis sehingga produsen dan distributor dapat mengambil keputusan yang lebih baik terkait produksi, distribusi, dan persediaan?</li>
+    <li> Bagaimana mengembangkan model prediksi harga Monero (XMR) yang dapat diandalkan dengan menggunakan data historis, dan bagaimana hasil prediksi tersebut dapat mendukung pengambilan keputusan investasi yang lebih strategis di pasar cryptocurrency?</li>
 </ul>
 <hr>
 
