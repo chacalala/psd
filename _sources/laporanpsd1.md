@@ -151,7 +151,7 @@ df.head()
 ```
 
 #### b. Rekayasa Fitur
-<p style="text-indent: 50px; text-align: justify;">Dalam penelitian ini, tujuan kita adalah memprediksi harga **Close** pada hari berikutnya, sehingga kita memerlukan variabel baru sebagai target. Fitur ini berguna untuk mengetahui sejauh mana harga saham bisa turun, yang memungkinkan investor untuk membeli aset pada harga yang lebih rendah dan meningkatkan peluang keuntungan ketika harga saham naik kembali.</P>
+<p style="text-indent: 50px; text-align: justify;">Dalam penelitian ini, tujuan kita adalah memprediksi harga Close pada hari berikutnya, sehingga kita memerlukan variabel baru sebagai target. Fitur ini berguna untuk mengetahui sejauh mana harga saham bisa turun, yang memungkinkan investor untuk membeli aset pada harga yang lebih rendah dan meningkatkan peluang keuntungan ketika harga saham naik kembali.</P>
 
 ```{code-cell} python
 df['Close Target'] = df['Close'].shift(-1)

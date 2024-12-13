@@ -65,9 +65,8 @@ df
 ```
 
 #### b. Deskripsi Dataset
-<p style="text-indent: 50px; text-align: justify;">Dataset ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris. Berikut adalah penjelasan setiap atribut:</p>
+<p style="text-indent: 50px; text-align: justify;">Dataset ini terdiri dari 6 fitur atau kolom, dan 1802 record atau baris. Berikut adalah penjelasan setiap atribut:</p>
         <ul>
-            <li><strong>Date:</strong> Tanggal data harga aset koin (format YYYY-MM-DD)</li>
             <li><strong>Open:</strong> Harga pembukaan aset koin pada tanggal tersebut</li>
             <li><strong>High:</strong> Harga tertinggi yang dicapai pada tanggal tersebut</li>
             <li><strong>Low:</strong> Harga terendah aset koin pada tanggal tersebut</li>
@@ -91,11 +90,13 @@ print('Ukuran data ', df.shape)
 df.isnull().sum()
 ```
 
-<p style="text-indent: 50px; text-align: justify;">Setelah dilakukan pengecekan dan ternyata tidak ada missing value maka langkah selanjutnya yaitu membuat visualisasi tren data untuk setiap kolom dalam dataset. Kita akan menggambar grafik garis untuk setiap kolom, dengan tanggal sebagai sumbu X dan nilai kolom sebagai sumbu Y. Setiap grafik akan menampilkan tren perubahan nilai kolom tersebut seiring waktu, lengkap dengan label sumbu dan judul yang menjelaskan kolom yang sedang dianalisis. Grafik ini juga akan dilengkapi dengan grid dan rotasi sumbu X agar lebih mudah dibaca.</p>
+<p style="text-indent: 50px; text-align: justify;">Setelah memastikan bahwa tidak ada missing value dalam dataset, langkah berikutnya adalah membuat visualisasi tren data untuk setiap kolom. Kita akan menggambar grafik garis untuk setiap kolom, dengan tanggal sebagai sumbu X dan nilai kolom sebagai sumbu Y. Setiap grafik akan menampilkan tren perubahan nilai kolom tersebut seiring waktu, lengkap dengan label sumbu dan judul yang menjelaskan kolom yang sedang dianalisis. Grafik ini juga akan dilengkapi dengan grid dan rotasi sumbu X agar lebih mudah dibaca.</p>
 
 ```{code-cell} python
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np  # Tambahkan ini untuk memperbaiki error
+
 # Membuat subplot otomatis berdasarkan jumlah kolom dalam dataframe
 plt.figure(figsize=(9, int(np.ceil(len(df.columns) / 3)) * 3))
 
@@ -114,6 +115,7 @@ plt.show()
 ```{code-cell} python
 df.hist(figsize=(10, 8), column=['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume'])
 ```
+<p style="text-indent: 50px; text-align: justify;">Histogram di atas menunjukkan distribusi nilai dari setiap kolom dalam dataset, termasuk Open, High, Low, Close, Adj Close, dan Volume. Dari visualisasi tersebut, terlihat bahwa sebagian besar data untuk kolom harga (Open, High, Low, Close, dan Adj Close) memiliki distribusi yang cenderung miring ke kanan (positively skewed), dengan sebagian besar nilai terkonsentrasi pada rentang yang lebih rendah. Sementara itu, kolom Volume memiliki distribusi yang sangat tidak merata dengan mayoritas nilai berada di rentang rendah, tetapi terdapat beberapa nilai yang sangat besar (outliers). Hal ini dapat mengindikasikan bahwa sebagian besar volume transaksi relatif kecil, namun ada beberapa transaksi yang jumlahnya sangat tinggi.</p>
 
 <p style="text-indent: 50px; text-align: justify;">Setelah itu, di sini kita akan menganalisis hubungan antar fitur dalam dataset. Heatmap ini membantu kita memahami korelasi antara kolom-kolom yang ada, apakah ada hubungan yang kuat, lemah, atau tidak ada korelasi sama sekali. Ini dapat memberikan wawasan penting untuk analisis lebih lanjut atau pembuatan model, seperti memilih fitur yang relevan atau mendeteksi multikolinearitas.</p>
 
@@ -125,20 +127,22 @@ sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
 plt.title('Heatmap Korelasi Antar Fitur')
 plt.show()
 ```
-<p style="text-indent: 50px; text-align: justify;">Hasil korelasi pada heatmap ini menunjukkan hubungan antara fitur-fitur dalam data. Nilai korelasi berkisar dari -1 sampai 1, di mana 1 berarti hubungan sangat kuat dan positif, 0 berarti tidak ada hubungan, dan -1 berarti hubungan sangat kuat namun negatif. Pada heatmap ini, terlihat bahwa fitur "Open," "High," "Low," "Close," dan "Adj Close" memiliki korelasi sempurna (1), yang menunjukkan bahwa nilai-nilai ini sangat saling terkait. Namun, fitur "Volume" memiliki korelasi yang lemah (sekitar 0,26-0,27) terhadap fitur-fitur lainnya, yang berarti perubahan pada "Volume" tidak terlalu berhubungan dengan perubahan pada fitur lainnya.</p>
+<p style="text-indent: 50px; text-align: justify;">Hasil korelasi pada heatmap ini menunjukkan hubungan antara fitur-fitur dalam data. Nilai korelasi berkisar dari -1 hingga 1, di mana 1 menunjukkan hubungan yang sangat kuat dan positif, 0 menunjukkan tidak ada hubungan, dan -1 menunjukkan hubungan yang sangat kuat namun negatif. Pada heatmap ini, terlihat bahwa fitur Open, High, Low, Close, dan Adj Close memiliki korelasi yang hampir sempurna (mendekati 1), yang menandakan bahwa nilai-nilai dari fitur-fitur ini sangat saling berkaitan dan cenderung bergerak searah. Sementara itu, fitur Volume memiliki korelasi yang lebih lemah dengan fitur lainnya (berkisar antara 0.44 hingga 0.54), menunjukkan bahwa perubahan nilai pada fitur Volume tidak terlalu berhubungan dengan perubahan pada fitur harga lainnya. Interpretasi ini penting dalam analisis data untuk memahami hubungan antar fitur.</p>
 
 ### Data Preprocessing
+
 
 #### a. Penghapusan Kolom yang Tidak Relevan dan Verifikasi Dataset
 <p style="text-indent: 50px; text-align: justify;">Menghapus kolom Volume dan Adj Close dari dataset, kolom-kolom tersebut dihilangkan karena mungkin tidak relevan untuk analisis atau pemodelan selanjutnya. Kemudian, kita akan melihat lima baris pertama dari dataset yang telah diperbarui untuk memastikan perubahan yang dilakukan.</p>
 
 ```{code-cell} python
+# Menghapus kolom yang tidak digunakan
 df = df.drop(columns=['Volume', 'Adj Close'])
 df.head()
 ```
 
 #### b. Rekayasa Fitur
-<p style="text-indent: 50px; text-align: justify;">Dalam penelitian ini, tujuan kita adalah memprediksi harga **Close** pada hari berikutnya, sehingga kita memerlukan variabel baru sebagai target. Fitur ini berguna untuk mengetahui sejauh mana harga saham bisa turun, yang memungkinkan investor untuk membeli aset pada harga yang lebih rendah dan meningkatkan peluang keuntungan ketika harga saham naik kembali.</P>
+<p style="text-indent: 50px; text-align: justify;">Dalam penelitian ini, tujuan kita adalah memprediksi harga Close pada hari berikutnya, sehingga kita memerlukan variabel baru sebagai target. Fitur ini berguna untuk mengetahui sejauh mana harga saham bisa turun, yang memungkinkan investor untuk membeli aset pada harga yang lebih rendah dan meningkatkan peluang keuntungan ketika harga saham naik kembali.</P>
 
 ```{code-cell} python
 df['Close Target'] = df['Close'].shift(-1)
@@ -147,31 +151,52 @@ df = df[:-1]
 df.head()
 ```
 
-<p style="text-indent: 50px; text-align: justify;">Tabel ini menunjukkan data harga saham harian yang mencakup harga pembukaan (Open), harga tertinggi (High), harga terendah (Low), dan harga penutupan (Close). Selain itu, terdapat kolom Close Target yang merupakan prediksi harga penutupan untuk hari berikutnya. Misalnya, pada 2020-01-01, harga penutupan adalah 7200.2, sementara prediksi harga penutupan untuk 2020-01-02 adalah 6985.5, yang lebih rendah dari harga penutupan hari itu.</P>
+<p style="text-indent: 50px; text-align: justify;">Tabel ini menunjukkan data harga saham harian yang mencakup harga pembukaan (*Open*), harga tertinggi (*High*), harga terendah (*Low*), dan harga penutupan (*Close*). Selain itu, terdapat kolom *Close Target* yang merupakan nilai harga penutupan untuk hari berikutnya. Misalnya, pada 2020-01-01, harga penutupan adalah 0.1927, sementara harga penutupan untuk 2020-01-02 adalah 0.1880, yang lebih rendah dibandingkan harga penutupan pada 2020-01-01. Hal ini memberikan gambaran tren perubahan harga saham dari hari ke hari, serta menyediakan data untuk analisis atau prediksi lebih lanjut..</P>
 
+<p style="text-indent: 50px; text-align: justify;">Pada langkah ini, parameter FORECAST_STEPS digunakan untuk menentukan jumlah langkah ke depan yang ingin diprediksi dalam *multi-step forecasting. Nilainya diatur menjadi 5, yang berarti model akan memprediksi nilai target untuk 5 periode atau hari ke depan. Parameter ini dapat disesuaikan sesuai kebutuhan analisis atau tujuan prediksi.</P>
+
+```{code-cell} python
+# Parameter untuk Multi-Step Forecasting
+FORECAST_STEPS = 5  # Jumlah langkah ke depan yang ingin diprediksi
+```
+<p style="text-indent: 50px; text-align: justify;">Pada langkah ini, dilakukan proses untuk membuat target prediksi harga berdasarkan parameter FORECAST_STEPS. Target dibuat dengan menggeser nilai harga penutupan ke atas sebanyak 1 hingga FORECAST_STEPS, sehingga menghasilkan kolom prediksi untuk 1 hari, 2 hari, hingga langkah ke depan yang ditentukan. Setelah kolom target selesai dibuat, baris-baris terakhir yang memiliki nilai NaN pada kolom target dihapus untuk menghindari data kosong yang dapat memengaruhi pelatihan model atau analisis.</P>
+
+```{code-cell} python
+# Membuat target untuk n langkah ke depan
+for i in range(1, FORECAST_STEPS + 1):
+    df[f'Close Target+{i}'] = df['Close'].shift(-i)
+
+# Menghapus baris yang memiliki nilai NaN pada target
+df = df[:-FORECAST_STEPS]
+```
 
 #### c. Normalisasi Data
 
-<p style="text-indent: 50px; text-align: justify;">Melakukan normalisasi data pada fitur dan target bertujuan untuk mengubah nilai-nilai dalam dataset ke rentang yang seragam, biasanya antara 0 dan 1. Dalam kode ini, `MinMaxScaler` digunakan untuk menormalisasi fitur (Open, High, Low, Close) dan target (Close Target). Fitur dinormalisasi menggunakan scaler_features.fit_transform() dan target menggunakan scaler_target.fit_transform(). Hasil normalisasi kemudian digabungkan dengan pd.concat() menjadi satu dataframe df_normalized, yang siap digunakan dalam model machine learning. Normalisasi membantu model belajar lebih efektif dengan skala data yang konsisten.</p>
+<p style="text-indent: 50px; text-align: justify;">Melakukan normalisasi data pada fitur dan target bertujuan untuk mengubah nilai-nilai dalam dataset ke rentang yang seragam, biasanya antara 0 dan 1. Dalam kode ini, MinMaxScaler digunakan untuk menormalisasi fitur (Open, High, Low, Close) dan target (Close Target). Fitur dinormalisasi menggunakan scaler_features.fit_transform() dan target menggunakan scaler_target.fit_transform(). Hasil normalisasi kemudian digabungkan dengan pd.concat() menjadi satu dataframe df_normalized, yang siap digunakan dalam model machine learning. Normalisasi membantu model belajar lebih efektif dengan skala data yang konsisten.</p>
 
 ```{code-cell} python
-# Inisialisasi scaler untuk fitur (input) dan target (output)
+# Inisialisasi scaler untuk fitur dan target
 scaler_features = MinMaxScaler()
 scaler_target = MinMaxScaler()
 
-# Normalisasi fitur (Open, High, Low,, 'Close' Close Target-4, Close Target-5)
-df_features_normalized = pd.DataFrame(scaler_features.fit_transform(df[['Open', 'High', 'Low', 'Close']]),
-                                      columns=['Open', 'High', 'Low', 'Close'],
-                                      index=df.index)
+# Normalisasi fitur
+features = ['Open', 'High', 'Low', 'Close']
+df_features_normalized = pd.DataFrame(
+    scaler_features.fit_transform(df[features]),
+    columns=features,
+    index=df.index
+)
 
-# Normalisasi target (Close Target)
-df_target_normalized = pd.DataFrame(scaler_target.fit_transform(df[['Close Target']]),
-                                    columns=['Close Target'],
-                                    index=df.index)
+# Normalisasi target
+target_columns = [f'Close Target+{i}' for i in range(1, FORECAST_STEPS + 1)]
+df_target_normalized = pd.DataFrame(
+    scaler_target.fit_transform(df[target_columns]),
+    columns=target_columns,
+    index=df.index
+)
 
-# Gabungkan kembali dataframe yang sudah dinormalisasi
+# Menggabungkan kembali dataframe yang sudah dinormalisasi
 df_normalized = pd.concat([df_features_normalized, df_target_normalized], axis=1)
-df_normalized.head()
 ```
 
 #### Modelling
