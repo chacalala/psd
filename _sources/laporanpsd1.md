@@ -184,7 +184,6 @@ df_target_normalized = pd.DataFrame(scaler_target.fit_transform(df[['Close Targe
 
 # Gabungkan kembali dataframe yang sudah dinormalisasi
 df_normalized = pd.concat([df_features_normalized, df_target_normalized], axis=1)
-df_normalized.head()
 ```
 
 #### Modelling

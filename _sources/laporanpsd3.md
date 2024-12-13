@@ -98,7 +98,7 @@ import seaborn as sns
 import numpy as np  # Tambahkan ini untuk memperbaiki error
 
 # Membuat subplot otomatis berdasarkan jumlah kolom dalam dataframe
-plt.figure(figsize=(9, int(np.ceil(len(df.columns) / 3)) * 3))
+plt.figure(figsize=(9, int(np.ceil(len(df.columns) / 3))*3))
 
 for i, col in enumerate(df.columns):
     plt.subplot(int(np.ceil(len(df.columns) / 3)), 3, i + 1)
@@ -151,9 +151,9 @@ df = df[:-1]
 df.head()
 ```
 
-<p style="text-indent: 50px; text-align: justify;">Tabel ini menunjukkan data harga saham harian yang mencakup harga pembukaan (*Open*), harga tertinggi (*High*), harga terendah (*Low*), dan harga penutupan (*Close*). Selain itu, terdapat kolom *Close Target* yang merupakan nilai harga penutupan untuk hari berikutnya. Misalnya, pada 2020-01-01, harga penutupan adalah 0.1927, sementara harga penutupan untuk 2020-01-02 adalah 0.1880, yang lebih rendah dibandingkan harga penutupan pada 2020-01-01. Hal ini memberikan gambaran tren perubahan harga saham dari hari ke hari, serta menyediakan data untuk analisis atau prediksi lebih lanjut..</P>
+<p style="text-indent: 50px; text-align: justify;">Tabel ini menunjukkan data harga saham harian yang mencakup harga pembukaan (Open), harga tertinggi (High), harga terendah (Low), dan harga penutupan (Close). Selain itu, terdapat kolom Close Target yang merupakan nilai harga penutupan untuk hari berikutnya. Misalnya, pada 2020-01-01, harga penutupan adalah 0.1927, sementara harga penutupan untuk 2020-01-02 adalah 0.1880, yang lebih rendah dibandingkan harga penutupan pada 2020-01-01. Hal ini memberikan gambaran tren perubahan harga saham dari hari ke hari, serta menyediakan data untuk analisis atau prediksi lebih lanjut..</P>
 
-<p style="text-indent: 50px; text-align: justify;">Pada langkah ini, parameter FORECAST_STEPS digunakan untuk menentukan jumlah langkah ke depan yang ingin diprediksi dalam *multi-step forecasting. Nilainya diatur menjadi 5, yang berarti model akan memprediksi nilai target untuk 5 periode atau hari ke depan. Parameter ini dapat disesuaikan sesuai kebutuhan analisis atau tujuan prediksi.</P>
+<p style="text-indent: 50px; text-align: justify;">Pada langkah ini, parameter FORECAST_STEPS digunakan untuk menentukan jumlah langkah ke depan yang ingin diprediksi dalam multi-step forecasting. Nilainya diatur menjadi 5, yang berarti model akan memprediksi nilai target untuk 5 periode atau hari ke depan. Parameter ini dapat disesuaikan sesuai kebutuhan analisis atau tujuan prediksi.</P>
 
 ```{code-cell} python
 # Parameter untuk Multi-Step Forecasting
@@ -175,6 +175,10 @@ df = df[:-FORECAST_STEPS]
 <p style="text-indent: 50px; text-align: justify;">Melakukan normalisasi data pada fitur dan target bertujuan untuk mengubah nilai-nilai dalam dataset ke rentang yang seragam, biasanya antara 0 dan 1. Dalam kode ini, MinMaxScaler digunakan untuk menormalisasi fitur (Open, High, Low, Close) dan target (Close Target). Fitur dinormalisasi menggunakan scaler_features.fit_transform() dan target menggunakan scaler_target.fit_transform(). Hasil normalisasi kemudian digabungkan dengan pd.concat() menjadi satu dataframe df_normalized, yang siap digunakan dalam model machine learning. Normalisasi membantu model belajar lebih efektif dengan skala data yang konsisten.</p>
 
 ```{code-cell} python
+# Import library yang dibutuhkan
+from sklearn.preprocessing import MinMaxScaler
+import pandas as pd
+
 # Inisialisasi scaler untuk fitur dan target
 scaler_features = MinMaxScaler()
 scaler_target = MinMaxScaler()
@@ -239,7 +243,7 @@ for name, model in models.items():
     # Evaluasi
     mse = mean_squared_error(y_test, y_pred)
     rmse = np.sqrt(mse)
-    mape = mean_absolute_percentage_error(y_test, y_pred) * 100  # Dalam persen
+    mape = mean_absolute_percentage_error(y_test, y_pred)  100  # Dalam persen
 
     # Simpan hasil evaluasi
     results[name] = {"RMSE": rmse, "MAPE": mape}
