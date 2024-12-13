@@ -991,7 +991,13 @@ dtype: int64
 <h4>b. Penyusunan Model<a class="headerlink" href="#b-penyusunan-model" title="Link to this heading">#</a></h4>
 <p style="text-indent: 50px; text-align: justify;">Pada tahap ini, dilakukan percobaan dengan menggunakan tiga model utama, yaitu Regresi Linear, Ridge Linear , dan Decision Tree. Selain itu, untuk meningkatkan akurasi dan kinerja model, diterapkan juga teknik ensemble dengan metode bagging</p><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List model regresi</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span><span class="p">,</span> <span class="n">Ridge</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_percentage_error</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># List model regresi</span>
 <span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;Linear Regression&quot;</span><span class="p">:</span> <span class="n">LinearRegression</span><span class="p">(),</span>
     <span class="s2">&quot;Decision Tree&quot;</span><span class="p">:</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">32</span><span class="p">),</span>
@@ -1062,19 +1068,19 @@ dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># List model regresi</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
-<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="s2">&quot;Linear Regression&quot;</span><span class="p">:</span> <span class="n">LinearRegression</span><span class="p">(),</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="s2">&quot;Decision Tree&quot;</span><span class="p">:</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">32</span><span class="p">),</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="s2">&quot;Ridge Regression&quot;</span><span class="p">:</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="p">}</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Dictionary untuk menyimpan hasil evaluasi</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
-
-<span class="ne">NameError</span>: name &#39;LinearRegression&#39; is not defined
+<img alt="_images/0d4a82ac471322152d71182e42c8d13eb71aa97538102faa0e2863f1c343b8b6.png" src="_images/0d4a82ac471322152d71182e42c8d13eb71aa97538102faa0e2863f1c343b8b6.png" />
+<img alt="_images/d4a472c910be3788337dabfcbc10e229c0f03146315a81bdc3aee6d69844a086.png" src="_images/d4a472c910be3788337dabfcbc10e229c0f03146315a81bdc3aee6d69844a086.png" />
+<img alt="_images/553721d017577656e3850c0f234770598e1dccca6ae9d9fafff18ecd5111b45a.png" src="_images/553721d017577656e3850c0f234770598e1dccca6ae9d9fafff18ecd5111b45a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HASIL EVALUASI MODEL
+Linear Regression:
+  Average RMSE: 0.03
+  Average MAPE: 5.44%
+Decision Tree:
+  Average RMSE: 0.04
+  Average MAPE: 12.14%
+Ridge Regression:
+  Average RMSE: 0.03
+  Average MAPE: 5.55%
 </pre></div>
 </div>
 </div>
@@ -1088,7 +1094,7 @@ dtype: int64
 <section id="deployment">
 <h3>DEPLOYMENT<a class="headerlink" href="#deployment" title="Link to this heading">#</a></h3>
 <p>Hasil deployment dapat dilihat melalui tautan berikut:
-<a class="reference external" href="https://huggingface.co/spaces/Alifiacaca/projek1_prediksimonero">https://huggingface.co/spaces/Alifiacaca/projek1_prediksimonero</a></p>
+<a class="reference external" href="https://huggingface.co/spaces/Alifiacaca/projek3_prediksimonero">https://huggingface.co/spaces/Alifiacaca/projek3_prediksimonero</a></p>
 </section>
 </section>
 </section>

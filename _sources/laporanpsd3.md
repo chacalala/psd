@@ -224,6 +224,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, shuffle
 <p style="text-indent: 50px; text-align: justify;">Pada tahap ini, dilakukan percobaan dengan menggunakan tiga model utama, yaitu Regresi Linear, Ridge Linear , dan Decision Tree. Selain itu, untuk meningkatkan akurasi dan kinerja model, diterapkan juga teknik ensemble dengan metode bagging</p>
 
 ```{code-cell} python
+from sklearn.linear_model import LinearRegression, Ridge
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.metrics import mean_squared_error, mean_absolute_percentage_error
+import numpy as np
+import matplotlib.pyplot as plt
+
 # List model regresi
 models = {
     "Linear Regression": LinearRegression(),
@@ -298,4 +304,4 @@ best_model = models[best_model_name]
 
 ### DEPLOYMENT
 Hasil deployment dapat dilihat melalui tautan berikut:
-https://huggingface.co/spaces/Alifiacaca/projek1_prediksimonero
+https://huggingface.co/spaces/Alifiacaca/projek3_prediksimonero
