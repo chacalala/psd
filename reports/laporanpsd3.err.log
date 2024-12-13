@@ -18,21 +18,87 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Mengatur fitur (X) dan target (y)
-X = df_normalized[features]
-y = df_normalized[target_columns]
+# List model regresi
+models = {
+    "Linear Regression": LinearRegression(),
+    "Decision Tree": DecisionTreeRegressor(random_state=32),
+    "Ridge Regression": Ridge(alpha=1.0)
+}
 
-# Membagi data menjadi training dan testing
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, shuffle=False)
+# Dictionary untuk menyimpan hasil evaluasi
+results = {}
+
+# Iterasi setiap model
+for name, model in models.items():
+    # Latih model
+    model.fit(X_train, y_train)
+
+    # Prediksi pada data uji
+    y_pred = model.predict(X_test)
+
+    # Evaluasi untuk setiap target hari ke depan
+    mse_list = []
+    mape_list = []
+    for i in range(FORECAST_STEPS):
+        mse = mean_squared_error(y_test.iloc[:, i], y_pred[:, i])
+        mape = mean_absolute_percentage_error(y_test.iloc[:, i], y_pred[:, i]) * 100
+        mse_list.append(mse)
+        mape_list.append(mape)
+
+    # Simpan hasil evaluasi rata-rata
+    results[name] = {
+        "Average RMSE": np.sqrt(np.mean(mse_list)),
+        "Average MAPE": np.mean(mape_list)
+    }
+
+    # Kembalikan hasil prediksi ke skala asli
+    y_pred_original = scaler_target.inverse_transform(y_pred)
+    y_test_original = scaler_target.inverse_transform(y_test)
+
+    # Plot hasil prediksi untuk setiap hari
+    plt.figure(figsize=(15, 6))
+    for i in range(FORECAST_STEPS):
+        plt.plot(
+            y_test.index, y_test_original[:, i], label=f"Actual Target+{i+1}", linestyle="dashed"
+        )
+        plt.plot(
+            y_test.index, y_pred_original[:, i], label=f"Predicted Target+{i+1}", alpha=0.7
+        )
+
+    # Tambahkan detail plot
+    plt.title(f'Actual vs Predicted Values ({name})')
+    plt.xlabel('Tanggal')
+    plt.ylabel('Kurs')
+    plt.legend()
+    plt.grid(True)
+
+    # Tampilkan plot
+    plt.show()
+
+# Tampilkan hasil evaluasi
+print("HASIL EVALUASI MODEL")
+for model, metrics in results.items():
+    print(f"{model}:")
+    print(f"  Average RMSE: {metrics['Average RMSE']:.2f}")
+    print(f"  Average MAPE: {metrics['Average MAPE']:.2f}%")
+
+# Cari model dengan Average MAPE terbaik (nilai terkecil)
+best_model_name = min(results, key=lambda x: results[x]["Average MAPE"])
+best_model = models[best_model_name]
 ------------------
 
 
 [1;31m---------------------------------------------------------------------------[0m
 [1;31mNameError[0m                                 Traceback (most recent call last)
-Cell [1;32mIn[13], line 6[0m
-[0;32m      3[0m y [38;5;241m=[39m df_normalized[target_columns]
-[0;32m      5[0m [38;5;66;03m# Membagi data menjadi training dan testing[39;00m
-[1;32m----> 6[0m X_train, X_test, y_train, y_test [38;5;241m=[39m [43mtrain_test_split[49m(X, y, test_size[38;5;241m=[39m[38;5;241m0.4[39m, shuffle[38;5;241m=[39m[38;5;28;01mFalse[39;00m)
+Cell [1;32mIn[14], line 3[0m
+[0;32m      1[0m [38;5;66;03m# List model regresi[39;00m
+[0;32m      2[0m models [38;5;241m=[39m {
+[1;32m----> 3[0m     [38;5;124m"[39m[38;5;124mLinear Regression[39m[38;5;124m"[39m: [43mLinearRegression[49m(),
+[0;32m      4[0m     [38;5;124m"[39m[38;5;124mDecision Tree[39m[38;5;124m"[39m: DecisionTreeRegressor(random_state[38;5;241m=[39m[38;5;241m32[39m),
+[0;32m      5[0m     [38;5;124m"[39m[38;5;124mRidge Regression[39m[38;5;124m"[39m: Ridge(alpha[38;5;241m=[39m[38;5;241m1.0[39m)
+[0;32m      6[0m }
+[0;32m      8[0m [38;5;66;03m# Dictionary untuk menyimpan hasil evaluasi[39;00m
+[0;32m      9[0m results [38;5;241m=[39m {}
 
-[1;31mNameError[0m: name 'train_test_split' is not defined
+[1;31mNameError[0m: name 'LinearRegression' is not defined
 
