@@ -300,7 +300,7 @@ best_model = models[best_model_name]
 ```
 
 ### Kesimpulan
-<p style="text-indent: 50px; text-align: justify;">Berdasarkan hasil percobaan dengan beberapa model, metode Linear Regression menunjukkan performa terbaik dengan nilai RMSE sebesar 0.01 dan MAPE sebesar 2.01%.</P>
+<p style="text-indent: 50px; text-align: justify;">Berdasarkan hasil percobaan dengan beberapa model, metode Linear Regression menunjukkan performa terbaik dengan nilai RMSE sebesar 0.03 dan MAPE sebesar 5.44%.</P>
 
 ### DEPLOYMENT
 Hasil deployment dapat dilihat melalui tautan berikut:
