@@ -210,23 +210,23 @@ df_normalized = pd.concat([df_features_normalized, df_target_normalized], axis=1
 
 ```{code-cell} python
 # Mengatur fitur (X) dan target (y)
-X = df_normalized[['Open', 'High', 'Low', 'Close']]
-y = df_normalized['Close Target']
+X = df_normalized[features]
+y = df_normalized[target_columns]
 
-# Membagi data menjadi training dan testing (60% training, 40% testing)
+# Membagi data menjadi training dan testing
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, shuffle=False)
 ```
 
 #### b. Penyusunan Model
 
-<p style="text-indent: 50px; text-align: justify;">Pada tahap ini, dilakukan percobaan dengan menggunakan tiga model utama, yaitu Regresi Linear, Ridge Linear , dan Gradient Boosting. Selain itu, untuk meningkatkan akurasi dan kinerja model, diterapkan juga teknik ensemble dengan metode bagging</p>
+<p style="text-indent: 50px; text-align: justify;">Pada tahap ini, dilakukan percobaan dengan menggunakan tiga model utama, yaitu Regresi Linear, Ridge Linear , dan Decision Tree. Selain itu, untuk meningkatkan akurasi dan kinerja model, diterapkan juga teknik ensemble dengan metode bagging</p>
 
 ```{code-cell} python
 # List model regresi
 models = {
     "Linear Regression": LinearRegression(),
-    "Ridge Regression": Ridge(alpha=1.0),
-    "Gradient Boosting" : GradientBoostingRegressor(random_state=32),
+    "Decision Tree": DecisionTreeRegressor(random_state=32),
+    "Ridge Regression": Ridge(alpha=1.0)
 }
 
 # Dictionary untuk menyimpan hasil evaluasi
@@ -240,27 +240,39 @@ for name, model in models.items():
     # Prediksi pada data uji
     y_pred = model.predict(X_test)
 
-    # Evaluasi
-    mse = mean_squared_error(y_test, y_pred)
-    rmse = np.sqrt(mse)
-    mape = mean_absolute_percentage_error(y_test, y_pred)  100  # Dalam persen
+    # Evaluasi untuk setiap target hari ke depan
+    mse_list = []
+    mape_list = []
+    for i in range(FORECAST_STEPS):
+        mse = mean_squared_error(y_test.iloc[:, i], y_pred[:, i])
+        mape = mean_absolute_percentage_error(y_test.iloc[:, i], y_pred[:, i]) * 100
+        mse_list.append(mse)
+        mape_list.append(mape)
 
-    # Simpan hasil evaluasi
-    results[name] = {"RMSE": rmse, "MAPE": mape}
+    # Simpan hasil evaluasi rata-rata
+    results[name] = {
+        "Average RMSE": np.sqrt(np.mean(mse_list)),
+        "Average MAPE": np.mean(mape_list)
+    }
 
     # Kembalikan hasil prediksi ke skala asli
-    y_pred_original = scaler_target.inverse_transform(y_pred.reshape(-1, 1))
-    y_test_original = scaler_target.inverse_transform(y_test.values.reshape(-1, 1))
+    y_pred_original = scaler_target.inverse_transform(y_pred)
+    y_test_original = scaler_target.inverse_transform(y_test)
 
-    # Plot hasil prediksi
+    # Plot hasil prediksi untuk setiap hari
     plt.figure(figsize=(15, 6))
-    plt.plot(y_test.index, y_test_original, label="Actual", color="blue")
-    plt.plot(y_test.index, y_pred_original, label=f"Predicted ({name})", color="red")
+    for i in range(FORECAST_STEPS):
+        plt.plot(
+            y_test.index, y_test_original[:, i], label=f"Actual Target+{i+1}", linestyle="dashed"
+        )
+        plt.plot(
+            y_test.index, y_pred_original[:, i], label=f"Predicted Target+{i+1}", alpha=0.7
+        )
 
     # Tambahkan detail plot
     plt.title(f'Actual vs Predicted Values ({name})')
-    plt.xlabel('Date')
-    plt.ylabel('Harga')
+    plt.xlabel('Tanggal')
+    plt.ylabel('Kurs')
     plt.legend()
     plt.grid(True)
 
@@ -270,7 +282,13 @@ for name, model in models.items():
 # Tampilkan hasil evaluasi
 print("HASIL EVALUASI MODEL")
 for model, metrics in results.items():
-    print(f"{model}:\n  RMSE: {metrics['RMSE']:.2f}\n  MAPE: {metrics['MAPE']:.2f}%\n")
+    print(f"{model}:")
+    print(f"  Average RMSE: {metrics['Average RMSE']:.2f}")
+    print(f"  Average MAPE: {metrics['Average MAPE']:.2f}%")
+
+# Cari model dengan Average MAPE terbaik (nilai terkecil)
+best_model_name = min(results, key=lambda x: results[x]["Average MAPE"])
+best_model = models[best_model_name]
 ```
 
 ### Kesimpulan
@@ -278,4 +296,4 @@ for model, metrics in results.items():
 
 ### DEPLOYMENT
 Hasil deployment dapat dilihat melalui tautan berikut:
-https://huggingface.co/spaces/Alifiacaca/projek1_prediksibtc
+https://huggingface.co/spaces/Alifiacaca/projek1_prediksimonero
