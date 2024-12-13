@@ -20,24 +20,28 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 ------------------
 import matplotlib.pyplot as plt
 import seaborn as sns
-# Visualisasi
-plt.figure(figsize=(15, 5))
-sns.lineplot(data=df[['xt-3', 'xt-2', 'xt-1', 'xt']])
-plt.title('Harga Gula (xt-3, xt-2, xt-1, xt)')
-plt.xlabel('Tanggal')
-plt.ylabel('Harga Gula (kg)')
-plt.xticks(rotation=90)
+# Membuat subplot otomatis berdasarkan jumlah kolom dalam dataframe
+plt.figure(figsize=(9, int(np.ceil(len(df.columns) / 3)) * 3))
+
+for i, col in enumerate(df.columns):
+    plt.subplot(int(np.ceil(len(df.columns) / 3)), 3, i + 1)
+    sns.lineplot(data=df, x='Date', y=col)
+    plt.title(f'Trend of {col}')
+    plt.xticks(rotation=45)
+
 plt.tight_layout()
 plt.show()
 ------------------
 
 
 [1;31m---------------------------------------------------------------------------[0m
-[1;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [1;32mIn[9], line 1[0m
-[1;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[5], line 4[0m
 [0;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mseaborn[39;00m [38;5;28;01mas[39;00m [38;5;21;01msns[39;00m
-[0;32m      3[0m [38;5;66;03m# Visualisasi[39;00m
+[0;32m      3[0m [38;5;66;03m# Membuat subplot otomatis berdasarkan jumlah kolom dalam dataframe[39;00m
+[1;32m----> 4[0m plt[38;5;241m.[39mfigure(figsize[38;5;241m=[39m([38;5;241m9[39m, [38;5;28mint[39m([43mnp[49m[38;5;241m.[39mceil([38;5;28mlen[39m(df[38;5;241m.[39mcolumns) [38;5;241m/[39m [38;5;241m3[39m)) [38;5;241m*[39m [38;5;241m3[39m))
+[0;32m      6[0m [38;5;28;01mfor[39;00m i, col [38;5;129;01min[39;00m [38;5;28menumerate[39m(df[38;5;241m.[39mcolumns):
+[0;32m      7[0m     plt[38;5;241m.[39msubplot([38;5;28mint[39m(np[38;5;241m.[39mceil([38;5;28mlen[39m(df[38;5;241m.[39mcolumns) [38;5;241m/[39m [38;5;241m3[39m)), [38;5;241m3[39m, i [38;5;241m+[39m [38;5;241m1[39m)
 
-[1;31mModuleNotFoundError[0m: No module named 'matplotlib'
+[1;31mNameError[0m: name 'np' is not defined
 

@@ -41,7 +41,7 @@ kernelspec:
 ### Data Understanding
 
 #### a. Sumber Data
-<p style="text-indent: 50px; text-align: justify;"> Data yang digunakan pada proyek ini diambil dari platform Yahoo Finance, yang beralamat di https://finance.yahoo.com/quote/BTC-USD/. Platform ini menyediakan informasi harga Bitcoin (BTC) yang mencakup data historis harga Bitcoin terhadap dolar AS (USD) dari berbagai periode waktu. Informasi ini termasuk harga penutupan, perubahan harga harian, dan berbagai fitur analisis pasar. Dalam proyek ini, digunakan data harga Bitcoin yang tersedia dalam format CSV, mencakup periode dari tanggal 10 April 2020 hingga 5 Desember 2024. </p>
+<p style="text-indent: 50px; text-align: justify;"> Data yang digunakan pada proyek ini diambil dari platform Yahoo Finance, yang beralamat di https://finance.yahoo.com/quote/BTC-USD/. Platform ini menyediakan informasi harga Bitcoin (BTC) yang mencakup data historis harga Bitcoin terhadap dolar AS (USD) dari berbagai periode waktu. Informasi ini termasuk harga penutupan, perubahan harga harian, dan berbagai fitur analisis pasar. Dalam proyek ini, digunakan data harga Bitcoin yang tersedia dalam format CSV, mencakup periode dari tanggal 2020 Januari 01 hingga 2024 Desember 06. </p>
 
 
 ```{code-cell} python
@@ -128,7 +128,7 @@ df.info()
 print('Ukuran data ', df.shape)
 ```
 
-<p style="text-indent: 50px; text-align: justify;">Setelah membuat heatmap, di sini kita akan menganalisis hubungan antar fitur dalam dataset. Heatmap ini membantu kita memahami korelasi antara kolom-kolom yang ada, apakah ada hubungan yang kuat, lemah, atau tidak ada korelasi sama sekali. Ini dapat memberikan wawasan penting untuk analisis lebih lanjut atau pembuatan model, seperti memilih fitur yang relevan atau mendeteksi multikolinearitas.</p>
+<p style="text-indent: 50px; text-align: justify;">Setelah itu, di sini kita akan menganalisis hubungan antar fitur dalam dataset. Heatmap ini membantu kita memahami korelasi antara kolom-kolom yang ada, apakah ada hubungan yang kuat, lemah, atau tidak ada korelasi sama sekali. Ini dapat memberikan wawasan penting untuk analisis lebih lanjut atau pembuatan model, seperti memilih fitur yang relevan atau mendeteksi multikolinearitas.</p>
 
 ```{code-cell} python
 correlation_matrix = df.corr()

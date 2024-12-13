@@ -174,6 +174,7 @@
 <li class="toctree-l1"><a class="reference internal" href="laporanpsd2.html">Laporan Proyek Sains Data 2</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="laporanpsd3.html">Laporan Proyek Sains Data 3</a></li>
+
 </ul>
 
     </div>
@@ -439,7 +440,7 @@
 <h3>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h3>
 <section id="a-sumber-data">
 <h4>a. Sumber Data<a class="headerlink" href="#a-sumber-data" title="Link to this heading">#</a></h4>
-<p style="text-indent: 50px; text-align: justify;"> Data yang digunakan pada proyek ini diambil dari platform Yahoo Finance, yang beralamat di https://finance.yahoo.com/quote/BTC-USD/. Platform ini menyediakan informasi harga Bitcoin (BTC) yang mencakup data historis harga Bitcoin terhadap dolar AS (USD) dari berbagai periode waktu. Informasi ini termasuk harga penutupan, perubahan harga harian, dan berbagai fitur analisis pasar. Dalam proyek ini, digunakan data harga Bitcoin yang tersedia dalam format CSV, mencakup periode dari tanggal 10 April 2020 hingga 5 Desember 2024. </p><div class="cell docutils container">
+<p style="text-indent: 50px; text-align: justify;"> Data yang digunakan pada proyek ini diambil dari platform Yahoo Finance, yang beralamat di https://finance.yahoo.com/quote/BTC-USD/. Platform ini menyediakan informasi harga Bitcoin (BTC) yang mencakup data historis harga Bitcoin terhadap dolar AS (USD) dari berbagai periode waktu. Informasi ini termasuk harga penutupan, perubahan harga harian, dan berbagai fitur analisis pasar. Dalam proyek ini, digunakan data harga Bitcoin yang tersedia dalam format CSV, mencakup periode dari tanggal 2020 Januari 01 hingga 2024 Desember 06. </p><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -741,7 +742,7 @@ Ukuran data  (1802, 6)
 </div>
 </div>
 </div>
-<p style="text-indent: 50px; text-align: justify;">Setelah membuat heatmap, di sini kita akan menganalisis hubungan antar fitur dalam dataset. Heatmap ini membantu kita memahami korelasi antara kolom-kolom yang ada, apakah ada hubungan yang kuat, lemah, atau tidak ada korelasi sama sekali. Ini dapat memberikan wawasan penting untuk analisis lebih lanjut atau pembuatan model, seperti memilih fitur yang relevan atau mendeteksi multikolinearitas.</p><div class="cell docutils container">
+<p style="text-indent: 50px; text-align: justify;">Setelah itu, di sini kita akan menganalisis hubungan antar fitur dalam dataset. Heatmap ini membantu kita memahami korelasi antara kolom-kolom yang ada, apakah ada hubungan yang kuat, lemah, atau tidak ada korelasi sama sekali. Ini dapat memberikan wawasan penting untuk analisis lebih lanjut atau pembuatan model, seperti memilih fitur yang relevan atau mendeteksi multikolinearitas.</p><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 

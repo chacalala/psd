@@ -376,9 +376,17 @@
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-eksplorasi-data">c. Eksplorasi Data</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-penghapusan-kolom-yang-tidak-relevan-dan-verifikasi-dataset">a. Penghapusan Kolom yang Tidak Relevan dan Verifikasi Dataset</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-rekayasa-fitur">b. Rekayasa Fitur</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-normalisasi-data">c. Normalisasi Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pembagian-data">a. Pembagian Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-penyusunan-model">b. Penyusunan Model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">DEPLOYMENT</a></li>
 </ul>
 </li>
 </ul>
@@ -431,160 +439,38 @@
 <h3>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h3>
 <section id="a-sumber-data">
 <h4>a. Sumber Data<a class="headerlink" href="#a-sumber-data" title="Link to this heading">#</a></h4>
-<p>Data yang digunakan pada proyek ini diambil dari platform PHIPS Nasional (Pusat Informasi Harga Pangan Strategis Nasional), yang beralamat di <a class="reference external" href="https://www.bi.go.id/hargapangan">https://www.bi.go.id/hargapangan</a>. Platform ini menyediakan informasi harga strategi pangan yang meliputi berbagai komoditas, baik di pasar tradisional maupun modern, serta data berdasarkan daerah dan jenis pedagang. Informasi ini mencakup harga rata-rata, perubahan harga, dan juga fitur visualisasi seperti histogram dan tampilan peta. Selain itu, PIHPS menawarkan berbagai jenis informasi harga pangan antar daerah, yang sangat berguna untuk analisis pasar dan pengambilan keputusan terkait kebutuhan pangan. Dalam proyek ini, digunakan data harga pangan yang tersedia dalam format tabel dari situs PIHPS Nasional, khususnya data harga gula dari tanggal 1 Januari 2021 hingga 18 September. Bentuk tampilan datanya seperti berikut :</p>
+<p>Data yang digunakan pada proyek ini diambil dari platform Yahoo Finance, yang beralamat di <a class="reference external" href="https://finance.yahoo.com/quote/XMR-USD/">https://finance.yahoo.com/quote/XMR-USD/</a>. Platform ini menyediakan informasi harga Monero (XMR) yang mencakup data historis harga Monero terhadap dolar AS (USD) dari berbagai periode waktu. Informasi ini termasuk harga penutupan, perubahan harga harian, dan berbagai fitur analisis pasar. Dalam proyek ini, digunakan data harga Monero yang tersedia dalam format CSV, mencakup periode dari tanggal 2020 Januari 01 hingga 2024 Desember 06. Bentuk tampilan datanya seperti berikut :</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="c1"># Baca data CSV</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/chacalala/Dataset/refs/heads/main/datagula.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/chacalala/psd/refs/heads/main/monero.csv&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Tanggal  Bulan  Tahun Harga Gula (kg)
-0        1      1   2021          13,900
-1        4      1   2021          13,900
-2        5      1   2021          13,900
-3        6      1   2021          13,950
-4        7      1   2021          13,950
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         Date    Open    High     Low   Close  Adj Close      Volume
+0  2020-01-01  0.1929  0.1944  0.1921  0.1927     0.1927  1041134003
+1  2020-01-02  0.1927  0.1929  0.1869  0.1880     0.1880  1085351426
+2  2020-01-03  0.1879  0.1941  0.1858  0.1935     0.1935  1270017043
+3  2020-01-04  0.1935  0.1947  0.1918  0.1944     0.1944   999331594
+4  2020-01-05  0.1944  0.1992  0.1939  0.1955     0.1955  1168067557
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="b-deskripsi-dataset">
-<h4>b. Deskripsi Dataset<a class="headerlink" href="#b-deskripsi-dataset" title="Link to this heading">#</a></h4>
-<p>Dataset ini terdiri dari 4 fitur atau kolom, dan 976 record. Berikut adalah deskripsi dari setiap atribut yang ada:</p>
-<ul class="simple">
-<li><p><strong>Tanggal</strong> : Mengindentifikasi tanggal transaksi.</p></li>
-<li><p><strong>Bulan</strong>: Mengindikasikan bulan terjadinya transaksi, di mana jumlah produk yang dibeli dalam satu transaksi dicatat.</p></li>
-<li><p><strong>Tahun</strong>: Menunjukkan tahun terjadinya transaksi.</p></li>
-<li><p><strong>Harga Gula (kg)</strong>: Menyimpan harga gula per kilogram, yang dapat berubah seiring waktu dan relevan dalam konteks pembelian.</p></li>
-</ul>
-<p>melihat ringkasan tentang DataFrame</p>
-<div class="cell docutils container">
+<p style="text-indent: 50px; text-align: justify;">Di sini, perubahan dilakukan agar kolom Date bisa diproses dengan benar sebagai tanggal. Dengan mengubahnya ke format datetime, kita bisa lebih mudah melakukan perbandingan atau analisis berdasarkan waktu. Kemudian, menjadikan Date sebagai indeks membuat data lebih mudah dicari berdasarkan tanggal, dan menyortirnya memastikan data tersusun dengan urutan waktu yang benar.</p><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ukuran data &#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-RangeIndex: 976 entries, 0 to 975
-Data columns (total 4 columns):
- #   Column           Non-Null Count  Dtype 
----  ------           --------------  ----- 
- 0   Tanggal          976 non-null    int64 
- 1   Bulan            976 non-null    int64 
- 2   Tahun            976 non-null    int64 
- 3   Harga Gula (kg)  976 non-null    object
-dtypes: int64(3), object(1)
-memory usage: 30.6+ KB
-Ukuran data  (976, 4)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Hasilnya menunjukkan bahwa DataFrame memiliki 976 baris dan 4 kolom. Tiga kolom bertipe int64 (Tanggal, Bulan, Tahun) dan satu kolom bertipe object (Harga Gula). Semua kolom memiliki 976 nilai non-null, sehingga tidak ada nilai yang hilang. Penggunaan memori adalah sekitar 30.6 KB.</p>
-<p><strong>Jenis Data</strong>:</p>
-<ul class="simple">
-<li><p><strong>Tanggal</strong> : Datetime</p></li>
-<li><p><strong>Bulan</strong>: Kategorikal (Ordinal), karena bulan memiliki urutan tertentu (Januari, Februari, dst.).</p></li>
-<li><p><strong>Tahun</strong>: Numerik (Diskrit), karena tahun adalah angka yang merepresentasikan waktu dan dapat dihitung.</p></li>
-<li><p><strong>Harga Gula (kg)</strong>: Numerik (Kontinu), karena harga dapat memiliki nilai pecahan dan dapat diukur dengan presisi yang lebih tinggi.</p></li>
-</ul>
-<p>melihat tipe data dari setiap kolom</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tanggal             int64
-Bulan               int64
-Tahun               int64
-Harga Gula (kg)    object
-dtype: object
-</pre></div>
-</div>
-</div>
-</div>
-<p>Kolom Tanggal, Bulan, Tahun (int64) berisi bilangan bulat, sesuai karena merupakan angka. Harga Gula (kg) (object) bertipe teks, kemungkinan mengandung tanda koma, sehingga perlu dikonversi ke tipe numerik (seperti float) untuk perhitungan.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          Tanggal       Bulan        Tahun
-count  976.000000  976.000000   976.000000
-mean    15.677254    6.221311  2022.398566
-std      8.790049    3.347283     1.084132
-min      1.000000    1.000000  2021.000000
-25%      8.000000    3.000000  2021.000000
-50%     16.000000    6.000000  2022.000000
-75%     23.000000    9.000000  2023.000000
-max     31.000000   12.000000  2024.000000
-</pre></div>
-</div>
-</div>
-</div>
-<p>memberikan informasi seperti jumlah data, rata-rata, nilai tertinggi dan terendah, serta seberapa jauh penyebaran data tersebut. Seperti misal :</p>
-<ul class="simple">
-<li><p>count : Jumlah total data untuk setiap kolom adalah 969.</p></li>
-<li><p>mean : Rata-rata nilai untuk setiap kolom, misalnya rata-rata untuk kolom xt adalah 15,260.11.</p></li>
-<li><p>std : Standar deviasi menunjukkan seberapa jauh nilai menyimpang dari rata-rata, dengan contoh kolom xtmemiliki</p></li>
-<li><p>standar deviasi 1,567.58.</p></li>
-<li><p>min : Nilai minimum untuk setiap kolom, seperti nilai terkecil di kolom xtyang adalah 13,750.</p></li>
-<li><p>25% (kuartil pertama) : 25% dari data memiliki nilai di bawah 13,950 untuk kolom xt-1.</p></li>
-<li><p>50% (median) : Nilai tengah dari data, misalnya median untuk kolom xtadalah 14,800.</p></li>
-<li><p>75% (kuartil ketiga) : 75% dari data memiliki nilai di bawah 15,550 untuk kolom xt-1.</p></li>
-<li><p>max : Nilai maksimum, di kolom mana xtmemiliki nilai tertinggi 18,950.</p></li>
-</ul>
-</section>
-<section id="c-eksplorasi-data">
-<h4>c. Eksplorasi Data<a class="headerlink" href="#c-eksplorasi-data" title="Link to this heading">#</a></h4>
-<p>Sebelum memulai analisis atau visualisasi data, penting untuk memastikan bahwa kolom Harga Gula (kg) memiliki format yang benar agar bisa digunakan dalam perhitungan. Oleh karena itu, perlu mengubah kolom tersebut menjadi tipe data numerik dengan menghapus tanda koma yang mungkin ada.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     Tanggal  Bulan  Tahun  Harga Gula (kg)
-0          1      1   2021          13900.0
-1          4      1   2021          13900.0
-2          5      1   2021          13900.0
-3          6      1   2021          13950.0
-4          7      1   2021          13950.0
-..       ...    ...    ...              ...
-971       23      9   2024          18750.0
-972       24      9   2024          18750.0
-973       25      9   2024          18850.0
-974       26      9   2024          18750.0
-975       27      9   2024          18750.0
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mengubah kolom &#39;Date&#39; dalam format datetime</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
 
-[976 rows x 4 columns]
-</pre></div>
-</div>
-</div>
-</div>
-<p>membuat beberapa kolom baru di DataFrame untuk menyimpan harga gula berdasarkan lag waktu, yaitu harga 3, 2, 1 hari sebelumnya dan juga menambahkan kolom xt yang berisi harga gula saat ini. Setelah itu, hapus baris yang memiliki nilai kosong akibat proses shifting(menggeser nilai).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt-3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt-2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt-1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span>
+<span class="c1"># Mengatur kolom &#39;Date&#39; sebagai indeks</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="c1"># Mensortir data berdasarkan kolom Date dari terkecil ke terbesar</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+<span class="n">df</span>
 </pre></div>
 </div>
 </div>
@@ -607,183 +493,381 @@ max     31.000000   12.000000  2024.000000
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Tanggal</th>
-      <th>Bulan</th>
-      <th>Tahun</th>
-      <th>Harga Gula (kg)</th>
-      <th>xt-3</th>
-      <th>xt-2</th>
-      <th>xt-1</th>
-      <th>xt</th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Adj Close</th>
+      <th>Volume</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>1</td>
-      <td>2021</td>
-      <td>13900.0</td>
-      <td>13950.0</td>
-      <td>13900.0</td>
-      <td>13900.0</td>
-      <td>13900.0</td>
+      <th>2020-01-01</th>
+      <td>0.1929</td>
+      <td>0.1944</td>
+      <td>0.1921</td>
+      <td>0.1927</td>
+      <td>0.1927</td>
+      <td>1041134003</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>4</td>
-      <td>1</td>
-      <td>2021</td>
-      <td>13900.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13900.0</td>
-      <td>13900.0</td>
+      <th>2020-01-02</th>
+      <td>0.1927</td>
+      <td>0.1929</td>
+      <td>0.1869</td>
+      <td>0.1880</td>
+      <td>0.1880</td>
+      <td>1085351426</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>5</td>
-      <td>1</td>
-      <td>2021</td>
-      <td>13900.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13900.0</td>
+      <th>2020-01-03</th>
+      <td>0.1879</td>
+      <td>0.1941</td>
+      <td>0.1858</td>
+      <td>0.1935</td>
+      <td>0.1935</td>
+      <td>1270017043</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>6</td>
-      <td>1</td>
-      <td>2021</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
+      <th>2020-01-04</th>
+      <td>0.1935</td>
+      <td>0.1947</td>
+      <td>0.1918</td>
+      <td>0.1944</td>
+      <td>0.1944</td>
+      <td>999331594</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>7</td>
-      <td>1</td>
-      <td>2021</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
-      <td>13950.0</td>
+      <th>2020-01-05</th>
+      <td>0.1944</td>
+      <td>0.1992</td>
+      <td>0.1939</td>
+      <td>0.1955</td>
+      <td>0.1955</td>
+      <td>1168067557</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2024-12-02</th>
+      <td>2.3207</td>
+      <td>2.8497</td>
+      <td>2.2439</td>
+      <td>2.7138</td>
+      <td>2.7138</td>
+      <td>51723383809</td>
+    </tr>
+    <tr>
+      <th>2024-12-03</th>
+      <td>2.7139</td>
+      <td>2.8649</td>
+      <td>2.3610</td>
+      <td>2.5255</td>
+      <td>2.5255</td>
+      <td>43498034453</td>
+    </tr>
+    <tr>
+      <th>2024-12-04</th>
+      <td>2.5256</td>
+      <td>2.6703</td>
+      <td>2.2956</td>
+      <td>2.3544</td>
+      <td>2.3544</td>
+      <td>22033216003</td>
+    </tr>
+    <tr>
+      <th>2024-12-05</th>
+      <td>2.3544</td>
+      <td>2.4850</td>
+      <td>2.1889</td>
+      <td>2.2952</td>
+      <td>2.2952</td>
+      <td>21253973296</td>
+    </tr>
+    <tr>
+      <th>2024-12-06</th>
+      <td>2.2509</td>
+      <td>2.4605</td>
+      <td>2.2395</td>
+      <td>2.4247</td>
+      <td>2.4247</td>
+      <td>13380810341</td>
     </tr>
   </tbody>
 </table>
+<p>1802 rows × 6 columns</p>
 </div></div></div>
 </div>
-<p>Dengan menambahkan kolom yang menunjukkan harga gula 3, 2, dan 1 hari sebelumnya, kita bisa melihat bagaimana harga-harga tersebut mempengaruhi harga saat ini.</p>
-<p>menambahkan kolom target xt (harga gula saat ini) ke DataFrame untuk diprediksi, dan menghapus kolom yang tidak diperlukan, sehingga hanya kolom penting untuk analisis yang tersisa.</p>
-<div class="cell docutils container">
+</section>
+<section id="b-deskripsi-dataset">
+<h4>b. Deskripsi Dataset<a class="headerlink" href="#b-deskripsi-dataset" title="Link to this heading">#</a></h4>
+<p style="text-indent: 50px; text-align: justify;">Dataset ini terdiri dari 8 fitur atau kolom, dan 2230 record atau baris. Berikut adalah penjelasan setiap atribut:</p>
+        <ul>
+            <li><strong>Date:</strong> Tanggal data harga aset koin (format YYYY-MM-DD)</li>
+            <li><strong>Open:</strong> Harga pembukaan aset koin pada tanggal tersebut</li>
+            <li><strong>High:</strong> Harga tertinggi yang dicapai pada tanggal tersebut</li>
+            <li><strong>Low:</strong> Harga terendah aset koin pada tanggal tersebut</li>
+            <li><strong>Close:</strong> Harga penutupan aset koin pada tanggal tersebut</li>
+            <li><strong>Adj Close:</strong> Harga penutupan yang sudah disesuaikan dengan pembagian aset koin, dividen, dan corporate actions lainnya</li>
+            <li><strong>Volume:</strong> Jumlah aset koin yang diperdagangkan pada tanggal tersebut</li>
+        </ul>
+<p style="text-indent: 50px; text-align: justify;"> Selanjutnya, memeriksa informasi tentang dataset untuk melihat jumlah baris dan kolom, serta tipe data dari masing-masing kolom. Ini membantu kita memastikan bahwa semua data sudah lengkap dan tidak ada yang hilang. Selain itu, kita juga ingin mengetahui ukuran data untuk melihat berapa banyak baris dan kolom yang ada. Dari hasil ini, kita bisa tahu bahwa dataset memiliki 1802 baris dan 6 kolom, dengan data yang lengkap dan tipe data yang sesuai.</p><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menyimpan harga gula saat ini ke kolom &#39;xt&#39;</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">]</span>
-
-<span class="c1"># Menghapus baris dengan nilai NaN</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-
-<span class="c1"># Menghapus kolom &#39;Harga Gula (kg)&#39; jika tidak diperlukan lagi</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">])</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<p>menggabungkan kolom Bulan dan Tahun jadi date, lalu menghapus keduanya. Kolom date dijadikan indeks untuk memudahkan analisis berdasarkan tanggal.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menggabungkan bulan dan tahun menjadi satu kolom tanggal</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Bulan&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tahun&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Bulan&#39;</span><span class="p">,</span> <span class="s1">&#39;Tahun&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
-
-<span class="c1"># Menampilkan DataFrame</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ukuran data &#39;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Tanggal     xt-3     xt-2     xt-1       xt
-date                                               
-1-2021        1  13950.0  13900.0  13900.0  13900.0
-1-2021        4  13950.0  13950.0  13900.0  13900.0
-1-2021        5  13950.0  13950.0  13950.0  13900.0
-1-2021        6  13950.0  13950.0  13950.0  13950.0
-1-2021        7  13950.0  13950.0  13950.0  13950.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+DatetimeIndex: 1802 entries, 2020-01-01 to 2024-12-06
+Data columns (total 6 columns):
+ #   Column     Non-Null Count  Dtype  
+---  ------     --------------  -----  
+ 0   Open       1802 non-null   float64
+ 1   High       1802 non-null   float64
+ 2   Low        1802 non-null   float64
+ 3   Close      1802 non-null   float64
+ 4   Adj Close  1802 non-null   float64
+ 5   Volume     1802 non-null   int64  
+dtypes: float64(5), int64(1)
+memory usage: 98.5 KB
+Ukuran data  (1802, 6)
 </pre></div>
 </div>
 </div>
 </div>
-<p>Kolom Bulan dan Tahun digabungkan menjadi kolom date untuk memudahkan analisis waktu. Menghapus kolom yang tidak diperlukan menyederhanakan DataFrame, dan menjadikan date sebagai indeks mempermudah operasi berbasis waktu.</p>
-<p>Visualisasi ini dibuat untuk menunjukkan perubahan harga gula dari waktu ke waktu, termasuk harga 3, 2, dan 1 hari sebelumnya, serta harga saat ini. Dengan grafik garis, kita bisa melihat tren dan pola harga secara jelas. Ini membantu kita memahami bagaimana harga saat ini dipengaruhi oleh harga di hari-hari sebelumnya.</p>
-<div class="cell docutils container">
+</section>
+<section id="c-eksplorasi-data">
+<h4>c. Eksplorasi Data<a class="headerlink" href="#c-eksplorasi-data" title="Link to this heading">#</a></h4>
+<p style="text-indent: 50px; text-align: justify;">Setelah itu, melihat apakah didalam data set tersebut ada missing value.</p><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Open         0
+High         0
+Low          0
+Close        0
+Adj Close    0
+Volume       0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p style="text-indent: 50px; text-align: justify;">Setelah dilakukan pengecekan dan ternyata tidak ada missing value maka langkah selanjutnya yaitu membuat visualisasi tren data untuk setiap kolom dalam dataset. Kita akan menggambar grafik garis untuk setiap kolom, dengan tanggal sebagai sumbu X dan nilai kolom sebagai sumbu Y. Setiap grafik akan menampilkan tren perubahan nilai kolom tersebut seiring waktu, lengkap dengan label sumbu dan judul yang menjelaskan kolom yang sedang dianalisis. Grafik ini juga akan dilengkapi dengan grid dan rotasi sumbu X agar lebih mudah dibaca.</p><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="c1"># Visualisasi</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;xt-3&#39;</span><span class="p">,</span> <span class="s1">&#39;xt-2&#39;</span><span class="p">,</span> <span class="s1">&#39;xt-1&#39;</span><span class="p">,</span> <span class="s1">&#39;xt&#39;</span><span class="p">]])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Harga Gula (xt-3, xt-2, xt-1, xt)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tanggal&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Harga Gula (kg)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="c1"># Membuat subplot otomatis berdasarkan jumlah kolom dalam dataframe</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)),</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Trend of </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/dcb1f089e5a1aeb5d347dba794dfe75050ad9d94f3e20eed337eadc792148676.png" src="_images/dcb1f089e5a1aeb5d347dba794dfe75050ad9d94f3e20eed337eadc792148676.png" />
-</div>
-</div>
-<p>menghitung hubungan antara fitur-fitur lag (harga gula sebelumnya) dan harga gula saat ini. Dengan koefisien korelasi Pearson, kita bisa melihat seberapa kuat dan arah hubungan tersebut. Ini membantu kita memahami fitur mana yang paling berpengaruh terhadap harga gula saat ini, yang penting untuk analisis dan pengembangan model prediksi.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="c1"># Menghitung korelasi Pearson antara fitur dan target</span>
-<span class="n">correlations</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>  <span class="c1"># Mengabaikan kolom terakhir (target)</span>
-    <span class="c1"># Pastikan kolom adalah numerik</span>
-    <span class="n">correlation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;xt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="n">correlations</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">correlation</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Membuat subplot otomatis berdasarkan jumlah kolom dalam dataframe</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span><span class="p">))</span> <span class="o">*</span> <span class="mi">3</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)),</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Menampilkan hasil korelasi</span>
-<span class="k">for</span> <span class="n">fitur</span><span class="p">,</span> <span class="n">bobot_korelasi</span> <span class="ow">in</span> <span class="n">correlations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Korelasi Pearson antara </span><span class="si">{</span><span class="n">fitur</span><span class="si">}</span><span class="s2"> dan target: </span><span class="si">{</span><span class="n">bobot_korelasi</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Korelasi Pearson antara Tanggal dan target: 0.0163
-Korelasi Pearson antara xt-3 dan target: 0.9989
-Korelasi Pearson antara xt-2 dan target: 0.9992
-Korelasi Pearson antara xt-1 dan target: 0.9996
+<span class="ne">NameError</span>: name &#39;np&#39; is not defined
 </pre></div>
 </div>
 </div>
 </div>
-<p>dari hasil diatas</p>
-<ul class="simple">
-<li><p>Tanggal dan target (0.0163): Tidak ada hubungan signifikan; tanggal tidak mempengaruhi harga gula.</p></li>
-<li><p>xt-3 (0.9989): Hubungan sangat kuat; harga 3 hari lalu hampir sama dengan harga sekarang.</p></li>
-<li><p>xt-2 (0.9992): Hubungan sangat kuat; harga 2 hari lalu hampir identik dengan harga saat ini.</p></li>
-<li><p>xt-1 (0.9996): Hubungan sangat kuat; harga sehari lalu sangat mempengaruhi harga saat ini.</p></li>
-</ul>
+<p style="text-indent: 50px; text-align: justify;">Selanjutnya membuat histogram dari kolom Open, High, Low, Close, Adj Close, dan Volume bertujuan untuk memvisualisasikan distribusi data pada setiap kolom tersebut. Visualisasi ini membantu kita memahami pola data, seperti apakah data terdistribusi normal, memiliki outlier, atau cenderung miring (skewed). Dengan histogram, kita dapat mengevaluasi karakteristik data sebelum melanjutkan ke tahap analisis atau pemodelan selanjutnya.</p><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">column</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Open&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Close&#39;</span><span class="p">,</span> <span class="s1">&#39;Adj Close&#39;</span><span class="p">,</span> <span class="s1">&#39;Volume&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p style="text-indent: 50px; text-align: justify;">Setelah itu, di sini kita akan menganalisis hubungan antar fitur dalam dataset. Heatmap ini membantu kita memahami korelasi antara kolom-kolom yang ada, apakah ada hubungan yang kuat, lemah, atau tidak ada korelasi sama sekali. Ini dapat memberikan wawasan penting untuk analisis lebih lanjut atau pembuatan model, seperti memilih fitur yang relevan atau mendeteksi multikolinearitas.</p><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Heatmap Korelasi Antar Fitur&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p style="text-indent: 50px; text-align: justify;">Hasil korelasi pada heatmap ini menunjukkan hubungan antara fitur-fitur dalam data. Nilai korelasi berkisar dari -1 sampai 1, di mana 1 berarti hubungan sangat kuat dan positif, 0 berarti tidak ada hubungan, dan -1 berarti hubungan sangat kuat namun negatif. Pada heatmap ini, terlihat bahwa fitur "Open," "High," "Low," "Close," dan "Adj Close" memiliki korelasi sempurna (1), yang menunjukkan bahwa nilai-nilai ini sangat saling terkait. Namun, fitur "Volume" memiliki korelasi yang lemah (sekitar 0,26-0,27) terhadap fitur-fitur lainnya, yang berarti perubahan pada "Volume" tidak terlalu berhubungan dengan perubahan pada fitur lainnya.</p>
 </section>
 </section>
-<section id="pra-pemrosesan-data">
-<h3>Pra-pemrosesan Data<a class="headerlink" href="#pra-pemrosesan-data" title="Link to this heading">#</a></h3>
+<section id="data-preprocessing">
+<h3>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Link to this heading">#</a></h3>
+<section id="a-penghapusan-kolom-yang-tidak-relevan-dan-verifikasi-dataset">
+<h4>a. Penghapusan Kolom yang Tidak Relevan dan Verifikasi Dataset<a class="headerlink" href="#a-penghapusan-kolom-yang-tidak-relevan-dan-verifikasi-dataset" title="Link to this heading">#</a></h4>
+<p style="text-indent: 50px; text-align: justify;">Menghapus kolom Volume dan Adj Close dari dataset, kolom-kolom tersebut dihilangkan karena mungkin tidak relevan untuk analisis atau pemodelan selanjutnya. Kemudian, kita akan melihat lima baris pertama dari dataset yang telah diperbarui untuk memastikan perubahan yang dilakukan.</p><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Volume&#39;</span><span class="p">,</span> <span class="s1">&#39;Adj Close&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-rekayasa-fitur">
+<h4>b. Rekayasa Fitur<a class="headerlink" href="#b-rekayasa-fitur" title="Link to this heading">#</a></h4>
+<p style="text-indent: 50px; text-align: justify;">Dalam penelitian ini, tujuan kita adalah memprediksi harga **Close** pada hari berikutnya, sehingga kita memerlukan variabel baru sebagai target. Fitur ini berguna untuk mengetahui sejauh mana harga saham bisa turun, yang memungkinkan investor untuk membeli aset pada harga yang lebih rendah dan meningkatkan peluang keuntungan ketika harga saham naik kembali.</P><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Close Target&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p style="text-indent: 50px; text-align: justify;">Tabel ini menunjukkan data harga saham harian yang mencakup harga pembukaan (Open), harga tertinggi (High), harga terendah (Low), dan harga penutupan (Close). Selain itu, terdapat kolom Close Target yang merupakan prediksi harga penutupan untuk hari berikutnya. Misalnya, pada 2020-01-01, harga penutupan adalah 7200.2, sementara prediksi harga penutupan untuk 2020-01-02 adalah 6985.5, yang lebih rendah dari harga penutupan hari itu.</P>
+</section>
+<section id="c-normalisasi-data">
+<h4>c. Normalisasi Data<a class="headerlink" href="#c-normalisasi-data" title="Link to this heading">#</a></h4>
+<p style="text-indent: 50px; text-align: justify;">Melakukan normalisasi data pada fitur dan target bertujuan untuk mengubah nilai-nilai dalam dataset ke rentang yang seragam, biasanya antara 0 dan 1. Dalam kode ini, `MinMaxScaler` digunakan untuk menormalisasi fitur (Open, High, Low, Close) dan target (Close Target). Fitur dinormalisasi menggunakan scaler_features.fit_transform() dan target menggunakan scaler_target.fit_transform(). Hasil normalisasi kemudian digabungkan dengan pd.concat() menjadi satu dataframe df_normalized, yang siap digunakan dalam model machine learning. Normalisasi membantu model belajar lebih efektif dengan skala data yang konsisten.</p><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inisialisasi scaler untuk fitur (input) dan target (output)</span>
+<span class="n">scaler_features</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">scaler_target</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+
+<span class="c1"># Normalisasi fitur (Open, High, Low,, &#39;Close&#39; Close Target-4, Close Target-5)</span>
+<span class="n">df_features_normalized</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaler_features</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Open&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Close&#39;</span><span class="p">]]),</span>
+                                      <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Open&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Close&#39;</span><span class="p">],</span>
+                                      <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="c1"># Normalisasi target (Close Target)</span>
+<span class="n">df_target_normalized</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaler_target</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Close Target&#39;</span><span class="p">]]),</span>
+                                    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Close Target&#39;</span><span class="p">],</span>
+                                    <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="c1"># Gabungkan kembali dataframe yang sudah dinormalisasi</span>
+<span class="n">df_normalized</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_features_normalized</span><span class="p">,</span> <span class="n">df_target_normalized</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_normalized</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="modelling">
-<h3>Modelling<a class="headerlink" href="#modelling" title="Link to this heading">#</a></h3>
+<h4>Modelling<a class="headerlink" href="#modelling" title="Link to this heading">#</a></h4>
 </section>
-<section id="evaluation">
-<h3>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h3>
+<section id="a-pembagian-data">
+<h4>a. Pembagian Data<a class="headerlink" href="#a-pembagian-data" title="Link to this heading">#</a></h4>
+<p style="text-indent: 50px; text-align: justify;">Selanjutnya, melakukan pembagian data menjadi data training dan data testing dengan menggunakan train_test_split, di mana 80% data digunakan untuk training dan 20% untuk testing. Proses ini dilakukan dengan opsi shuffle=False agar data tetap terurut berdasarkan urutan aslinya. Setelah pembagian, data training (X_train dan y_train) digunakan untuk melatih model, sedangkan data testing (X_test dan y_test) digunakan untuk menguji kinerja model yang telah dilatih.<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mengatur fitur (X) dan target (y)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_normalized</span><span class="p">[[</span><span class="s1">&#39;Open&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;Close&#39;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_normalized</span><span class="p">[</span><span class="s1">&#39;Close Target&#39;</span><span class="p">]</span>
+
+<span class="c1"># Membagi data menjadi training dan testing (60% training, 40% testing)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="b-penyusunan-model">
+<h4>b. Penyusunan Model<a class="headerlink" href="#b-penyusunan-model" title="Link to this heading">#</a></h4>
+<p style="text-indent: 50px; text-align: justify;">Pada tahap ini, dilakukan percobaan dengan menggunakan tiga model utama, yaitu Regresi Linear, Ridge Linear , dan Gradient Boosting. Selain itu, untuk meningkatkan akurasi dan kinerja model, diterapkan juga teknik ensemble dengan metode bagging</p><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List model regresi</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Linear Regression&quot;</span><span class="p">:</span> <span class="n">LinearRegression</span><span class="p">(),</span>
+    <span class="s2">&quot;Ridge Regression&quot;</span><span class="p">:</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span>
+    <span class="s2">&quot;Gradient Boosting&quot;</span> <span class="p">:</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">32</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="c1"># Dictionary untuk menyimpan hasil evaluasi</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Iterasi setiap model</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1"># Latih model</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="c1"># Prediksi pada data uji</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+    <span class="c1"># Evaluasi</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
+    <span class="n">mape</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># Dalam persen</span>
+
+    <span class="c1"># Simpan hasil evaluasi</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;RMSE&quot;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">,</span> <span class="s2">&quot;MAPE&quot;</span><span class="p">:</span> <span class="n">mape</span><span class="p">}</span>
+
+    <span class="c1"># Kembalikan hasil prediksi ke skala asli</span>
+    <span class="n">y_pred_original</span> <span class="o">=</span> <span class="n">scaler_target</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">y_test_original</span> <span class="o">=</span> <span class="n">scaler_target</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># Plot hasil prediksi</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y_test_original</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Actual&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">y_pred_original</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Predicted (</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Tambahkan detail plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Actual vs Predicted Values (</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Harga&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Tampilkan plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Tampilkan hasil evaluasi</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HASIL EVALUASI MODEL&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">metrics</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">  RMSE: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;RMSE&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">  MAPE: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;MAPE&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="kesimpulan">
+<h3>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Link to this heading">#</a></h3>
+<p style="text-indent: 50px; text-align: justify;">Berdasarkan hasil percobaan dengan beberapa model, metode Linear Regression menunjukkan performa terbaik dengan nilai RMSE sebesar 0.01 dan MAPE sebesar 2.01%.</P>
+</section>
+<section id="deployment">
+<h3>DEPLOYMENT<a class="headerlink" href="#deployment" title="Link to this heading">#</a></h3>
+<p>Hasil deployment dapat dilihat melalui tautan berikut:
+<a class="reference external" href="https://huggingface.co/spaces/Alifiacaca/projek1_prediksibtc">https://huggingface.co/spaces/Alifiacaca/projek1_prediksibtc</a></p>
 </section>
 </section>
 </section>
@@ -859,9 +943,17 @@ Korelasi Pearson antara xt-1 dan target: 0.9996
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-eksplorasi-data">c. Eksplorasi Data</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pra-pemrosesan-data">Pra-pemrosesan Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-penghapusan-kolom-yang-tidak-relevan-dan-verifikasi-dataset">a. Penghapusan Kolom yang Tidak Relevan dan Verifikasi Dataset</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-rekayasa-fitur">b. Rekayasa Fitur</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-normalisasi-data">c. Normalisasi Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modelling">Modelling</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-pembagian-data">a. Pembagian Data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-penyusunan-model">b. Penyusunan Model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">DEPLOYMENT</a></li>
 </ul>
 </li>
 </ul>
